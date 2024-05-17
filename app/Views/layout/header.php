@@ -233,7 +233,7 @@
                                     </div>
                                 </li>
 
-                                <li class="nav-item dropdown">
+                                <!-- <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-master" role="button"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="ri-database-2-line mr-1"></i> Master  <div class="arrow-down"></div>
@@ -242,7 +242,7 @@
                                         <a href="<?= base_url()."visa_type"; ?>" class="dropdown-item">Visa Type</a>
                                         <a href="<?= base_url()."countries"; ?>" class="dropdown-item">countries</a>
                                     </div>
-                                </li>
+                                </li> -->
                                 <?php  } ?>
                             <?php }else if(isset($_SESSION['is_client_logged_in']) && $_SESSION['is_client_logged_in']) { ?>
 
