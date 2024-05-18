@@ -39,3 +39,15 @@ use CodeIgniter\Router\RouteCollection;
  $routes->match(['get','post'],'/edit_visa_request','VisaRequestController::edit_visa_request');
  $routes->get('download/(:any)', 'VisaRequestController::download/$1');
  $routes->match(['get','post'],'/update_notes','VisaRequestController::update_notes');
+
+
+ $routes->match(['get','post'],'/visa_summary_list','MasterController::visa_summary_list');
+ $routes->match(['get','post'],'/visa_summary_create','MasterController::visa_summary_create');
+ $routes->match(['get','post'],'/visa_summary_edit','MasterController::visa_summary_edit');
+ $routes->match(['get','post'],'/country_list','MasterController::country_list');
+ $routes->match(['get','post'],'/country_create','MasterController::country_create');
+ $routes->match(['get','post'],'/country_edit','MasterController::country_edit');
+ $routes->match(['get','post'],'/category_list','MasterController::category_list');
+ $routes->match(['get','post'],'/category_create','MasterController::category_create');
+ $routes->match(['get','post'],'/category_edit','MasterController::category_edit');
+ 

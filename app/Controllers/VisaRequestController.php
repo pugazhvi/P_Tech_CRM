@@ -31,6 +31,7 @@ class VisaRequestController extends BaseController
         $this->CountryModel = new CountryModel();
         $this->VisaTypeModel = new VisaTypeModel();
         $this->NotesModel = new NotesModel();
+       
     }
 
     public function index()
@@ -45,6 +46,11 @@ class VisaRequestController extends BaseController
 
     public function visa_request_list()
     {
+
+        // $data['visaData'] =  $this->VisaRequestModel->getVisaRequestList(session()->get('logged_in_staff_branch_id'), 3);
+        // $data['visaNotesData'] = $this->NotesModel-> getVisaRequestNotes(3);
+
+        // return view('mail_template', $data);
        
         if(!$this->session->has('is_staff_logged_in')){ return redirect()->to(base_url().'staff'); }
 
@@ -170,7 +176,9 @@ class VisaRequestController extends BaseController
        
         $result = $this->VisaRequestModel->getVisaType($countryId);
 
-        return $this->response->setJSON(['count'=>count($result) , 'data'=>$result]);
+        $country_code =  $this->CountryModel->where('id',$countryId)->get()->getRow()->c_code;
+
+        return $this->response->setJSON(['count'=>count($result) , 'data'=>$result , 'country_code'=>$country_code]);
 
     }
 
@@ -215,7 +223,7 @@ class VisaRequestController extends BaseController
             $this->NotesModel->save($insertArray);
             $visaNotesData = $this->NotesModel-> getVisaRequestNotes($notesData['visa_request_id']);
             $MailHelper = new MailHelper();
-            //$MailHelper->send_email($notesData['visa_request_id']);
+            $MailHelper->send_email($notesData['visa_request_id']);
 
             $html = '';
               foreach ($visaNotesData as $key => $notes) 

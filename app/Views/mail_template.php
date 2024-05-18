@@ -32,10 +32,10 @@
 
 
                         <tr>
-                            <td style="text-align: center">
-                                <table  width="100%" cellpadding="0" cellspacing="0"  style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0; margin-bottom: 10px;" >
-                                    <tr>
-                                        <td style="text-align: left; width:50%; padding-left: 15px;">
+                            <td >
+                                <table  width="100%" cellpadding="0" cellspacing="0"  style=" margin-bottom: 12px; border-bottom: 1px solid black;" >
+                                    <tr style=" border-bottom: 2px solid black;">
+                                        <td style="text-align: left; width:50%; padding-left: 15px; font-weight: 600;">
                                         Traveller Name
                                         </td>
                                         <td style="text-align: left; width:50%">
@@ -43,7 +43,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="text-align: left; width:50%; padding-left: 15px;">
+                                        <td style="text-align: left; width:50%; padding-left: 15px; font-weight: 600;">
                                         Passport No
                                         </td>
                                         <td style="text-align: left; width:50%">
@@ -51,7 +51,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="text-align: left; width:50%; padding-left: 15px;">
+                                        <td style="text-align: left; width:50%; padding-left: 15px; font-weight: 600;">
                                         Travel To 
                                         </td>
                                         <td style="text-align: left; width:50%">
@@ -59,7 +59,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                       <td style="text-align: left; width:50%; padding-left: 15px;">
+                                       <td style="text-align: left; width:50%; padding-left: 15px; font-weight: 600;">
                                        Visa Type
                                         </td>
                                         <td style="text-align: left; width:50%">
@@ -67,27 +67,27 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="text-align: left; width:50%; padding-left: 15px;">
-                                        Current Status
-                                        </td>
-                                        <td style="text-align: left; width:50%">
-                                        <?= $visaNotesData[0]['status_value']; ?>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align: left; width:50%; padding-left: 15px;">
-                                        Request Created at 
+                                        <td style="text-align: left; width:50%; padding-left: 15px; font-weight: 600;">
+                                        Req Created
                                         </td>
                                         <td style="text-align: left; width:50%">
                                         <?php echo date('d-M-Y h:i A', strtotime( $visaData->created_at )); ?>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="text-align: left; width:50%; padding-left: 15px;">
-                                        Request Updated at 
+                                        <td style="text-align: left; width:50%; padding-left: 15px; font-weight: 600;">
+                                        Req Updated 
                                         </td>
                                         <td style="text-align: left; width:50%">
                                         <?php echo date('d-M-Y h:i A', strtotime( $visaNotesData[0]['updated_at'] )); ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left; width:50%; padding-left: 15px; font-weight: 600;">
+                                        Current Status
+                                        </td>
+                                        <td style="text-align: left; width:50%">
+                                        <?= $visaNotesData[0]['status_value']; ?>
                                         </td>
                                     </tr>
                                 </table>   
