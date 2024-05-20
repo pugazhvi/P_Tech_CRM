@@ -60,7 +60,6 @@
                             <td><?php echo $value['passport_no'];  ?></td>
                             <td><?php echo $value['country_name'];  ?></td>
                             <td><?php echo $value['visa_type_name'];  ?></td>
-                            <td><?php echo $value['priority'];  ?></td>
                             <td><?php echo $value['status_value'];  ?></td>
                             <td><?php echo date('d-M-Y', strtotime($value['updated_at']));  ?></td>
                             <!-- <td>

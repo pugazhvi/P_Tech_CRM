@@ -95,14 +95,14 @@
                                    <?php endif;?>
 
                                    <div class="form-group row">
-                                        <label for="hori-pass1" class="col-4 col-form-label">Email<span class="text-danger">*</span></label>
-                                        <div class="col-7">
+                                        <label for="hori-pass1" class="col-3 col-form-label">Email<span class="text-danger">*</span></label>
+                                        <div class="col-9">
                                             <input type="text" class="form-control" value="<?= session()->getTempdata('email'); ?>" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="hori-pass1" class="col-4 col-form-label">Password<span class="text-danger">*</span></label>
-                                        <div class="col-7">
+                                        <label for="hori-pass1" class="col-3 col-form-label">Password<span class="text-danger">*</span></label>
+                                        <div class="col-9">
                                             <input id="hori-pass1" type="password" placeholder="Password"  
                                             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,}" 
                                             title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" 
@@ -111,9 +111,9 @@
                                         <span toggle="#hori-pass1" id="toggle-password"  class="fa fa-fw fa-eye field-icon toggle-password"></span>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="hori-pass2" class="col-4 col-form-label">Confirm Password
+                                        <label for="hori-pass2" class="col-3 col-form-label">Confirm Password
                                             <span class="text-danger">*</span></label>
-                                        <div class="col-7">
+                                        <div class="col-9">
                                             <input data-parsley-equalto="#hori-pass1" type="password" required
                                                 placeholder="Password" class="form-control" id="hori-pass2">
                                         </div>

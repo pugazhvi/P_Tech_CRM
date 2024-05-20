@@ -29,6 +29,7 @@
                     <table id="datatable-buttons" class="table table-hover m-0 table-centered dt-responsive nowrap w-100" cellspacing="0" >
                         <thead class="bg-light">
                         <tr>
+                        <th>Action</th>
                         <th>Country</th>
                         <th>Country Code</th>
                         <th>Category</th>
@@ -55,8 +56,8 @@
                        
                         <?php foreach ($visaSummaryList as $key => $value) { ?>
                            
-                            <tr  onclick="window.location.href='<?= base_url()."visa_summary_edit?vs_id=".$value['vs_id']; ?>'" >
-
+                            <tr >
+                            <td > <a href='<?= base_url()."visa_summary_edit?vs_id=".$value['vs_id']; ?>'><i class='mdi mdi-pencil-outline mr-1'></i> Edit</a></td>
                             <td><?php echo $value['country_name'];  ?></td>
                             <td><?php echo $value['vs_country_code'];  ?></td>
                             <td><?php echo $value['category_name'];  ?></td>

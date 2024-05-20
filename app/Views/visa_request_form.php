@@ -61,7 +61,8 @@
 
                         <div class="form-group col-md-3">
                             <label for="passport_no">Passport No<span class="text-danger">*</span></label>
-                            <input type="text" name="passport_no"  parsley-trigger="change" required  class="form-control" id="passport_no">
+                            <input type="text" name="passport_no"  parsley-trigger="change" required  class="form-control" id="passport_no" onchange="validatePassportNumber()">
+                            <span id="error-message" style="color:red;display:none;">Invalid passport number.</span>
                         </div>
 
                         <div class="form-group col-md-3">
@@ -172,6 +173,22 @@
 
     // Attach the function to the input field using an event listener
     document.getElementById("passport_no").addEventListener("input", convertToUpperCase);
+
+    function validatePassportNumber() {
+            var passportNumber = document.getElementById("passport_no").value;
+            var errorMessage = document.getElementById("error-message");
+
+            // Example regex: Adjust according to the format you need to validate
+            var regex = /^[A-Za-z0-9]{6,9}$/;
+
+            if (regex.test(passportNumber)) {
+                errorMessage.style.display = "none";
+               
+            } else {
+                errorMessage.style.display = "inline";
+               
+            }
+        }
 
 
   

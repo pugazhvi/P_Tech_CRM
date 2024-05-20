@@ -10,7 +10,7 @@
         <div class="card text-center">
             <div class="card-body">
                 <h4 class="mt-3 mb-0"><?php echo $client->user_name; ?></h4>
-                <div class="text-left mt-3" style=" margin-bottom: 16px;">
+                <div class="text-left mt-3" style=" margin-bottom: -9px;">
                     <div class="table-responsive">
                         <table class="table table-borderless table-sm">
                             <tbody>
@@ -33,6 +33,10 @@
                                 <tr>
                                     <th scope="row">Email :</th>
                                     <td class="text-muted"><?php echo $client->email; ?></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">User Name :</th>
+                                    <td class="text-muted"><?php echo $client->user_name; ?></td>
                                 </tr>
                                 
                             </tbody>

@@ -58,7 +58,7 @@ class MailHelper
        
 
        
-        $subject = 'UVS Forget Password - OTP';
+        $subject = 'UVS Reset Password - OTP';
         $message =  "Hai ,
 
                     We have received a request for account recovery associated with your account. To ensure the security of your account, we are sending you a one-time password (OTP) for verification purposes. Please use the following OTP to proceed with the account recovery process:
