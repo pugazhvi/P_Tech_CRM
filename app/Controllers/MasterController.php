@@ -69,6 +69,7 @@ class MasterController extends BaseController
            
            
             $data['countryData'] = $this->CountryModel->findall();
+            $data['visaCategoryData'] = $this->VisaTypeModel->findall();
 
 		    $staffdata = $this->StaffModel->where('staff_id',$this->session->get('is_staff_logged_in'))->get()->getRow();
             echo view('layout/header', ['Data'=>$staffdata]);
@@ -94,7 +95,7 @@ class MasterController extends BaseController
             $vs_id = $this->request->getVar('vs_id');
             $data['countryData'] = $this->CountryModel->findall();
             $data['visaSummaryData']  = $this->VisaSummaryModel->getVisaSummaryList($vs_id);
-            $data['visaCategoryData'] = $this->VisaSummaryModel->getVisaCategory($data['visaSummaryData']->vs_country);
+            $data['visaCategoryData'] = $this->VisaTypeModel->findall();
 
 		    $staffdata = $this->StaffModel->where('staff_id',$this->session->get('is_staff_logged_in'))->get()->getRow();
             echo view('layout/header', ['Data'=>$staffdata]);

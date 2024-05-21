@@ -64,7 +64,7 @@
                             <select class="select2-dropdown form-control" name="vs_country" id="country_of_visit"  required>
                                 <option value="">Select country</option>
                                 <?php foreach ($countryData as $key => $countryValue) { ?>
-                                    <option value="<?php echo $countryValue['id'];  ?>"  <?php echo ($countryValue['id'] ==  $visaSummaryData->vs_country) ? 'selected' : ''; ?> ><?php echo $countryValue['country'];  ?></option>
+                                    <option value="<?php echo $countryValue['id'];  ?>"  <?php if(isset($visaSummaryData)){ echo ($countryValue['id'] ==  $visaSummaryData->vs_country) ? 'selected' : ''; } ?> ><?php echo $countryValue['country'];  ?></option>
                                 <?php } ?>
                                     
                             </select>   
@@ -79,9 +79,9 @@
                             <label for="vs_category">Category<span class="text-danger">*</span></label>
                             <select class="select2-dropdown form-control"  name="vs_category" id="visa_type" required>
                                 <option value="">Select Category</option> 
-                                <?php if(isset($visaCategoryData)){ foreach ($visaCategoryData as $key => $visaTypeValue) { ?>
-                                            <option value="<?php echo $visaTypeValue['id'];  ?>"  <?php echo ($visaTypeValue['id'] ==  $visaSummaryData->vs_category) ? 'selected' : ''; ?> ><?php echo $visaTypeValue['category'];  ?></option>
-                                <?php } } ?>
+                                <?php  foreach ($visaCategoryData as $key => $visaTypeValue) { ?>
+                                            <option value="<?php echo $visaTypeValue['id'];  ?>"  <?php if(isset($visaSummaryData)){ echo ($visaTypeValue['id'] ==  $visaSummaryData->vs_category) ? 'selected' : ''; } ?> ><?php echo $visaTypeValue['category'];  ?></option>
+                                <?php }  ?>
                             </select>
                         </div>
 
@@ -90,9 +90,9 @@
                             <label for="vs_type">VS Type<span class="text-danger">*</span></label>
                            
                             <select class="select2-dropdown form-control" id="vs_type" name="vs_type" parsley-trigger="change" >
-                                <option value="normal" <?php echo ('normal' ==  $visaSummaryData->vs_type) ? 'selected' : ''; ?> >Normal</option>
-                                <option value="urgent" <?php echo ('urgent' ==  $visaSummaryData->vs_type) ? 'selected' : ''; ?> >Urgent</option>
-                                <option value="NA" <?php echo ('NA' ==  $visaSummaryData->vs_type) ? 'selected' : ''; ?> >NA</option>
+                                <option value="normal" <?php if(isset($visaSummaryData)){ echo ('normal' ==  $visaSummaryData->vs_type) ? 'selected' : ''; } ?> >Normal</option>
+                                <option value="urgent" <?php if(isset($visaSummaryData)){ echo ('urgent' ==  $visaSummaryData->vs_type) ? 'selected' : ''; } ?> >Urgent</option>
+                                <option value="NA" <?php if(isset($visaSummaryData)){ echo ('NA' ==  $visaSummaryData->vs_type) ? 'selected' : ''; } ?> >NA</option>
                                
                             </select>
                         </div>
@@ -236,24 +236,10 @@
                     type: 'GET',
                     dataType: 'json', // Expect JSON response
                     success: function(response) {
-                        if (response.count > 0) {
-                       
-                        $('#visa_type option:not(:first)').remove();
-
-                     
-                        $.each(response.data, function(index, item) {
-                            $('#visa_type').append($('<option>', {
-                                value: item.id,
-                                text: item.category
-                            }));
-                        });
-
+                    
                         $('#vs_country_code').val(response.country_code);
 
                       
-                    } else {
-                        toastr.warning('Visa type data found.', 'Warning');
-                    }
                     },
                     error: function(xhr, status, error) {
                         // Handle error
