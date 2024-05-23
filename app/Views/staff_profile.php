@@ -6,66 +6,45 @@
 
 
 <div class="row">
-    <div class="col-lg-4 col-xl-4">
-        <div class="card text-center">
-            <div class="card-body">
-                <h4 class="mt-3 mb-0"><?php echo $staff->name; ?></h4>
-                <p class="text-muted">@<?php echo $staff->role; ?></p>
-                <div class="text-left mt-3" style=" margin-bottom: 16px;">
-                    <div class="table-responsive">
-                        <table class="table table-borderless table-sm">
-                            <tbody>
-                                <tr>
-                                    <th scope="row">Full Name :</th>
-                                    <td class="text-muted"><?php echo $staff->name; ?></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Mobile :</th>
-                                    <td class="text-muted"><?php echo $staff->mobile_no; ?></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Email :</th>
-                                    <td class="text-muted"><?php echo $staff->email; ?></td>
-                                </tr>
-                              
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div> <!-- end card -->
+
+
+    <div class="col-lg-1 col-xl-1">
+       
     </div>
 
-    <div class="col-lg-8 col-xl-8">
+
+
+    
+    <div class="col-lg-10 col-xl-10">
         <div class="card">
             <div class="card-body">
+
+
                     <div class="tab-pane show active" id="settings">
                         <form id="update-profile" >
                             <h5 class="mb-3 text-uppercase bg-light p-2"><i class="mdi mdi-account-circle mr-1"></i> Personal Info</h5>
                             <input type="text" class="form-control"  id="staff_id" name="staff_id" value="<?php echo $staff->staff_id; ?>" hidden>   
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="name">Name</label>
                                         <input type="text" class="form-control" id="name" name="name" value="<?php echo $staff->name; ?>">
                                     </div>
                                 </div>      
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="mobile_no">Mobile Number</label>
                                         <input type="text" class="form-control" id="mobile_no" name="mobile_no" value="<?php echo $staff->mobile_no; ?>">
                                     </div>
                                 </div>                 
-                            </div>
-                          
-                            <div class="row">
-                                <div class="col-md-6">
+                            
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="useremail">Email Address</label>
                                         <input type="email" class="form-control" id="email"  name="email"  value="<?php echo $staff->email; ?>">
                                     </div>
                                 </div>  
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="form-group" style="margin-top: 28px;">
                                         <button type="submit" class="btn btn-primary" style="float: inline-end;" >Update</button>
                                     </div>
@@ -77,14 +56,8 @@
                     </div>
                     <!-- end settings content-->
 
-            </div>
-        </div>
 
-    </div>
-    <div class="col-lg-12 col-xl-12">
-        <div class="card text-center">
-            <div class="card-body">
-                <div class="text-left mt-3">
+                    <div class="text-left mt-3">
 
                         <h5 class="mb-3 text-uppercase bg-light p-2"><i class="mdi mdi-account-circle mr-1"></i> Change Password</h5>
 
@@ -131,17 +104,26 @@
                                 </div>
                             </div>
                             <div class="col-md-6" style="margin-top: 27px;">
-                              
+                            
                             </div>
                             <div class="col-md-6" style="margin-top: 27px;">
                                 <button type="submit" class="btn btn-primary" id="submit_password" style="float: inline-end;" onclick="changePassword(this)">Submit</button>
                             </div>
                         </div>
-                </div>
+                    </div>
+
 
             </div>
-        </div> <!-- end card -->
+        </div>
+
     </div>
+
+
+    <div class="col-lg-1 col-xl-1">
+       
+    </div>
+
+
 </div>
 
 

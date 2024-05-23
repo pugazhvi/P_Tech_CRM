@@ -2,6 +2,19 @@
     <!-- Start Page Content here -->
     <!-- ============================================================== -->
     <style>
+        @media (min-width: 992px) {
+        body[data-layout-mode=horizontal] .content-page {
+            padding: calc(15px + 70px) 12px 65px 12px;
+         }
+        }
+        .note-status h5{ 
+            display: flex;
+            align-items: center;
+        }
+        .note-status a{
+            margin-left: 10px;
+            line-height: 20px;
+        }
         .select2-container .select2-selection--single{
             height: 36px;
             border:1px solid #ced4da;
@@ -11,6 +24,23 @@
         }
         .select2-container--default .select2-selection--single .select2-selection__arrow{
             top:4px;
+        }
+        #attachment{
+            font-size: 22px;
+        }
+        #remove-attachment{
+            font-size: 18px;
+            margin-left: 5px;
+            margin-bottom: 0;
+        }
+        .fileupload-group{
+            display: flex;
+            align-items: center;
+        }
+        .fileupload-group #selected-file-name{
+            height: 20px;
+            display: inline-block;
+            overflow: hidden;
         }
         /* The container for the toggle button */
         .toggle-btn {
@@ -68,6 +98,7 @@
         input:checked + .slider::before {
         transform: translateX(26px);
         }
+        
         .toast-warning {
          background-color: #ffc107 !important; /* Change to the desired background color */
         }
@@ -95,8 +126,12 @@
             height: 6px;
             background-color: #f5f5f5;
         }
+        
 
     </style>
+
+
+
     <div class="content-page">
         <!-- Start Content-->
         <div class="container-fluid">
@@ -123,36 +158,26 @@
 
 
                     <div class="dropdown float-right">
-                        <a href="#" class="dropdown-toggle arrow-none text-muted"
-                            data-toggle="dropdown" aria-expanded="false">
-                            <i class='mdi mdi-dots-horizontal font-18'></i>
-                        </a>
-                    
-                        <div class="dropdown-menu dropdown-menu-right">
-                           
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item" data-toggle="modal" data-target="#con-close-modal">
-                                <i class='mdi mdi-pencil-outline mr-1'></i>Edit
-                            </a>
-                           
-                            <?php if($visaData->file != null){ ?>
-                            <a href="<?= base_url('download/' . urlencode($visaData->file)) ?>" class="dropdown-item">
-                                <i class='mdi mdi-arrow-down'></i> Download file
-                            </a> 
-                            <?php } ?>
 
-                             <!-- item-->
-                             <a href="<?= base_url('visa_request_list'); ?>" class="dropdown-item">
-                                <i class='mdi mdi-backspace-outline mr-1'></i>Back to list
-                            </a>
-                           
-                           
-                        </div>
+                       
+
+                        <a href="javascript:void(0);"  data-toggle="modal" data-target="#con-close-modal" title="Edit" style="font-size: 22px;">
+                            <i class='mdi mdi-square-edit-outline mr-1'></i>
+                        </a>
+                        
+                
+                        <a href="<?= base_url('visa_request_list'); ?>"  title="Close" style="font-size: 22px;" >
+                          <i class='mdi mdi-window-close mr-1'></i>
+                        </a>
+
+
                     </div>
 
-                    <p class="text-primary">#<?= $visaData->request_id; ?></p>
-                    <h4 class="mb-1"><?= $visaData->client_name; ?>-<?= $visaData->branch; ?>-<?= $visaData->agency; ?> <i class="ri-phone-line" title="<?= $visaData->client_mobile; ?>"></i> </h4>  
-                    <!-- <p class="text-muted mb-1">Contact : <?= $visaData->client_email; ?> , <?= $visaData->client_mobile; ?></p> -->
+                    <p class="text-primary"><?= $visaData->request_id; ?></p>
+                    <h4 class="mb-1"><?= $visaData->client_name; ?>-<?= $visaData->branch; ?>-<?= $visaData->agency; ?> 
+                    <span class="mdi mdi-information-outline" style="color: green;font-size: 15px;" data-toggle="modal" data-target="#centermodal"></span> 
+                    </h4>  
+                 
 
                     <div class="text-muted mb-4">
                             <div class="row">
@@ -226,7 +251,7 @@
                                         <div class="p-2 bg-light d-flex  ">
                                             <input type="hidden" name="visa_request_id" value="<?= $visaData->visa_request_id; ?>">
                                             
-                                            <div class="form-group col-md-6 justify-content-between align-items-center m-0">
+                                            <div class="form-group col-md-4 justify-content-between align-items-center m-0">
                                                 <select class="select2-dropdown form-control"  name="status" id="status" required>
                                                     <option value="">Select status</option>
                                                     <?php foreach ($statusData as $key => $statusValue) { ?>
@@ -235,24 +260,27 @@
                                                 </select> 
                                             </div>
 
-                                            <div class="form-group col-md-4 justify-content-start align-items-center m-0">
+                                            <div  class="form-group col-md-3 justify-content-start align-items-center m-0 fileupload-group">
+                                                <i class="ri-attachment-2" id="attachment"></i>
+                                                <span id="selected-file-name" style="margin-left: 10px;"></span>
+                                                <i class='mdi mdi-window-close mr-1' id="remove-attachment" style="display:none;"></i> 
+                                                <input type="file" name="file" class="form-control" id="file" style="display:none;">
+                                            </div>
 
-                                            <div style="display:none;" id="awb-display">
-                                               <input type="text" class="form-control" name="awb_no" value="<?= $visaData->awb_no; ?>" id="awb_no" placeholder="AWB NO" >
-                                            </div>
-                                          
-                                            <div style="display:none;" id="is-visa-approve-display">
-                                                Visa Approved
-                                                <label class="toggle-btn"> 
-                                                    <input type="checkbox" value="<?= $visaData->is_visa_approved; ?>" class="form-control"  name="is_visa_approved" id="is_visa_approved">
-                                                    <span class="slider round"></span>
-                                                </label> 
-                                                
-                                               
-                                                   
-                                            </div>
+                                            <div class="form-group col-md-3 justify-content-start align-items-center m-0">
+
+                                                <div style="display:none;" id="awb-display">
+                                                <input type="text" class="form-control" name="awb_no" value="<?= $visaData->awb_no; ?>" id="awb_no" placeholder="AWB NO" >
+                                                </div>
                                             
-
+                                                <div style="display:none;" id="is-visa-approve-display">
+                                                    Visa Approved
+                                                    <label class="toggle-btn"> 
+                                                        <input type="checkbox" value="<?= $visaData->is_visa_approved; ?>" class="form-control"  name="is_visa_approved" id="is_visa_approved">
+                                                        <span class="slider round"></span>
+                                                    </label> 
+                                                </div>
+                                        
                                             </div>
 
                                             <div class="form-group col-md-2 d-flex justify-content-start align-items-center m-0">
@@ -296,9 +324,16 @@
                           ?>
 
                     <div class="media mb-3 pb-3 border-bottom">
-                        <div class="media-body">
+                        <div class="media-body note-status">
                             
-                            <h5 class="mt-0"><?php echo  $statusValue; ?><small class="text-muted float-right"></small></h5>
+                            <h5 class="mt-0"><?php echo  $statusValue; ?>
+                            <?php if($notes['file'] != null){ ?>
+                            <a href="<?= base_url('download/' . urlencode($notes['file'])) ?>" title="Download" >
+                                <i class="ri-attachment-2"></i> 
+                            </a> 
+                            <?php } ?>
+                            <small class="text-muted float-right"></small>
+                            </h5>
                             <?php echo $notes['notes']; ?>
 
                             <br/>
@@ -370,7 +405,8 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="field-2" class="control-label">Passport No</label>
-                                    <input type="text" class="form-control" name="passport_no" value="<?= $visaData->passport_no; ?>">
+                                    <input type="text" class="form-control" name="passport_no" value="<?= $visaData->passport_no; ?>" id="passport_no" onchange="validatePassportNumber()">
+                                    <span id="error-message" style="color:red;display:none;">Invalid passport number.</span>
                                 </div>
                             </div>
 
@@ -400,12 +436,7 @@
 
                            
 
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="client">Select new file</label>
-                                    <input type="file" name="file" class="form-control" id="file"/>
-                                </div>
-                            </div>
+                          
 
                         </div>
                     
@@ -419,6 +450,29 @@
             </div>
     </div><!-- /.modal -->
 
+
+     <!-- Center modal content -->
+     <div class="modal fade" id="centermodal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myCenterModalLabel">Client Details</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+                    <h5>Organization-Location-Agency</h5>
+                    <p ><?= $reqClientData->org_name; ?>-<?= $reqClientData->branch; ?>-<?= $reqClientData->agency; ?></p>
+                   
+                    <h5>Mobile</h5>
+                    <p ><?= $reqClientData->mobile_no; ?></p>
+                   
+                    <h5>Email</h5>
+                    <p ><?= $reqClientData->email; ?></p>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
     <!-- ============================================================== -->
     <!-- End Page content -->
     <!-- ============================================================== -->
@@ -430,6 +484,29 @@
     $(document).ready(function() {
         $('.select2-dropdown').select2({
             
+        });
+
+        $('#attachment').click(function(){
+           $('#file').click();
+         
+        });
+        $('#remove-attachment').click(function() {
+            $('#file').val(''); 
+            $('#selected-file-name').text(''); 
+            $(this).hide(); 
+            $('#attachment').show(); 
+        });
+         // Handle file selection
+        $('#file').change(function() {
+            if (this.files && this.files.length > 0) {
+                var selectedFile = this.files[0];
+                $('#selected-file-name').text(selectedFile.name); 
+                $('#remove-attachment').show(); 
+                $('#attachment').hide(); 
+            } else {
+                $('#selected-file-name').text(''); 
+                $('#remove-attachment').hide(); 
+            }
         });
       
     });
@@ -451,13 +528,15 @@
             // Serialize the form data
             var checkbox = document.getElementById("is_visa_approved");
             checkbox.value = checkbox.checked ? "1" : "0";
-            var formData = $(this).serialize();
+            var formData = new FormData(this);
             console.log(formData);
             // Make an AJAX POST request
             $.ajax({
                 url: '<?= base_url()."update_notes"; ?>',
                 type: 'POST',
                 data: formData,
+                contentType: false, 
+                processData: false, 
                 success: function(response) {
                     if(checkbox.value == 1){ document.getElementById('is_visa_approved').checked = true; }
                     var count  = 'Notes ('+response.count+')';
@@ -467,7 +546,11 @@
                     $('#notes').append(response.notes); 
                     $('#submit-spin').hide();
                    
-                     $('.notes-field').val('');
+                    $('.notes-field').val('');
+                    $('#file').val(''); 
+                    $('#selected-file-name').text(''); 
+                    $('#remove-attachment').hide(); 
+                    $('#attachment').show(); 
                    
                     
                 },
@@ -595,6 +678,36 @@
 
     });
 </script>
+
+<script>
+    function convertToUpperCase() {
+        var inputField = document.getElementById("passport_no");
+        inputField.value = inputField.value.toUpperCase();
+    }
+
+    // Attach the function to the input field using an event listener
+    document.getElementById("passport_no").addEventListener("input", convertToUpperCase);
+
+    function validatePassportNumber() {
+            var passportNumber = document.getElementById("passport_no").value;
+            var errorMessage = document.getElementById("error-message");
+
+            // Example regex: Adjust according to the format you need to validate
+            var regex = /^[A-Za-z0-9]{6,9}$/;
+
+            if (regex.test(passportNumber)) {
+                errorMessage.style.display = "none";
+               
+            } else {
+                errorMessage.style.display = "inline";
+               
+            }
+        }
+
+
+  
+   
+</script>  
 
 
 

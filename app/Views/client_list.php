@@ -13,7 +13,7 @@
                         <h4 class="page-title">Client List</h4>
                         <div class="page-title-right">
                             <a  href="<?= base_url('client_create'); ?>" class="btn btn-primary waves-effect waves-light">
-                                Create Client
+                            Create New
                             </a>
                         </div>
                     </div>

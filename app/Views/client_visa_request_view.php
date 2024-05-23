@@ -2,6 +2,11 @@
     <!-- Start Page Content here -->
     <!-- ============================================================== -->
     <style>
+          @media (min-width: 992px) {
+        body[data-layout-mode=horizontal] .content-page {
+            padding: calc(15px + 70px) 12px 65px 12px;
+         }
+        }
        #is-visa-approve-display {
         display: flex;
        align-items: center;
@@ -25,6 +30,7 @@
             height: 6px;
             background-color: #f5f5f5;
         }
+      
     </style>
     <div class="content-page">
         <!-- Start Content-->
@@ -50,30 +56,21 @@
 
                 
 
-
                     <div class="dropdown float-right">
-                        <a href="#" class="dropdown-toggle arrow-none text-muted"
-                            data-toggle="dropdown" aria-expanded="false">
-                            <i class='mdi mdi-dots-horizontal font-18'></i>
-                        </a>
-                    
-                        <div class="dropdown-menu dropdown-menu-right">
 
-                           <?php if($visaData->file != null){ ?>
-                            <a href="<?= base_url('download/' . urlencode($visaData->file)) ?>" class="dropdown-item">
-                                <i class='mdi mdi-arrow-down'></i> Download file
-                            </a> 
-                            <?php } ?>
+                  
 
-                            <!-- item-->
-                            <a href="<?= base_url('client_home'); ?>" class="dropdown-item">
-                                <i class='mdi mdi-backspace-outline mr-1'></i>Back to list
-                            </a>
-                        </div>
+                    <a href="<?= base_url('client_home'); ?>"  title="Close" style="font-size: 22px;" >
+                    <i class='mdi mdi-window-close mr-1'></i>
+                    </a>
+
                     </div>
-                    <p class="text-primary">#<?= $visaData->request_id; ?></p>
-                    <h4 class="mb-1"><?= $visaData->client_name; ?>-<?= $visaData->branch; ?>-<?= $visaData->agency; ?> <i class="ri-phone-line" title="<?= $visaData->client_mobile; ?>"></i> </h4>  
-                    <!-- <p class="text-muted mb-1">Contact : <?= $visaData->client_email; ?> , <?= $visaData->client_mobile; ?></p> -->
+
+                    <p class="text-primary"><?= $visaData->request_id; ?></p>
+                    <h4 class="mb-1"><?= $visaData->client_name; ?>-<?= $visaData->branch; ?>-<?= $visaData->agency; ?> 
+                    <span class="mdi mdi-information-outline" style="color: green;font-size: 15px;" data-toggle="modal" data-target="#centermodal"></span>
+                    </h4>  
+                 
 
                     <div class="text-muted mb-4">
                             <div class="row">
@@ -154,19 +151,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-lg-3 col-sm-6">
-                                    <div class="media mt-3">
-                                        <div class="mr-2 align-self-center">
-                                        
-                                        </div>
-                                        <div class="media-body overflow-hidden">
-                                            <p class="mb-1">Current Status</p>
-                                            <h5 class="mt-0 text-truncate">
-                                            <?= $visaNotesData[0]['status_value']; ?>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                </div>
+                              
 
                                 <div class="col-lg-3 col-sm-6">
                                     <div class="media mt-3">
@@ -185,6 +170,20 @@
                                 <div class="col-lg-3 col-sm-6">
                                     <div class="media mt-3">
                                         <div class="mr-2 align-self-center">
+                                        
+                                        </div>
+                                        <div class="media-body overflow-hidden">
+                                            <p class="mb-1">Current Status</p>
+                                            <h5 class="mt-0 text-truncate">
+                                            <?= $visaNotesData[0]['status_value']; ?>
+                                            </h5>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-3 col-sm-6">
+                                    <div class="media mt-3">
+                                        <div class="mr-2 align-self-center">
                                       
                                         </div>
                                         <div class="media-body overflow-hidden">
@@ -195,6 +194,13 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                </div>
+
+                                <div class="row">
+
+                               
+
                                 </div>
 
                             
@@ -271,7 +277,27 @@
         
 
     </div>
-
+  <!-- Center modal content -->
+  <div class="modal fade" id="centermodal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myCenterModalLabel">Client Details</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+                    <h5>Organization-Location-Agency</h5>
+                    <p ><?= $reqClientData->org_name; ?>-<?= $reqClientData->branch; ?>-<?= $reqClientData->agency; ?></p>
+                   
+                    <h5>Mobile</h5>
+                    <p ><?= $reqClientData->mobile_no; ?></p>
+                   
+                    <h5>Email</h5>
+                    <p ><?= $reqClientData->email; ?></p>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
     <!-- ============================================================== -->
     <!-- End Page content -->
     <!-- ============================================================== -->

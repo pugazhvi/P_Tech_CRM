@@ -108,8 +108,10 @@ class ClientController extends BaseController
             $data['statusData'] = $this->StatusModel->findall();
             $data['countryData'] = $this->CountryModel->findall();
             $data['visaTypeData'] = $this->VisaTypeModel->findall();
+          
 
             $data['visaData'] = $this->VisaRequestModel->getVisaRequestListByClientId(session()->get('is_client_logged_in'), $visa_request_id);
+            $data['reqClientData'] = $this->ClientModel->where('client_id',$data['visaData']->client_id)->get()->getRow();
             $data['visaNotesData'] = $this->NotesModel-> getVisaRequestNotes($visa_request_id);
 
             $clientdata = $this->ClientModel->where('client_id',$this->session->get('is_client_logged_in'))->get()->getRow();

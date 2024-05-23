@@ -12,7 +12,7 @@
                         <h4 class="page-title">Country List</h4>
                         <div class="page-title-right">
                             <a  href="<?= base_url('country_create'); ?>" class="btn btn-primary waves-effect waves-light">
-                                Create Country
+                               Create New
                             </a>
                         </div>
                     </div>

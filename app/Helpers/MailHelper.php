@@ -23,8 +23,9 @@ class MailHelper
 
        
         
-        $data['visaData'] = $VisaRequestModel->getVisaRequestList(session()->get('logged_in_staff_branch_id'), $visa_request_id);
-        $data['visaNotesData'] = $NotesModel-> getVisaRequestNotes($visa_request_id);
+        $data['visaData'] = $VisaRequestModel->getVisaRequestList(session()->get('logged_in_staff_branch_id'), md5($visa_request_id));
+   
+        $data['visaNotesData'] = $NotesModel-> getVisaRequestNotes(md5($visa_request_id));
 
         $emaill = $data['visaData']->client_email;
         $subject = 'United Visa Servises - Notification';

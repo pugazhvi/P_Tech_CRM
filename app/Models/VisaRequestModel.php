@@ -24,7 +24,7 @@ class VisaRequestModel extends Model
                         
                          
         if($visa_request_id != null){
-            return $result->where('visa_request.visa_request_id',$visa_request_id)->get()->getRow();
+            return $result->where('md5(visa_request.visa_request_id)',$visa_request_id)->get()->getRow();
         }else{ 
             return $result->get()->getResultArray();
         }
@@ -52,9 +52,9 @@ class VisaRequestModel extends Model
     public function getVisaRequestListByClientId($client_id = null,$visa_request_id = null)
     {
          $result =  $this->db->table('visa_request')
-                         ->select('visa_request.* , branches.name as branch_name , client.org_name as client_name, client.branch as branch, client.agency as agency ,client.email as client_email ,client.mobile_no as client_mobile, country.country as country_name ,  category.category as visa_type_name  , status.status_value ')
+                         ->select('visa_request.* , branch.branch as branch_name  , client.org_name as client_name, client.branch as branch, client.agency as agency ,client.email as client_email ,client.mobile_no as client_mobile, country.country as country_name ,  category.category as visa_type_name  , status.status_value ')
                          ->join('client', 'visa_request.client_id = client.client_id') 
-                         ->join('branches', 'visa_request.branch_id = branches.branch_id') 
+                         ->join('branch', 'visa_request.branch_id = branch.id') 
                          ->join('country', 'visa_request.country_of_visit = country.id') 
                          ->join('category', 'visa_request.visa_type = category.id') 
                          ->join('status', 'visa_request.status = status.status_id') 
@@ -64,7 +64,7 @@ class VisaRequestModel extends Model
                         
                          
         if($visa_request_id != null){
-            return $result->where('visa_request.visa_request_id',$visa_request_id)->get()->getRow();
+            return $result->where('md5(visa_request.visa_request_id)',$visa_request_id)->get()->getRow();
         }else{ 
             return $result->get()->getResultArray();
         }

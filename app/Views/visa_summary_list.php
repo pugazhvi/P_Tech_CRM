@@ -9,10 +9,10 @@
          <div class="row">
                 <div class="col-12">
                     <div class="page-title-box page-title-box-alt">
-                        <h4 class="page-title">Visa Summary</h4>
+                        <h4 class="page-title">Visa Info</h4>
                         <div class="page-title-right">
                             <a  href="<?= base_url('visa_summary_create'); ?>" class="btn btn-primary waves-effect waves-light">
-                                Create Summary
+                                Create New
                             </a>
                         </div>
                     </div>
@@ -31,7 +31,6 @@
                         <tr>
                         <th>Action</th>
                         <th>Country</th>
-                        <th>Country Code</th>
                         <th>Category</th>
                         <th>VS Type</th>
                         <th>VS Processing</th>
@@ -58,8 +57,7 @@
                            
                             <tr >
                             <td > <a href='<?= base_url()."visa_summary_edit?vs_id=".$value['vs_id']; ?>'><i class='mdi mdi-pencil-outline mr-1'></i> Edit</a></td>
-                            <td><?php echo $value['country_name'];  ?></td>
-                            <td><?php echo $value['vs_country_code'];  ?></td>
+                            <td><?php echo $value['country_name'];  ?> - <?php echo $value['vs_country_code'];  ?></td>
                             <td><?php echo $value['category_name'];  ?></td>
                             <td><?php echo $value['vs_type'];  ?></td>
                             <td><?php echo $value['vs_processing'];  ?>&nbsp;<?php echo $value['vs_processing_base'];  ?></td>

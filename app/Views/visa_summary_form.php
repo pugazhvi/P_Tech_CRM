@@ -23,7 +23,7 @@
                 <div class="page-title-box page-title-box-alt">
                     <h4 class="page-title">
                         
-                     <?php if(isset($visaSummaryData)){ echo 'Edit Visa Summary'; }else{ echo 'Create Visa Summary'; } ?>
+                     <?php if(isset($visaSummaryData)){ echo 'Edit Visa Info'; }else{ echo 'Create Visa info'; } ?>
                            
                   </h4>
                     <div class="page-title-right">

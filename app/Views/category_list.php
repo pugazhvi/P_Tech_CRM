@@ -12,7 +12,7 @@
                         <h4 class="page-title">Category List</h4>
                         <div class="page-title-right">
                             <a  href="<?= base_url('category_create'); ?>" class="btn btn-primary waves-effect waves-light">
-                                Create Category
+                            Create New
                             </a>
                         </div>
                     </div>

@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box page-title-box-alt">
-                    <h4 class="page-title">Create Client</h4>
+                    <h4 class="page-title"> <?php if(isset($clientData)){ echo 'Edit Client'; }else{ echo 'Create Client'; } ?></h4>
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
                             <!-- <li class="breadcrumb-item"><a href="javascript: void(0);">Minton</a></li>
@@ -50,7 +50,7 @@
                             <input type="text" name="org_name" value="<?php if(isset($clientData)){ echo $clientData->org_name; } ?>" parsley-trigger="change" required  class="form-control" id="orgName">
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="branch">Branch<span class="text-danger">*</span></label>
+                            <label for="branch">Location<span class="text-danger">*</span></label>
                             <input type="text" name="branch" value="<?php if(isset($clientData)){ echo $clientData->branch; } ?>" parsley-trigger="change" required  class="form-control" id="branch">
                         </div>
                         <div class="form-group col-md-3">
@@ -91,34 +91,7 @@
                           
 
                    
-                        
-                        <div class="form-group col-md-8">
-                            <label for="address">Address</label>
-                            <input type="text" name="address" value="<?php if(isset($clientData)){ echo $clientData->address; } ?>" parsley-trigger="change"  placeholder="Enter Address" class="form-control" id="address">
-                        </div>
-
-                        <div class="form-group col-md-4">
-                            <label for="city">City</label>
-                            <input type="text"  value="<?php if(isset($clientData)){ echo $clientData->city; } ?>" placeholder="Enter City" name="city"  class="form-control"  id="city">
-                        </div>
-
                   
-                        
-        
-                        <div class="form-group col-md-4">
-                            <label for="state">State </label>
-                            <input type="text" name="state"  value="<?php if(isset($clientData)){ echo $clientData->state; } ?>" placeholder="Enter State" class="form-control" id="state">
-                        </div>
-
-                        <div class="form-group col-md-4">
-                            <label for="country">Country</label>
-                            <input type="text"   name="country" value="<?php if(isset($clientData)){ echo $clientData->country; } ?>" placeholder="Enter country" class="form-control"  id="country">
-                        </div>
-
-                        <div class="form-group col-md-4">
-                            <label for="pin_code">PIN </label>
-                            <input type="text" name="pin_code"  value="<?php if(isset($clientData)){ echo $clientData->pin_code; } ?>" placeholder="Enter PIN" class="form-control" id="pin_code">
-                        </div>
 
                 </div>
                    

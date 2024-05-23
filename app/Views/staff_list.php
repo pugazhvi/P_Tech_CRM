@@ -13,7 +13,7 @@
                         <h4 class="page-title">Staff List</h4>
                         <div class="page-title-right">
                             <a  href="<?= base_url('staff_create'); ?>" class="btn btn-primary waves-effect waves-light">
-                                Create Staff
+                              Create New
                             </a>
                         </div>
                     </div>
@@ -31,6 +31,7 @@
                         <table id="datatable-buttons" class="table table-striped dt-responsive nowrap w-100">
                             <thead>
                                 <tr>
+                                    <th>Branch</th>
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Mobile</th>
@@ -45,6 +46,7 @@
                             <?php foreach ($staffList as $key => $value) { ?>
 
                                 <tr>
+                                    <td> <?php echo $value['branch_name'];  ?></td>
                                     <td> <?php echo $value['name'];  ?></td>
                                     <td><?php echo $value['email'];  ?></td>
                                     <td><?php echo $value['mobile_no'];  ?></td>

@@ -37,6 +37,13 @@
 
 
         <style>
+            @media (min-width: 992px) {
+                body[data-layout-mode=horizontal] .content-page {
+                    padding: calc(15px + 55px) 12px 65px 12px;
+                }
+                .navbar-custom .topnav-menu li a{ display:flex; }
+            }
+
             .dropdown-item:focus, .dropdown-item:hover{
                 background-color: #7ce4dd;
             }
@@ -82,6 +89,68 @@
     
                     <ul class="list-unstyled topnav-menu float-right mb-0">
 
+                        <?php  if(isset($_SESSION['is_staff_logged_in']) && $_SESSION['is_staff_logged_in'] && $_SESSION['logged_in_staff_role'] == 'Staff') { ?>
+
+                            <li class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light">
+                                <a href="<?= base_url().'create_visa_request'; ?>"  style="color:white;"> New Visa Request</a>
+                            <li>
+
+                            <li class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light">
+                                <a href="<?= base_url().'visa_request_list'; ?>"  style="color:white;">  Visa Request List</a>
+                            <li>
+                        
+                        <?php }else if(isset($_SESSION['is_staff_logged_in']) && $_SESSION['is_staff_logged_in'] && $_SESSION['logged_in_staff_role'] == 'Admin'){ ?>
+
+                            <li class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light">
+                                <a href="<?= base_url().'create_visa_request'; ?>"  style="color:white;"> New Visa Request</a>
+                            <li>
+
+                            <li class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light">
+                                <a href="<?= base_url().'visa_request_list'; ?>"  style="color:white;">  Visa Request List</a>
+                            <li>
+                                
+                            <li class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light">
+                                <a href="<?= base_url().'client_list'; ?>"  style="color:white;"> Client</a>
+                            <li>
+
+                            <li class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light">
+                                <a href="<?= base_url().'staff_list'; ?>"  style="color:white;"> Staff</a>
+                            <li>
+
+                            <li class="dropdown notification-list topbar-dropdown">
+                                    <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                    
+                                        <span class="pro-user-name ml-1">
+                                          Masters
+                                        <i class="mdi mdi-chevron-down"></i> 
+                                        </span>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
+                                    
+                                    
+                                            <a href="<?= base_url('country_list'); ?>" class="dropdown-item notify-item">
+                                            <span>Country</span>
+                                            </a>
+
+                                            <a href="<?= base_url('category_list'); ?>" class="dropdown-item notify-item">
+                                            <span>Category</span>
+                                            </a>
+
+                                            <a href="<?= base_url('visa_summary_list'); ?>" class="dropdown-item notify-item">
+                                            <span>Visa Info</span>
+                                            </a>
+                                    
+                                    </div>
+                            </li>
+
+                        <?php }else if(isset($_SESSION['is_client_logged_in']) && $_SESSION['is_client_logged_in']){ ?>
+
+                            <!-- <li class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light">
+                                <a href="<?= base_url().'client_home'; ?>"  style="color:white;"> <span class="mdi mdi-format-align-justify" style="font-size: 17px;"></span>  My Visa Request </a>
+                            <li> -->
+
+                        <?php } ?>
+                      
     
                         <li class="dropdown notification-list topbar-dropdown">
                             <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
@@ -108,10 +177,10 @@
                                     <span>My Profile</span>
                                     </a>
                                 <?php }else if(isset($_SESSION['is_client_logged_in']) && $_SESSION['is_client_logged_in']){ ?>
-                                    <a href="<?= base_url('client_profile'); ?>" class="dropdown-item notify-item">
+                                    <!-- <a href="<?= base_url('client_profile'); ?>" class="dropdown-item notify-item">
                                     <i class="ri-account-circle-line"></i>
                                     <span>My Profile</span>
-                                    </a>
+                                    </a> -->
                                 <?php } ?>
                                
 
@@ -164,7 +233,10 @@
                     </div>
 
 
-                    <ul class="list-unstyled topnav-menu topnav-menu-left m-0">
+
+                    
+
+                    <!-- <ul class="list-unstyled topnav-menu topnav-menu-left m-0">
                         <li>
                             <button class="button-menu-mobile waves-effect waves-light">
                                 <i class="fe-menu"></i>
@@ -172,7 +244,7 @@
                         </li>
 
                         <li>
-                            <!-- Mobile menu toggle (Horizontal Layout)-->
+                           
                             <a class="navbar-toggle nav-link" data-toggle="collapse" data-target="#topnav-menu-content">
                                 <div class="lines">
                                     <span></span>
@@ -180,57 +252,37 @@
                                     <span></span>
                                 </div>
                             </a>
-                            <!-- End mobile menu toggle-->
+                           
                         </li>   
             
-                    </ul>
+                    </ul> -->
                     <div class="clearfix"></div>
                 </div>
             </div>
-            <!-- end Topbar -->
 
+
+            <!-- end Topbar -->
+            <?php  if(isset($_SESSION['is_staff_logged_in']) && $_SESSION['is_staff_logged_in'] && $_SESSION['logged_in_staff_role'] == 'SuperAdmin' ) { ?>
             <div class="topnav">
                 <div class="container-fluid">
                     <nav class="navbar navbar-light navbar-expand-lg topnav-menu">
 
                         <div class="collapse navbar-collapse" id="topnav-menu-content">
                             <ul class="navbar-nav">
-                            <?php  if(isset($_SESSION['is_staff_logged_in']) && $_SESSION['is_staff_logged_in']) { ?>
-
-                                <?php  if($_SESSION['logged_in_staff_role'] == 'Admin'  || $_SESSION['logged_in_staff_role'] == 'Staff') { ?>
+                        
+                
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-visa" role="button"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="ri-pages-line mr-1"></i> Visa Request  <div class="arrow-down"></div>
+                                    <a class="nav-link" href="<?= base_url()."client_list"; ?>" id="topnav-client" role="button" >
+                                        <i class="ri-shield-user-line mr-1"></i> Client  
                                     </a>
-                                    <div class="dropdown-menu" aria-labelledby="topnav-visa">
-                                        <a href="<?= base_url()."visa_request_list"; ?>" class="dropdown-item">Visa Request List</a>
-                                        <a href="<?= base_url()."create_visa_request"; ?>" class="dropdown-item">Create Visa Request</a>
-                                    </div>
-                                </li>
-                                <?php  } ?>
-
-                                <?php  if($_SESSION['logged_in_staff_role'] == 'Admin' ) { ?>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-client" role="button"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="ri-shield-user-line mr-1"></i> Client  <div class="arrow-down"></div>
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="topnav-client">
-                                        <a href="<?= base_url()."client_list"; ?>" class="dropdown-item">Client List</a>
-                                        <a href="<?= base_url()."client_create"; ?>" class="dropdown-item">Create Client</a>
-                                    </div>
+                                   
                                 </li>
 
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-staff" role="button"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="ri-user-line mr-1"></i> Staff  <div class="arrow-down"></div>
+                                    <a class="nav-link" href="<?= base_url()."staff_list"; ?>" id="topnav-staff" role="button">
+                                        <i class="ri-user-line mr-1"></i> Staff  
                                     </a>
-                                    <div class="dropdown-menu" aria-labelledby="topnav-staff">
-                                        <a href="<?= base_url()."staff_list"; ?>" class="dropdown-item">Staff List</a>
-                                        <a href="<?= base_url()."staff_create"; ?>" class="dropdown-item">Create Staff</a>
-                                    </div>
+                                  
                                 </li>
 
                                 <li class="nav-item dropdown">
@@ -239,33 +291,16 @@
                                         <i class="ri-database-2-line mr-1"></i> Master  <div class="arrow-down"></div>
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="topnav-master">
-                                        <a href="<?= base_url()."visa_summary_list"; ?>" class="dropdown-item">Visa Summary</a>
                                         <a href="<?= base_url()."country_list"; ?>" class="dropdown-item">Country</a>
                                         <a href="<?= base_url()."category_list"; ?>" class="dropdown-item">Visa Category</a>
+                                        <a href="<?= base_url()."visa_summary_list"; ?>" class="dropdown-item">Visa Info</a>
                                     </div>
                                 </li>
-                                <?php  } ?>
-                            <?php }else if(isset($_SESSION['is_client_logged_in']) && $_SESSION['is_client_logged_in']) { ?>
-
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle arrow-none" href="<?= base_url()."client_home"; ?>" id="topnav-my-visa" role="button"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="ri-pages-line mr-1"></i> My Visa Request  <div class="arrow-down"></div>
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="topnav-my-visa">
-                                        <a href="<?= base_url()."client_home"; ?>" class="dropdown-item">Visa Request List</a>
-                                    </div>
-                                </li>
-
-
-                            <?php } ?>
-                               
-
-                           
-
+                     
 
                             </ul> <!-- end navbar-->
                         </div> <!-- end .collapsed-->
                     </nav>
                 </div> <!-- end container-fluid -->
             </div> <!-- end topnav-->
+            <?php } ?>    

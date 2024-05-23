@@ -1,7 +1,18 @@
 <!-- ============================================================== -->
 <!-- Start Page Content here -->
 <!-- ============================================================== -->
-
+<style>
+    .status-option .status-box:hover, .status-option .status-box.active {
+        background: #02a8b5;
+        color: #fff;
+        border-radius: 5px;
+        box-shadow: 6px 5px 8px 0 #00000036;
+        cursor: pointer;
+    }
+    .status-option .status-box:hover h3, .status-option .status-box.active h3{
+        color: #fff;
+    }
+</style>    
 <div class="content-page">
     <!-- Start Content-->
     <div class="container-fluid">
@@ -10,14 +21,14 @@
     <div class="row">
         <div class="col-12">
             <div class="card" >
-                <div class="card-body" style="padding: 0.5rem !important;">
+                <div class="card-body status-option" style="padding: 0.5rem !important;">
                     <div class="text-center">
                         <div class="row">
 
                             <?php  foreach ($statusCount as $key => $value) { ?>
 
-                                <div class="col-md-2 col-xl-2">
-                                    <div class="py-1">
+                                <div class="col-md-2 col-xl-2 status">
+                                    <div class="py-1 status-box ">
                                         <h3>
                                         <?= $value['status_count'];  ?>
                                         </h3>
@@ -40,14 +51,14 @@
                     <table id="datatable-buttons" class="table table-hover m-0 table-centered dt-responsive nowrap w-100" cellspacing="0" >
                         <thead class="bg-light">
                         <tr>
-                            <th class="font-weight-medium">Requested By</th>
-                            <th class="font-weight-medium">Req Created Date</th>
-                            <th class="font-weight-medium">Traveller Name</th>
+                            <th class="font-weight-medium">Client</th>
+                            <th class="font-weight-medium">Created Date</th>
+                            <th class="font-weight-medium">Traveller</th>
                             <th class="font-weight-medium">Passport No</th>
-                            <th class="font-weight-medium">Country Of Visit</th>
-                            <th class="font-weight-medium">Visa Type</th>
-                            <th class="font-weight-medium">Statue</th>
-                            <th class="font-weight-medium">Req Updated Date</th>
+                            <th class="font-weight-medium">Country</th>
+                            <th class="font-weight-medium">Visa</th>
+                            <th class="font-weight-medium">Status</th>
+                            <th class="font-weight-medium">Updated Date</th>
                             <!-- <th class="font-weight-medium">Action</th> -->
                         </tr>
                         </thead>
@@ -56,11 +67,11 @@
                        
                         <?php foreach ($visaList as $key => $value) { ?>
                            
-                            <tr  onclick="window.location.href='<?= base_url()."edit_visa_request?visa_request_id=".$value['visa_request_id']; ?>'" >
+                            <tr  onclick="window.location.href='<?= base_url()."edit_visa_request?visa_request_id=".md5($value['visa_request_id']); ?>'" >
 
                             <td><b><?php echo $value['client_name'];  ?>-<?php echo $value['branch'];  ?>-<?php echo $value['agency'];  ?></b></td>
                             <td><?php echo date('d-M-Y', strtotime($value['created_at']));  ?></td>
-                            <td><?php echo $value['traveller_name'];  ?></td>
+                            <td><?php if($value['priority'] != null){ echo '<span class="mdi mdi-star" style="color: gold;font-size: 14px;"></span>';} echo $value['traveller_name'];  ?></td>
                             <td><?php echo $value['passport_no'];  ?></td>
                             <td><?php echo $value['country_name'];  ?></td>
                             <td><?php echo $value['visa_type_name'];  ?></td>
@@ -109,14 +120,29 @@
 <!-- ============================================================== -->
 
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-   
 
   $(document).ready(function() {
-    $('#datatable-buttons').DataTable({
+
+        $('.status').on('click', function() {
+            var statusValue = $(this).find('.font-weight-medium').text().trim();
+            var table = $('#datatable-buttons').DataTable();
+            
+            // Remove active class from all other .status-box elements
+            $('.status .status-box').removeClass('active');
+           
+            if (table.search() === statusValue) {
+                $(this).find('.status-box').removeClass('active');
+                // If current search term matches, clear the search
+                table.search('').draw();
+            } else {
+                $(this).find('.status-box').addClass('active');
+                // Otherwise, apply the new search term
+                table.search(statusValue).draw();
+            }
+        });
      
-      
-      "ordering": false
+     
     });
-  });
 </script>

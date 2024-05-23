@@ -4,18 +4,20 @@ namespace App\Controllers;
 use App\Helpers\MailHelper;
 use App\Models\StaffModel;
 use App\Models\ClientModel;
-
+use App\Models\BranchModel;
 
 class StaffController extends BaseController
 {
     public $session;
     protected $StaffModel;
 	protected $ClientModel;
+	protected $BranchModel;
     public function __construct()
     {
         $this->session = session();
         $this->StaffModel = new StaffModel();
 		$this->ClientModel = new ClientModel();
+		$this->BranchModel = new BranchModel();
     }
 
    
@@ -84,8 +86,11 @@ class StaffController extends BaseController
         if(!$this->session->has('is_staff_logged_in')){ return redirect()->to(base_url().'staff'); }
 
        
-        $data['staffList'] =  $this->StaffModel->where('staff.staff_id != ',session()->get('is_staff_logged_in') )->findAll();
-        
+        $data['staffList'] =  $this->StaffModel->select('staff.* , branch.branch as branch_name')
+		                              ->join('branch', 'staff.branch_id = branch.id') 
+		                              ->where('staff.staff_id != ',session()->get('is_staff_logged_in') )
+									  ->findAll();
+        // dd($data);
         $staffdata = $this->StaffModel->where('staff_id',$this->session->get('is_staff_logged_in'))->get()->getRow();
         echo view('layout/header', ['Data'=>$staffdata]);
         echo view('staff_list',$data);
@@ -106,6 +111,7 @@ class StaffController extends BaseController
 		}else{
 
             $data['staffData'] =  $this->StaffModel->where('md5(staff.staff_id)', $this->request->getVar('staff_id') )->get()->getRow();
+			$data['branchData'] = $this->BranchModel->findAll();
             $staffdata = $this->StaffModel->where('staff_id',$this->session->get('is_staff_logged_in'))->get()->getRow();
           
             echo view('layout/header', ['Data'=>$staffdata]);
@@ -122,7 +128,6 @@ class StaffController extends BaseController
 		if($this->request->getmethod() == 'POST')
 		{
 				$staffData = $this->request->getVar();
-                $staffData['branch_id'] = $this->session->get('logged_in_staff_branch_id');
                 $staffData['created_by'] = $this->session->get('is_staff_logged_in');
 				$insert = $this->StaffModel->save($staffData);
 				if($insert) 
@@ -132,9 +137,11 @@ class StaffController extends BaseController
 		
 		}else{
 
+			$data['branchData'] = $this->BranchModel->findAll();
+
 		    $staffdata = $this->StaffModel->where('staff_id',$this->session->get('is_staff_logged_in'))->get()->getRow();
             echo view('layout/header', ['Data'=>$staffdata]);
-            echo view('staff_form');
+            echo view('staff_form',$data);
             echo view('layout/footer');
         }
 	}

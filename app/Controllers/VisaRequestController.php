@@ -88,7 +88,7 @@ class VisaRequestController extends BaseController
                         'path' => WRITEPATH . 'uploads/' . $newName,
                     ];
         
-                    $visaData['file'] = $newName;
+                    $file_name = $newName;
                 }
 
                 $visaData['branch_id'] = $this->session->get('logged_in_staff_branch_id');
@@ -96,7 +96,7 @@ class VisaRequestController extends BaseController
 				$id = $this->VisaRequestModel->insert($visaData);
 				if($id) 
 				{
-                    $this->NotesModel->save(['visa_request_id'=>$id,'status'=>$visaData['status'],'notes'=>$visaData['notes'], 'created_by'=>$this->session->get('is_staff_logged_in')]);
+                    $this->NotesModel->save(['visa_request_id'=>$id,'status'=>$visaData['status'],'notes'=>$visaData['notes'], 'created_by'=>$this->session->get('is_staff_logged_in'), 'file'=> isset( $file_name) ?  $file_name : null]);
                     $MailHelper = new MailHelper();
                     $MailHelper->send_email($id);
 					return redirect()->to(base_url()."visa_request_list"); 
@@ -124,21 +124,7 @@ class VisaRequestController extends BaseController
 				//update visa details
 				$visaData = $this->request->getVar();
 
-                $file = $this->request->getFile('file');
-
-                if ($file->isValid() && !$file->hasMoved()) {
-                    $newName = $file->getRandomName();
-                    $file->move(WRITEPATH . 'uploads', $newName);
-        
-                    $fileInfo = [
-                        'name' => $file->getName(),
-                        'type' => $file->getClientMimeType(),
-                        'size' => $file->getSize(),
-                        'path' => WRITEPATH . 'uploads/' . $newName,
-                    ];
-        
-                    $visaData['file'] = $newName;
-                }
+               
 				$visa_request_id =  $this->request->getVar('visa_request_id');
 				$update = $this->VisaRequestModel->where('visa_request_id', $visa_request_id )->set($visaData)->update();
                 
@@ -155,7 +141,7 @@ class VisaRequestController extends BaseController
 
             $data['visaData'] = $this->VisaRequestModel->getVisaRequestList(session()->get('logged_in_staff_branch_id'), $visa_request_id);
             $data['visaNotesData'] = $this->NotesModel-> getVisaRequestNotes($visa_request_id);
-
+            $data['reqClientData'] = $this->ClientModel->where('client_id',$data['visaData']->client_id)->get()->getRow();
             $data['clientData'] = $this->ClientModel->findall();
             $data['statusData'] = $this->StatusModel->findall();
             $data['countryData'] = $this->CountryModel->findall();
@@ -198,21 +184,30 @@ class VisaRequestController extends BaseController
     {
         $notesData = $this->request->getVar();
 
+        $file = $this->request->getFile('file');
+
+        if ($file->isValid() && !$file->hasMoved()) {
+            $newName = $file->getRandomName();
+            $file->move(WRITEPATH . 'uploads', $newName);
+
+            $file_name = $newName;
+        }
+
         if($notesData['status'] == 6){
 
             $updateArray = ['status'=>$notesData['status'],'awb_no'=>$notesData['awb_no']];
-            $insertArray = ['visa_request_id'=>$notesData['visa_request_id'],'status'=>$notesData['status'],'notes'=>$notesData['notes'], 'created_by'=>$this->session->get('is_staff_logged_in'),'awb_no'=>$notesData['awb_no']];
+            $insertArray = ['visa_request_id'=>$notesData['visa_request_id'],'status'=>$notesData['status'],'notes'=>$notesData['notes'], 'created_by'=>$this->session->get('is_staff_logged_in'),'awb_no'=>$notesData['awb_no'] , 'file'=> isset( $file_name) ?  $file_name : null ];
         
         }else if($notesData['status'] == 5){
 
             $is_visa_approved =  isset($notesData['is_visa_approved'])  ? 1 : 0;
             $updateArray = ['status'=>$notesData['status'],'is_visa_approved'=>$is_visa_approved];
-            $insertArray = ['visa_request_id'=>$notesData['visa_request_id'],'status'=>$notesData['status'],'notes'=>$notesData['notes'], 'created_by'=>$this->session->get('is_staff_logged_in'),'is_visa_approved'=>$is_visa_approved];
+            $insertArray = ['visa_request_id'=>$notesData['visa_request_id'],'status'=>$notesData['status'],'notes'=>$notesData['notes'], 'created_by'=>$this->session->get('is_staff_logged_in'),'is_visa_approved'=>$is_visa_approved , 'file'=> isset( $file_name) ?  $file_name : null];
         
         }else{
 
             $updateArray = ['status'=>$notesData['status']];
-            $insertArray = ['visa_request_id'=>$notesData['visa_request_id'],'status'=>$notesData['status'],'notes'=>$notesData['notes'], 'created_by'=>$this->session->get('is_staff_logged_in')];
+            $insertArray = ['visa_request_id'=>$notesData['visa_request_id'],'status'=>$notesData['status'],'notes'=>$notesData['notes'], 'created_by'=>$this->session->get('is_staff_logged_in') , 'file'=> isset( $file_name) ?  $file_name : null];
         }
         
         $update =$this->VisaRequestModel->where('visa_request_id',$this->request->getVar('visa_request_id') )
@@ -221,13 +216,19 @@ class VisaRequestController extends BaseController
         if($update) 
         {
             $this->NotesModel->save($insertArray);
-            $visaNotesData = $this->NotesModel-> getVisaRequestNotes($notesData['visa_request_id']);
+            $visaNotesData = $this->NotesModel-> getVisaRequestNotes(md5($notesData['visa_request_id']));
             $MailHelper = new MailHelper();
             $MailHelper->send_email($notesData['visa_request_id']);
 
             $html = '';
               foreach ($visaNotesData as $key => $notes) 
                 {
+                    if($notes['file'] != null){
+                    $downloadIcon = '<a href="' . base_url("download/" . urlencode($notes['file'])) . '" title="Download"><i class="ri-attachment-2"></i></a>';
+                    }else{
+                        $downloadIcon = '';
+                    }
+                       
                     if($notes['status'] == 5)
                     { 
                         $text = ($notes['is_visa_approved'] == 1 ) ? ' (Visa Approved)' : ' (Visa Rejected)';
@@ -240,8 +241,8 @@ class VisaRequestController extends BaseController
                         $statusValue = $notes['status_value']; 
                     }
 
-                    $html .= '<div class="media mb-3 pb-3 border-bottom"><div class="media-body">';
-                    $html .= '<h5 class="mt-0">'.$statusValue.'<small class="text-muted float-right"></small></h5>';
+                    $html .= '<div class="media mb-3 pb-3 border-bottom"><div class="media-body note-status">';
+                    $html .= '<h5 class="mt-0">'.$statusValue.$downloadIcon.'<small class="text-muted float-right"></small></h5>';
                     $html .= $notes['notes'];
                     $html .='<br/><a href="javascript: void(0);" class="text-muted font-13 d-inline-block mt-2"> <i class="mdi mdi-account-circle"></i> '.$notes['created_by'].' </a>';
                     $html .= '<small class="text-muted float-right mt-2"><i class="mdi mdi-calendar-clock"></i>'.date('d-M-Y h:i A', strtotime($notes['created_at'])).'</small></div></div>';

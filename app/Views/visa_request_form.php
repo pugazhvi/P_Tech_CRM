@@ -12,6 +12,68 @@
     .select2-container--default .select2-selection--single .select2-selection__arrow{
         top:4px;
     }
+
+            /* The container for the toggle button */
+            .toggle-btn {
+        position: relative;
+        display: inline-block;
+        width: 50px;
+        height: 25px;
+        margin-left: 15px;
+        margin-bottom: 0;
+        }
+
+        /* Hide the default checkbox */
+        .toggle-btn input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+        }
+
+        /* The slider (circle) of the toggle button */
+        .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: .4s;
+        border-radius: 34px;
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+        border-radius: 34px;
+        }
+
+        /* The circle inside the slider */
+        .slider.round::before {
+        position: absolute;
+        content: "";
+        height: 18px;
+        width: 18px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: .4s;
+        border-radius: 50%;
+        }
+
+        /* Move the circle when toggled */
+        input:checked + .slider {
+        background-color: #1aa79c;
+        }
+
+        input:checked + .slider::before {
+        transform: translateX(26px);
+        }
+        #is-visa-approve-display {
+        display: flex;
+       align-items: center;
+       margin-top: 14px;
+       }
 </style>
 <div class="content-page">
     <!-- Start Content-->
@@ -109,14 +171,22 @@
                         </div>
 
                         <div class="form-group col-md-3">
-                            <label for="priority">Priority</label>
+                            <!-- <label for="priority">Priority</label>
                             <select class="select2-dropdown form-control" id="priority" name="priority" parsley-trigger="change" >
                                 <option value="medium">Medium</option>
                                 <option value="low">Low</option>
                                 <option value="high">High</option>
                                 <option value="urgent">Urgent</option>
                                 <option value="critical">Critical</option>
-                            </select>
+                            </select> -->
+                            <label></label><br>
+                            <div id="is-visa-approve-display">
+                            Priority
+                            <label class="toggle-btn"> 
+                                <input type="checkbox"  class="form-control"  name="priority" id="priority">
+                                <span class="slider round"></span>
+                            </label> 
+                            </div>
                         </div>
 
                        
