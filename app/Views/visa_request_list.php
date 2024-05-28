@@ -2,6 +2,16 @@
 <!-- Start Page Content here -->
 <!-- ============================================================== -->
 <style>
+    .select2-container .select2-selection--single{
+        height: 36px;
+        border:1px solid #ced4da;
+    }
+    .select2-container--default .select2-selection--single .select2-selection__rendered{
+        line-height: 36px;
+    }
+    .select2-container--default .select2-selection--single .select2-selection__arrow{
+        top:4px;
+    }
     .status-option .status-box:hover, .status-option .status-box.active {
         background: #02a8b5;
         color: #fff;
@@ -62,16 +72,17 @@
                 <div class="card-body">
                     <div id="datatable-toolbar" class="d-flex justify-content-between align-items-center mb-3" style="margin-top: -37px;margin-left: 198px;">
                         <div id="categoryFilter" style="display: flex;">
-                            <select class="form-control" id="client_list" style="width:auto;">
+                            <select class="select2-dropdown" id="client_list" style="width:auto;">
                                 <option value="">Select Client</option>
                                 <?php foreach ($client_list as $key => $value) { ?>
                                     <option class="dropdown-item " href="#" value="<?= $value['client_id'] ?>"><?= $value['org_name'] ?>-<?= $value['branch'] ?>-<?= $value['agency'] ?></option>
                                 <?php } ?>
                             </select>
-                            <div>
-                            <label class="form-control" style="border:1px solid white;margin-left: 5px;" for=""><input style="height: 19px;width: 28px;" id="add_30days_old_dispatched_data" type="checkbox"> View Old Data</label>
-                            </div>
+                            
                         </div>
+                        <div id="categoryFilter_11">
+                            <label class="form-control" style="border:1px solid white;margin-left: 5px;display:flex;" for=""><input style="height: 19px;width: 28px;" id="add_30days_old_dispatched_data" type="checkbox"><span> View Old Data</span></label>
+                            </div>
                     </div>
                     <table id="client_table" class="table display table-hover m-0 table-centered dt-responsive nowrap w-100" cellspacing="0" >
                         <thead class="bg-light">
@@ -142,9 +153,11 @@
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/js/select2.min.js"></script>
 <script>
 
     $(document).ready(function() {
+        $('.select2-dropdown').select2();
 
         $('.status').on('click', function() {
             console.log("1111111111111111111111");
@@ -186,11 +199,18 @@
 
             $('#client_table_wrapper').find('.row').append($('.dt-buttons.btn-group.flex-wrap')[0]);
             $('#client_table_wrapper').find('.row').append($('#client_table_filter')[0]);
-            $('.dt-buttons.btn-group.flex-wrap').addClass('col-6');
-            $('#client_table_filter').addClass('col-6');
+            $('.dt-buttons.btn-group.flex-wrap').addClass('col-8');
+            $('#client_table_filter').addClass('col-4');
+            $('.btn.btn-secondary.buttons-copy.buttons-html5').addClass('col-1');
+            $('.btn.btn-secondary.buttons-print').addClass('col-1');
+            $('.btn.btn-secondary.buttons-pdf.buttons-html5').addClass('col-1');
+            
             setTimeout(() => {
                 $('.dt-buttons.btn-group.flex-wrap').append($("#categoryFilter")[0]);
+                $('.dt-buttons.btn-group.flex-wrap').append($("#categoryFilter_11")[0]);
             }, 500);
+            $('#categoryFilter').addClass('col-4');
+            $('#categoryFilter_11').addClass('col-4');
 
             $('#client_list').change(function () {
                 var client_id = $(this).val();
@@ -203,7 +223,11 @@
                 table.clear().draw();
 
                 if (client_id) {
-                    append_visa_request_list(client_id, table);
+                        if($('#add_30days_old_dispatched_data').prop('checked')){
+                            append_visa_request_list(client_id, table,1);
+                        }else{
+                            append_visa_request_list(client_id, table);
+                        }
                     
                 }else{
                     status_masters.forEach(function (status_master) {
