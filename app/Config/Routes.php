@@ -18,9 +18,12 @@ use CodeIgniter\Router\RouteCollection;
  $routes->match(['get','post'],'/visa_type','StaffController::visa_type');
  $routes->match(['get','post'],'/countries','StaffController::countries');
  $routes->post("change_staff_password/(:any)", "StaffController::change_staff_password/$1");
+ $routes->post("change_staff_password/(:any)/(:any)", "StaffController::change_staff_password/$1/$2");
  $routes->match(['get','post'],'/forgot_password','StaffController::forgot_password');
  $routes->match(['get','post'],'/verify_otp','StaffController::verify_otp');
  $routes->match(['get','post'],'/change_password','StaffController::change_password');
+ $routes->post('status_staff', 'StaffController::status_staff');
+ 
 
 
  $routes->match(['get','post'],'/','ClientController::login');
@@ -29,6 +32,7 @@ use CodeIgniter\Router\RouteCollection;
  $routes->match(['get','post'],'/view_visa_request','ClientController::view_visa_request');
  $routes->match(['get','post'],'/client_profile','ClientController::client_profile');
  $routes->post("change_client_password/(:any)", "ClientController::change_client_password/$1");
+ $routes->post('status_client', 'ClientController::status_client');
 
 
 

@@ -166,7 +166,7 @@
                         </a>
                         
                 
-                        <a href="<?= base_url('visa_request_list'); ?>"  title="Close" style="font-size: 22px;" >
+                        <a href="<?= base_url('visa_request_list'); ?>" id="Close" title="Close" style="font-size: 22px;" >
                           <i class='mdi mdi-window-close mr-1'></i>
                         </a>
 
@@ -247,7 +247,7 @@
                         <div class=" col-md-12">
                             <div class="border rounded">
                                 <form id="save-notes" class="comment-area-box">
-                                        <textarea rows="3" class="form-control border-0 resize-none notes-field" name="notes"  placeholder="Enter Notes..."></textarea>
+                                        <textarea rows="6" class="form-control border-0 resize-none notes-field" name="notes"  placeholder="Enter Notes..."></textarea>
                                         <div class="p-2 bg-light d-flex  ">
                                             <input type="hidden" name="visa_request_id" value="<?= $visaData->visa_request_id; ?>">
                                             
@@ -537,21 +537,34 @@
                 data: formData,
                 contentType: false, 
                 processData: false, 
-                success: function(response) {
-                    if(checkbox.value == 1){ document.getElementById('is_visa_approved').checked = true; }
-                    var count  = 'Notes ('+response.count+')';
-                    $('#notes-count').empty();
-                    $('#notes-count').append(count);
-                    $('#notes').empty(); 
-                    $('#notes').append(response.notes); 
-                    $('#submit-spin').hide();
-                   
-                    $('.notes-field').val('');
-                    $('#file').val(''); 
-                    $('#selected-file-name').text(''); 
-                    $('#remove-attachment').hide(); 
-                    $('#attachment').show(); 
-                   
+                success: function(responses) {
+                    try{
+
+                        var jsonString = responses.substring(responses.indexOf('{'));
+    
+                        // Parse the JSON string to an object
+                        
+                        // Access the notes HTML content from the parsed object
+                        var response = JSON.parse(jsonString);
+
+                        console.log(response);
+
+                        if(checkbox.value == 1){ document.getElementById('is_visa_approved').checked = true; }
+                        var count  = 'Notes ('+response.count+')';
+                        $('#notes-count').empty();
+                        $('#notes-count').append(count);
+                        $('#notes').empty(); 
+                        $('#notes').append(response.notes); 
+                        $('#submit-spin').hide();
+                    
+                        $('.notes-field').val('');
+                        $('#file').val(''); 
+                        $('#selected-file-name').text(''); 
+                        $('#remove-attachment').hide(); 
+                        $('#attachment').show(); 
+                    } catch (e) {
+                        console.error('Parsing error:', e);
+                    }
                     
                 },
                 error: function(xhr, status, error) {
@@ -606,7 +619,7 @@
             }
             else if(statusValue == 5)
             {
-                document.getElementById('is_visa_approved').checked = false;
+                document.getElementById('is_visa_approved').checked = true;
                 $("#is-visa-approve-display").show();
                 $("#awb-display").hide();
                
@@ -705,7 +718,14 @@
         }
 
 
-  
+        $('#Close').click(function(params) {
+            // console.log($(this));
+            
+           <?php session()->setFlashdata('client_id', $reqClientData->client_id);?>
+
+           
+
+        })
    
 </script>  
 

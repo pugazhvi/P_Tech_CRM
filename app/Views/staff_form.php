@@ -19,7 +19,7 @@
             
         <!-- start page title -->
         <div class="row">
-            <div class="col-12">
+            <div class="col-6">
                 <div class="page-title-box page-title-box-alt">
                     <h4 class="page-title">   <?php if(isset($staffData)){ echo 'Edit Staff'; }else{ echo 'Create Staff'; } ?> </h4>
                     <div class="page-title-right">
@@ -31,9 +31,13 @@
                     </div>
                 </div>
             </div>
+            <div class="col-6" style="margin-top: 19px;margin-left: -21px;">
+            <button style="float: right;" class="btn btn-primary waves-effect waves-light mr-1" href="#" onclick="window.history.back()">Back to List</button>
+
+            </div>
         </div>     
         <!-- end page title -->  
- 
+
  
         <div class="row">
         <div class="col-lg-12">
@@ -43,70 +47,70 @@
                     
 
                     <form method="post" 
-                    <?php if(isset($staffData)){ ?>  action="<?= base_url()."staff_edit"; ?>"
-                    <?php } else {  ?>   action="<?= base_url()."staff_create"; ?>" <?php } ?>
-                     class="parsley-examples">
+                        <?php if(isset($staffData)){ ?>  action="<?= base_url()."staff_edit"; ?>"
+                        <?php } else {  ?>   action="<?= base_url()."staff_create"; ?>" <?php } ?>
+                        class="parsley-examples">
 
 
-                     <?php if(isset($staffData)){ ?>
-                            <input type="hidden" required   name="id" value="<?= $staffData->staff_id; ?>" id='id' >
-                    <?php } ?>
+                        <?php if(isset($staffData)){ ?>
+                                <input type="hidden" required   name="id" value="<?= $staffData->staff_id; ?>" id='id' >
+                        <?php } ?>
 
-                    <div class="form-row">
+                        <div class="form-row">
 
-                        <div class="form-group col-md-3">
-                            <label for="branch_id">Branch<span class="text-danger">*</span></label>
-                            <select class="select2-dropdown form-control" name="branch_id" id="branch_id"  required>
-                                <option value="">Select branch</option>
-                                <?php foreach ($branchData as $key => $branchValue) { ?>
-                                    <option value="<?php echo $branchValue['id'];  ?>"  <?php if(isset($staffData)){ echo ($branchValue['id'] ==  $staffData->branch_id) ? 'selected' : ''; } ?> ><?php echo $branchValue['branch'];  ?></option>
-                                <?php } ?>
-                                    
-                            </select>   
-                        </div>
-
-                        <div class="form-group col-md-3">
-                            <label for="role">Role<span class="text-danger">*</span></label>
-                            <select  class="select2-dropdown form-control" name="role" id="role" parsley-trigger="change" required >
-                            <?php if(isset($staffData)){ ?> <option value="<?= $staffData->role; ?>"> <?= $staffData->role; ?> </option>   <?php } ?>
-                                <option >Select Role</option>
-                                <option value="Admin">Admin</option>
-                                <option value="Staff">Staff</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group col-md-3">
-                            <label for="staffName">Staff Name<span class="text-danger">*</span></label>
-                            <input type="text" name="name" value="<?php if(isset($staffData)){ echo $staffData->name; } ?>" parsley-trigger="change" required placeholder="Enter staff name" class="form-control" id="staffName">
-                        </div>
-
-                        <div class="form-group col-md-3">
-                            <label for="mobile">Mobile<span class="text-danger">*</span></label>
-                            <input type="text" name="mobile_no" value="<?php if(isset($staffData)){ echo $staffData->mobile_no; } ?>" parsley-trigger="change" required placeholder="Enter Mobile" class="form-control" id="mobile">
-                        </div>
-                       
-                    </div>
-
-                    <div class="form-row">
-
-                            <div class="form-group col-md-4">
-                                <label for="email">Email<span class="text-danger">*</span></label>
-                                <input type="email" name="email" value="<?php if(isset($staffData)){ echo $staffData->email; } ?>" parsley-trigger="change" required placeholder="Enter Email" class="form-control" id="email">
+                            <div class="form-group col-md-3">
+                                <label for="branch_id">Branch<span class="text-danger">*</span></label>
+                                <select class="select2-dropdown form-control" name="branch_id" id="branch_id"  required>
+                                    <option value="">Select branch</option>
+                                    <?php foreach ($branchData as $key => $branchValue) { ?>
+                                        <option value="<?php echo $branchValue['id'];  ?>"  <?php if(isset($staffData)){ echo ($branchValue['id'] ==  $staffData->branch_id) ? 'selected' : ''; } ?> ><?php echo $branchValue['branch'];  ?></option>
+                                    <?php } ?>
+                                        
+                                </select>   
                             </div>
-                            <?php if(!isset($staffData)){  ?>
+
+                            <div class="form-group col-md-3">
+                                <label for="role">Role<span class="text-danger">*</span></label>
+                                <select  class="select2-dropdown form-control" name="role" id="role" parsley-trigger="change" required >
+                                <?php if(isset($staffData)){ ?> <option value="<?= $staffData->role; ?>"> <?= $staffData->role; ?> </option>   <?php } ?>
+                                    <option >Select Role</option>
+                                    <option value="Admin">Admin</option>
+                                    <option value="Staff">Staff</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="staffName">Staff Name<span class="text-danger">*</span></label>
+                                <input type="text" name="name" value="<?php if(isset($staffData)){ echo $staffData->name; } ?>" parsley-trigger="change" required placeholder="Enter staff name" class="form-control" id="staffName">
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="mobile">Mobile<span class="text-danger">*</span></label>
+                                <input type="text" name="mobile_no" value="<?php if(isset($staffData)){ echo $staffData->mobile_no; } ?>" parsley-trigger="change" required placeholder="Enter Mobile" class="form-control" id="mobile">
+                            </div>
+                        
+                        </div>
+
+                        <div class="form-row">
+
                                 <div class="form-group col-md-4">
-                                <label for="pass1">Password<span class="text-danger">*</span></label>
-                                <input id="pass1" type="password"  placeholder="Password" required class="form-control">
-                            </div>
+                                    <label for="email">Email<span class="text-danger">*</span></label>
+                                    <input type="email" name="email" value="<?php if(isset($staffData)){ echo $staffData->email; } ?>" parsley-trigger="change" required placeholder="Enter Email" class="form-control" id="email">
+                                </div>
+                                <?php if(!isset($staffData)){  ?>
+                                    <div class="form-group col-md-4">
+                                    <label for="pass1">Password<span class="text-danger">*</span></label>
+                                    <input id="pass1" type="password"  placeholder="Password" required class="form-control">
+                                </div>
 
-                            <div class="form-group col-md-4">
-                                <label for="passWord2">Confirm Password <span class="text-danger">*</span></label>
-                                <input data-parsley-equalto="#pass1" type="password" name="password" required placeholder="Password" class="form-control" id="passWord2">
-                            </div>
-                            <?php } ?>
-                          
+                                <div class="form-group col-md-4">
+                                    <label for="passWord2">Confirm Password <span class="text-danger">*</span></label>
+                                    <input data-parsley-equalto="#pass1" type="password" name="password" required placeholder="Password" class="form-control" id="passWord2">
+                                </div>
+                                <?php } ?>
+                            
 
-                    </div>
+                        </div>
 
 
     
@@ -118,13 +122,56 @@
                             <button class="btn btn-primary waves-effect waves-light mr-1" type="submit">
                                 Submit
                             </button>
-                            <button type="reset" onclick="window.history.back()" class="btn btn-secondary waves-effect">
+                            <!-- <button type="reset" onclick="window.history.back()" class="btn btn-secondary waves-effect">
                                 Cancel
-                            </button>
+                            </button> -->
                         </div>
 
                     </form>
-                    
+
+                    <?php if (isset($staffData)) { ?>
+                    <div class="text-left mt-3">
+
+                        <h5 class="mb-3 text-uppercase bg-light p-2"><i class="mdi mdi-account-circle mr-1"></i> Change Password</h5>
+
+                        <div class="row">                            
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="new_password">New Password</label>
+                                    <div class="input-group">
+                                        <input type="password" class="form-control" id="new_password" required>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">
+                                                <i class="fa fa-eye" id="toggleNewPassword"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="confirm_password">Confirm Password</label>
+                                    <div class="input-group">
+                                        <input type="password" class="form-control" id="confirm_password" required>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">
+                                                <i class="fa fa-eye" id="toggleConfirmPassword"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6" style="margin-top: 27px;">
+                            
+                            </div>
+                            <div class="col-md-6" style="margin-top: 27px;">
+                                <button type="submit" class="btn btn-primary" id="submit_password" style="float: inline-end;" onclick="changeStaffPassword(this)">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                    <?php } ?>
                 </div>
             </div> <!-- end card -->
         </div>
@@ -151,3 +198,86 @@
 <!-- ============================================================== -->
 <!-- End Page content -->
 <!-- ============================================================== -->
+
+
+<script>
+    function changeStaffPassword(params) {
+
+        var staff_id = $('#id').val();
+
+        var formData = {
+            new_password: $('#new_password').val(),
+            confirm_password: $('#confirm_password').val()
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: '<?php echo base_url()."change_staff_password/"?>' + staff_id + '/' + 'admin', 
+            data: formData,
+            dataType: 'json',
+            success: function(response) {
+                console.log(response);
+                if (response.status == 'error') {
+                    toastr.warning(response.message, 'Warning');
+                }else{
+                    toastr.success(response.message, 'Success');
+
+                    // window.location.href = "<?php echo base_url().'staff_logout' ?>";
+                }
+
+            },
+            error: function(xhr, status, error) {
+                // Handle error response here
+                console.error(xhr.responseText);
+            }
+        });
+
+    }
+</script>
+
+<script>
+
+    var newPasswordField = document.getElementById("new_password");
+    var toggleNewPassword = document.getElementById("toggleNewPassword");
+
+    var confirmField = document.getElementById("confirm_password");
+    var toggleConfirmPassword = document.getElementById("toggleConfirmPassword");
+
+
+    toggleNewPassword.addEventListener("click", function() {
+        togglePasswordVisibility(newPasswordField, toggleNewPassword);
+    });
+
+    toggleConfirmPassword.addEventListener("click", function() {
+        togglePasswordVisibility(confirmField, toggleConfirmPassword);
+    });
+
+    function togglePasswordVisibility(field, toggle) {
+        if (field.type === "password") {
+            field.type = "text";
+            toggle.className = "fa fa-eye-slash";
+        } else {
+            field.type = "password";
+            toggle.className = "fa fa-eye";
+        }
+    }
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var newPasswordField = document.getElementById('new_password');
+        var confirmPasswordField = document.getElementById('confirm_password');
+        var submitButton = document.getElementById('submit_password');
+
+        // Add an event listener to the "Confirm Password" field
+        confirmPasswordField.addEventListener('input', function() {
+            // Check if the passwords match
+            if (newPasswordField.value === confirmPasswordField.value) {
+                // Enable the submit button
+                submitButton.disabled = false;
+            } else {
+                // Disable the submit button
+                submitButton.disabled = true;
+            }
+        });
+    });
+</script>

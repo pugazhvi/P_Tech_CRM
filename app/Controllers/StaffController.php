@@ -6,12 +6,19 @@ use App\Models\StaffModel;
 use App\Models\ClientModel;
 use App\Models\BranchModel;
 
+use CodeIgniter\API\ResponseTrait;
+
+
 class StaffController extends BaseController
 {
     public $session;
     protected $StaffModel;
 	protected $ClientModel;
 	protected $BranchModel;
+
+	use ResponseTrait;
+
+	
     public function __construct()
     {
         $this->session = session();
@@ -258,7 +265,7 @@ class StaffController extends BaseController
 		}
 	}
 
-	public function change_staff_password($staff_id)
+	public function change_staff_password($staff_id, $admin="")
     {
         $old_password =$this->request->getVar('old_password');
         $new_password =$this->request->getVar('new_password');
@@ -268,13 +275,15 @@ class StaffController extends BaseController
         $staff = $this->StaffModel->where('staff_id',$staff_id)->first();
         $data_old_password = $staff['password'];
 
-        if (!password_verify($old_password, $data_old_password)) {
-            $response = array(
-                'status' => 'error',
-                'message' => 'Old Password Not Match...'
-            );
-            return json_encode($response);
-        } 
+        if(!$admin == 'admin'){
+			if (!password_verify($old_password, $data_old_password)) {
+				$response = array(
+					'status' => 'error',
+					'message' => 'Old Password Not Match...'
+				);
+				return json_encode($response);
+			} 
+		}
 
         if($new_password  != $confirm_password){
             $response = array(
@@ -375,7 +384,34 @@ class StaffController extends BaseController
 	}
 
 
+    public function status_staff()
+    {
 
+        try {
+            $staff_id = $this->request->getPost('staff_id');
+            $is_active = $this->request->getPost('is_active'); 
+            
+            $data = [
+                'is_active' => $is_active
+            ];
+            $updated = $this->StaffModel->update($staff_id, $data);
+            // $staff_list = $this->StaffModel->orderBy('org_name','asc')->findAll();
+            $staff_list = $this->StaffModel->select('staff.* , branch.branch as branch_name')
+										   ->join('branch', 'staff.branch_id = branch.id') 
+										   ->where('staff.staff_id != ',session()->get('is_staff_logged_in') )
+										   ->findAll();
+
+            if ($updated) {
+                $result = $data;
+                return $this->respond(['status' => 'success','code' => 200,'data' => $staff_list],200);
+            } else {
+                $result = "No Match's";
+                return $this->respond(['status' => 'failed','code' => 404,'data' => $result],404);
+            }
+        } catch (\Exception $exception) {
+            return $this->respond(['status' => 'failed','code' => 500,'data' => $exception],500);
+       }
+    }
 
 
 

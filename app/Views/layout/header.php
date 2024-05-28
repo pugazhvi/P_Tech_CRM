@@ -36,6 +36,12 @@
         <link href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css" rel="stylesheet">
 
 
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/min/moment.min.js"></script>
+
+
         <style>
             @media (min-width: 992px) {
                 body[data-layout-mode=horizontal] .content-page {
@@ -72,8 +78,21 @@
             }
 
 
+            .btn-secondary{
+                color: black;
+                background-color: #f4f9fb;
+                border-color: #f4f9fb;
+            }
 
+
+            .btn-secondary:hover {
+                color: #343a40;
+                background-color: #d8eaf1;
+                border-color: #cfe5ed;
+            }
         </style>
+
+
 
 
     </head>

@@ -8,6 +8,9 @@ use App\Models\CountryModel;
 use App\Models\VisaTypeModel;
 use App\Models\NotesModel;
 
+use CodeIgniter\API\ResponseTrait;
+
+
 class ClientController extends BaseController
 {
     public $session;
@@ -17,6 +20,9 @@ class ClientController extends BaseController
     protected $CountryModel;
     protected $VisaTypeModel;
     protected $NotesModel;
+
+    use ResponseTrait;
+
     public function __construct()
     {
         $this->session = session();
@@ -151,15 +157,15 @@ class ClientController extends BaseController
 
 
         $client = $this->ClientModel->where('client_id',$client_id)->first();
-        $data_old_password = $client['password'];
+        // $data_old_password = $client['password'];
 
-        if (!password_verify($old_password, $data_old_password)) {
-            $response = array(
-                'status' => 'error',
-                'message' => 'Old Password Not Match...'
-            );
-            return json_encode($response);
-        } 
+        // if (!password_verify($old_password, $data_old_password)) {
+        //     $response = array(
+        //         'status' => 'error',
+        //         'message' => 'Old Password Not Match...'
+        //     );
+        //     return json_encode($response);
+        // } 
 
         if($new_password  != $confirm_password){
             $response = array(
@@ -182,15 +188,31 @@ class ClientController extends BaseController
 
     }
 
+   
+    public function status_client()
+    {
 
-	
+        try {
+            $client_id = $this->request->getPost('client_id');
+            $is_active = $this->request->getPost('is_active'); 
+            
+            $data = [
+                'is_active' => $is_active
+            ];
+            $updated = $this->ClientModel->update($client_id, $data);
+            $client_list = $this->ClientModel->orderBy('org_name','asc')->findAll();
 
-
-
-
-
-
-
+            if ($updated) {
+                $result = $data;
+                return $this->respond(['status' => 'success','code' => 200,'data' => $client_list],200);
+            } else {
+                $result = "No Match's";
+                return $this->respond(['status' => 'failed','code' => 404,'data' => $result],404);
+            }
+        } catch (\Exception $exception) {
+            return $this->respond(['status' => 'failed','code' => 500,'data' => $exception],500);
+       }
+    }
 
 
 

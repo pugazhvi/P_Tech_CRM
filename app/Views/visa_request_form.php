@@ -106,112 +106,103 @@
 
                     <form method="post" action="<?= base_url()."create_visa_request"; ?>" enctype="multipart/form-data" class="parsley-examples">
 
-                   
-                <div class="row">
-                       
+                        <div class="row">
+                            
 
-                        <div class="form-group col-md-3">
-                            <label for="client">Client<span class="text-danger">*</span></label>
-                            <select class="select2-dropdown form-control"  name="client_id" required>
-                                <option value="">Select client</option>
-                                <?php foreach ($clientData as $key => $clientValue) { ?>
-                                    <option value="<?php echo $clientValue['client_id'];  ?>"><?php echo $clientValue['org_name'];  ?>-<?php echo $clientValue['branch'];  ?>-<?php echo $clientValue['agency'];  ?></option>
-                                <?php } ?>
+                                <div class="form-group col-md-3">
+                                    <label for="client">Client<span class="text-danger">*</span></label>
+                                    <select class="select2-dropdown form-control"  name="client_id" required>
+                                        <option value="">Select client</option>
+                                        <?php foreach ($clientData as $key => $clientValue) { ?>
+                                            <option value="<?php echo $clientValue['client_id'];  ?>"><?php echo $clientValue['org_name'];  ?>-<?php echo $clientValue['branch'];  ?>-<?php echo $clientValue['agency'];  ?></option>
+                                        <?php } ?>
+                                            
+                                    </select>
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    <label for="passport_no">Passport No<span class="text-danger">*</span></label>
+                                    <input type="text" name="passport_no"  parsley-trigger="change" required  class="form-control" id="passport_no" onchange="validatePassportNumber()">
+                                    <span id="error-message" style="color:red;display:none;">Invalid passport number.</span>
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    <label for="traveller_name">Traveller Name<span class="text-danger">*</span></label>
+                                    <input type="text" name="traveller_name"  parsley-trigger="change" required  class="form-control" id="traveller_name">
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    <label for="country_of_visit">Country Of Visit<span class="text-danger">*</span></label>
+                                    <select class="select2-dropdown form-control" name="country_of_visit" id="country_of_visit"  required>
+                                        <option value="">Select country</option>
+                                        <?php foreach ($countryData as $key => $countryValue) { ?>
+                                            <option value="<?php echo $countryValue['id'];  ?>"><?php echo $countryValue['country'];  ?></option>
+                                        <?php } ?>
+                                            
+                                    </select>   
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    <label for="visa_type">Visa Type<span class="text-danger">*</span></label>
+                                    <select class="select2-dropdown form-control"  name="visa_type" id="visa_type" required>
+                                        <option value="">Select visa type</option>
                                     
-                            </select>
-                        </div>
+                                            
+                                    </select>
+                                </div>
 
-                        <div class="form-group col-md-3">
-                            <label for="passport_no">Passport No<span class="text-danger">*</span></label>
-                            <input type="text" name="passport_no"  parsley-trigger="change" required  class="form-control" id="passport_no" onchange="validatePassportNumber()">
-                            <span id="error-message" style="color:red;display:none;">Invalid passport number.</span>
-                        </div>
+                                <div class="form-group col-md-3">
+                                    <label for="trip_approval_no">Trip Approval No</label>
+                                    <input type="text" name="trip_approval_no"  parsley-trigger="change"   class="form-control" id="trip_approval_no">
+                                </div>
 
-                        <div class="form-group col-md-3">
-                            <label for="traveller_name">Traveller Name<span class="text-danger">*</span></label>
-                            <input type="text" name="traveller_name"  parsley-trigger="change" required  class="form-control" id="traveller_name">
-                        </div>
+                            
+                            
+                                <div class="form-group col-md-3">
+                                    <label for="status">Status<span class="text-danger">*</span></label>
+                                    <select class="select2-dropdown form-control"  name="status" required>
+                                        
+                                        <?php foreach ($statusData as $key => $statusValue) { ?>
+                                            <option value="<?php echo $statusValue['status_id'];  ?>"><?php echo $statusValue['status_value'];  ?></option>
+                                        <?php } ?>
+                                            
+                                    </select>   
+                                </div>
 
-                        <div class="form-group col-md-3">
-                            <label for="country_of_visit">Country Of Visit<span class="text-danger">*</span></label>
-                            <select class="select2-dropdown form-control" name="country_of_visit" id="country_of_visit"  required>
-                                <option value="">Select country</option>
-                                <?php foreach ($countryData as $key => $countryValue) { ?>
-                                    <option value="<?php echo $countryValue['id'];  ?>"><?php echo $countryValue['country'];  ?></option>
-                                <?php } ?>
-                                    
-                            </select>   
-                        </div>
+                                <div class="form-group col-md-3">
+                                    <!-- <label for="priority">Priority</label>
+                                    <select class="select2-dropdown form-control" id="priority" name="priority" parsley-trigger="change" >
+                                        <option value="medium">Medium</option>
+                                        <option value="low">Low</option>
+                                        <option value="high">High</option>
+                                        <option value="urgent">Urgent</option>
+                                        <option value="critical">Critical</option>
+                                    </select> -->
+                                    <label></label><br>
+                                    <div id="is-visa-approve-display">
+                                    Priority
+                                    <label class="toggle-btn"> 
+                                        <input type="checkbox"  class="form-control"  name="priority" id="priority">
+                                        <span class="slider round"></span>
+                                    </label> 
+                                    </div>
+                                </div>
 
-                        <div class="form-group col-md-3">
-                            <label for="visa_type">Visa Type<span class="text-danger">*</span></label>
-                            <select class="select2-dropdown form-control"  name="visa_type" id="visa_type" required>
-                                <option value="">Select visa type</option>
-                               
-                                    
-                            </select>
-                        </div>
+                            
 
-                        <div class="form-group col-md-3">
-                            <label for="trip_approval_no">Trip Approval No</label>
-                            <input type="text" name="trip_approval_no"  parsley-trigger="change"   class="form-control" id="trip_approval_no">
-                        </div>
-
-                       
-                       
-                        <div class="form-group col-md-3">
-                            <label for="status">Status<span class="text-danger">*</span></label>
-                            <select class="select2-dropdown form-control"  name="status" required>
+                                <div class="form-group col-md-6">
+                                    <label for="notes">Notes</label>
+                                    <textarea id="textarea" name="notes" class="form-control" maxlength="225" rows="3" placeholder="This textarea has a limit of 225 chars."></textarea>
+                                </div>
                                 
-                                <?php foreach ($statusData as $key => $statusValue) { ?>
-                                    <option value="<?php echo $statusValue['status_id'];  ?>"><?php echo $statusValue['status_value'];  ?></option>
-                                <?php } ?>
-                                    
-                            </select>   
-                        </div>
-
-                        <div class="form-group col-md-3">
-                            <!-- <label for="priority">Priority</label>
-                            <select class="select2-dropdown form-control" id="priority" name="priority" parsley-trigger="change" >
-                                <option value="medium">Medium</option>
-                                <option value="low">Low</option>
-                                <option value="high">High</option>
-                                <option value="urgent">Urgent</option>
-                                <option value="critical">Critical</option>
-                            </select> -->
-                            <label></label><br>
-                            <div id="is-visa-approve-display">
-                            Priority
-                            <label class="toggle-btn"> 
-                                <input type="checkbox"  class="form-control"  name="priority" id="priority">
-                                <span class="slider round"></span>
-                            </label> 
-                            </div>
-                        </div>
-
-                       
-
-                        <div class="form-group col-md-6">
-                            <label for="notes">Notes</label>
-                            <textarea id="textarea" name="notes" class="form-control" maxlength="225" rows="3" placeholder="This textarea has a limit of 225 chars."></textarea>
-                        </div>
-                        
-                        <div class="form-group col-md-6">
-                            <label for="notes">File Upload</label>
-                            <input type="file" name="file" class="form-control" id="file"/>
-                        </div>
-                       
-              
-                       
-                </div>
-
-               
-
-                
-                   
+                                <div class="form-group col-md-6">
+                                    <label for="notes">File Upload</label>
+                                    <input type="file" name="file" class="form-control" id="file"/>
+                                </div>
+                            
                     
-                        
-
+                            
+                        </div>
                         <div class="form-group text-right m-b-0">
                             <button id="submitBtn" class="btn btn-primary waves-effect waves-light mr-1" type="submit" onclick="preventDoubleSubmit()">
                                 Submit
@@ -220,7 +211,6 @@
                                 Cancel
                             </button>
                         </div>
-
                     </form>
                     
                 </div>

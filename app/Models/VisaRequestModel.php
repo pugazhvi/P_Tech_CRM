@@ -35,17 +35,32 @@ class VisaRequestModel extends Model
     {
         
         $result = $this->db->table('status')
-                            ->select('COUNT(visa_request.status) as status_count, status.status_value, status.status_id')
-                            ->join('visa_request', "visa_request.status = status.status_id and visa_request.branch_id = {$branch_id}", 'left')
-                            ->where('status.is_active', 1)
-                            ->groupBy('status.status_id')
-                            ->get()
-                            ->getResultArray();
+        ->select('COUNT(visa_request.status) as status_count, visa_request.client_id, status.status_value, status.status_id')
+        ->join('visa_request', "visa_request.status = status.status_id AND visa_request.branch_id = {$branch_id}", 'left')
+        ->where('status.is_active', 1)
+        ->groupBy('status.status_id')
+        ->get()
+        ->getResultArray();
+
     
 
 
                          
       
+         return $result;
+    }
+
+    public function getVisaRequestBasedOnStatusCLient_id($branch_id)
+    {
+        
+        $result = $this->db->table('status')
+        ->select('COUNT(visa_request.status) as status_count, visa_request.client_id, status.status_value, status.status_id')
+        ->join('visa_request', "visa_request.status = status.status_id AND visa_request.branch_id = {$branch_id}", 'left')
+        ->where('status.is_active', 1)
+        ->groupBy('visa_request.client_id') // Group by client_id
+        ->groupBy('status.status_id')
+        ->get()
+        ->getResultArray();
          return $result;
     }
 
