@@ -215,7 +215,35 @@ class ClientController extends BaseController
     }
 
 
+    public function getClientList($client_id)
+    {
+        try {
+            $branch_id = session()->get('logged_in_staff_branch_id');
+ 
+            // Check if branch_id is retrieved correctly
+            if (empty($branch_id)) {
+                throw new \Exception('Branch ID is not set in session');
+            }
 
 
+            // Retrieve client list
+            $visa_list = $this->VisaRequestModel->getVisaRequestListClient($branch_id, $client_id);
+            // Check if client list is retrieved
+            if (empty($visa_list)) {
+                throw new \Exception('No clients found for the given client ID and branch ID');
+            }
+    
+            return $this->response->setJSON($visa_list);
+        } catch (\Exception $exception) {
+            // Log the detailed error message for debugging
+            log_message('error', $exception->getMessage());
+    
+            return $this->response->setStatusCode(500)->setJSON([
+                'status' => 'failed',
+                'code' => 500,
+                'message' => $exception->getMessage()
+            ]);
+        }
+    }
 
 }

@@ -114,4 +114,24 @@ class VisaRequestModel extends Model
          return $result;
     }
   
+
+    public function getVisaRequestListClient($branch_id = null,$client_id = null)
+    {
+         $result =  $this->db->table('visa_request')
+                         ->select('visa_request.* , client.org_name as client_name, client.branch as branch, client.agency as agency ,client.email as client_email ,client.mobile_no as client_mobile, country.country as country_name , category.category as visa_type_name , status.status_value ')
+                         ->join('client', 'visa_request.client_id = client.client_id') 
+                         ->join('country', 'visa_request.country_of_visit = country.id') 
+                         ->join('category', 'visa_request.visa_type = category.id') 
+                         ->join('status', 'visa_request.status = status.status_id') 
+                         ->where('visa_request.branch_id',$branch_id)
+                         ->where('visa_request.client_id',$client_id)
+                         ->where('visa_request.is_active',1)
+                         ->orderBy('visa_request.visa_request_id','DESC');
+                        
+            return $result->get()->getResultArray();
+                          
+    }
+
+
+
 }

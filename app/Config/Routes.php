@@ -33,9 +33,10 @@ use CodeIgniter\Router\RouteCollection;
  $routes->match(['get','post'],'/client_profile','ClientController::client_profile');
  $routes->post("change_client_password/(:any)", "ClientController::change_client_password/$1");
  $routes->post('status_client', 'ClientController::status_client');
+ $routes->get('getClientList/(:num)', 'ClientController::getClientList/$1');
 
 
-
+ 
  $routes->match(['get','post'],'/visa_request','VisaRequestController::index');
  $routes->match(['get','post'],'/visa_request_list','VisaRequestController::visa_request_list');
  $routes->match(['get','post'],'/create_visa_request','VisaRequestController::create_visa_request');
@@ -51,6 +52,7 @@ use CodeIgniter\Router\RouteCollection;
  $routes->match(['get','post'],'/country_list','MasterController::country_list');
  $routes->match(['get','post'],'/country_create','MasterController::country_create');
  $routes->match(['get','post'],'/country_edit','MasterController::country_edit');
+ $routes->post('status_country', 'MasterController::status_country');
  $routes->match(['get','post'],'/category_list','MasterController::category_list');
  $routes->match(['get','post'],'/category_create','MasterController::category_create');
  $routes->match(['get','post'],'/category_edit','MasterController::category_edit');

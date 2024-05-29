@@ -38,7 +38,8 @@ class MailHelper
         $data['visaNotesData'] = $NotesModel-> getVisaRequestNotes(md5($visa_request_id));
 
         $fileName = $data['visaNotesData'][0]['file']; // Assuming it contains only the file name, not the full path
-       
+        $data['attach']=false;
+
         if (!empty($fileName)) {
             $filePath = WRITEPATH . 'uploads/' . $fileName;
 
@@ -65,6 +66,7 @@ class MailHelper
             }
     
             // $mimeType = mime_content_type($filePath);
+            $data['attach']=true;
         }
 
 

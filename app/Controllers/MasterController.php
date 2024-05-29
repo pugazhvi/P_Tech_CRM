@@ -12,6 +12,8 @@ use App\Models\VisaTypeModel;
 use App\Models\NotesModel;
 use App\Models\VisaSummaryModel;
 
+use CodeIgniter\API\ResponseTrait;
+
 
 class MasterController extends BaseController
 {
@@ -24,6 +26,8 @@ class MasterController extends BaseController
     protected $VisaTypeModel;
     protected $NotesModel;
     protected $VisaSummaryModel;
+
+    use ResponseTrait;
 
     public function __construct()
     {
@@ -222,7 +226,29 @@ class MasterController extends BaseController
 	}
 
 
+    public function status_country()
+    {
+        try {
+            $id = $this->request->getPost('id');
+            $active = $this->request->getPost('active'); 
+            
+            $data = [
+                'active' => $active
+            ];
+            $updated = $this->CountryModel->update($id, $data);
+            $country_list = $this->CountryModel->orderBy('country','asc')->findAll();
 
+            if ($updated) {
+                $result = $data;
+                return $this->respond(['status' => 'success','code' => 200,'data' => $country_list],200);
+            } else {
+                $result = "No Match's";
+                return $this->respond(['status' => 'failed','code' => 404,'data' => $result],404);
+            }
+        } catch (\Exception $exception) {
+            return $this->respond(['status' => 'failed','code' => 500,'data' => $exception],500);
+       }
+    }
 
 
 

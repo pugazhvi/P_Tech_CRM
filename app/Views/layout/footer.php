@@ -21,7 +21,23 @@
 
         </div>
         <!-- END wrapper -->
+
         
+        <script>
+
+            function right_slide_nav(){
+                var menu = $('.right-side-menu')[0];
+                console.log(menu);
+                if ($(menu).css('display') === 'none') {
+                    $(menu).css('display', 'block');
+                } else {
+                    $(menu).css('display', 'none');
+                }
+            }
+
+            </script>
+
+
         <!-- Right bar overlay-->
         <!-- <div class="rightbar-overlay"></div> -->
 
@@ -70,6 +86,28 @@
         <link href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css" rel="stylesheet">
 
 
+        <script>
+            var count =0;
+            function mobile_view_menu() {
+                $('.right-side-menu').css('display','none');
+            }
+            // Function to check if the viewport is in mobile view
+            function isMobileView() {
+                return window.matchMedia("(max-width: 770px)").matches;
+            }
+            setInterval(() => {
+                if (isMobileView()) {
+                    if (count == 1) {
+                        count =0;
+                    }
+                }else{
+                    if(count == 0){
+                        mobile_view_menu();
+                        count =1;
+                    }
+                }
+            }, 300);
+        </script>
         
     </body>
 </html>

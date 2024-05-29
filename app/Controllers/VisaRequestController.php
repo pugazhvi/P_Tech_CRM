@@ -46,23 +46,11 @@ class VisaRequestController extends BaseController
 
     public function visa_request_list()
     {
-
-        // $data['visaData'] =  $this->VisaRequestModel->getVisaRequestList(session()->get('logged_in_staff_branch_id'), 3);
-        $data['client_list'] =  $this->ClientModel->where('is_active',1)->findAll();
-        // $data['visaNotesData'] = $this->NotesModel-> getVisaRequestNotes(3);
-
-        // return view('mail_template', $data);
-       
         if(!$this->session->has('is_staff_logged_in')){ return redirect()->to(base_url().'staff'); }
 
-       
-        $data['visaList']  = $this->VisaRequestModel->getVisaRequestList(session()->get('logged_in_staff_branch_id'));
-        $data['statusCount']  = $this->VisaRequestModel->getVisaRequestBasedOnStatus(session()->get('logged_in_staff_branch_id'));
-        $data['statusCount_client_id']  = $this->VisaRequestModel->getVisaRequestBasedOnStatusCLient_id(session()->get('logged_in_staff_branch_id'));
+        $data['client_list'] =  $this->ClientModel->where('is_active',1)->findAll();       
         $data['status_master'] = $this->StatusModel->where('is_active',1)->findAll();
         $staffdata = $this->StaffModel->where('staff_id',$this->session->get('is_staff_logged_in'))->get()->getRow();
-        // echo "<pre>";
-        // print_r($data);die;
         echo view('layout/header', ['Data'=>$staffdata]);
         echo view('visa_request_list',$data);
         echo view('layout/footer');

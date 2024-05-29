@@ -40,9 +40,55 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 
         <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/min/moment.min.js"></script>
-
+        <!-- <link href="<?php echo base_url()?>public/assets/css/app-modern.min.css" rel="stylesheet" type="text/css" id="app-default-stylesheet" /> -->
 
         <style>
+            .right-side-menu{
+                width: 185px;
+                background: #fff;
+                bottom: 0;
+                padding: 20px 0;
+                position: fixed;
+                transition: all .1s ease-out;
+                top: 0;
+                right: 0; /* Changed from left to right */
+                padding-top: calc(62px + 20px);
+                box-shadow: 0 0 35px 0 rgba(154, 161, 171, .15);
+                z-index: 1;
+                height: 430px;
+            }
+            .button-menu-mobiles {
+                border: none;
+                color: #fff;
+                display: inline-block;
+                height: 70px;
+                line-height: 70px;
+                width: 60px;
+                background-color: transparent;
+                font-size: 24px;
+                cursor: pointer;
+            }
+            @media (max-width: 770px){
+                #hide_nav_pane{
+                    display: none;
+                }
+            }
+            @media (min-width: 770px){
+                #show_nav_pane{
+                    display: none;
+                }
+                .right-side-menu{
+                    display: none;
+                }
+            }
+            @media (max-width: 770px){
+                #show_nav_pane{
+                    display: block;
+                }
+                .right-side-menu{ 
+                    display: none;
+                 }
+            }
             @media (min-width: 992px) {
                 body[data-layout-mode=horizontal] .content-page {
                     padding: calc(15px + 55px) 12px 65px 12px;
@@ -75,7 +121,15 @@
             }
             .navbar-custom{
                 background-color: #256bb1;
+                /* overflow:hidden; */
             }
+
+            @media (max-width: 441px){
+                .navbar-custom{
+                    overflow:hidden;
+                }            
+            }
+
 
 
             .btn-secondary{
@@ -102,11 +156,98 @@
         <!-- Begin page -->
         <div id="wrapper">
 
+        <div class="right-side-menu" >
+            <ul style="color: #343a40 !important;margin-left:-35px;list-style-type: none;">
+
+            <?php  if(isset($_SESSION['is_staff_logged_in']) && $_SESSION['is_staff_logged_in'] && $_SESSION['logged_in_staff_role'] == 'Staff') { ?>
+
+                <li class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light">
+                    <a href="<?= base_url().'create_visa_request'; ?>"  style="color:black;"> New Visa Request</a>
+                <li>
+
+                <li class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light">
+                    <a href="<?= base_url().'visa_request_list'; ?>"  style="color:black;">  Visa Request List</a>
+                <li>
+
+            <?php }else if(isset($_SESSION['is_staff_logged_in']) && $_SESSION['is_staff_logged_in'] && $_SESSION['logged_in_staff_role'] == 'Admin'){ ?>
+
+                <li class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" >
+                    <a href="<?= base_url().'create_visa_request'; ?>"  class="dropdown-item notify-item" style="color:black;"> New Visa Request</a>
+                <li>
+
+                <li class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" >
+                    <a href="<?= base_url().'visa_request_list'; ?>" class="dropdown-item notify-item"  style="color:black;"> Visa Request List </a>
+                <li>
+                    
+                <li class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" >
+                    <a href="<?= base_url().'client_list'; ?>" class="dropdown-item notify-item"  style="color:black;"> Client</a>
+                <li>
+
+                <li class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" >
+                    <a href="<?= base_url().'staff_list'; ?>" class="dropdown-item notify-item" style="color:black;"> Staff</a>
+                <li>
+                <li class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" >
+                    <a href="<?= base_url('country_list'); ?>" class="dropdown-item notify-item" style="color:black;">Country</a>
+                </li >                
+                <li class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" >
+                    <a href="<?= base_url('category_list'); ?>" class="dropdown-item notify-item" style="color:black;">Category</a>
+                </li>
+                <li class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" > 
+                    <a href="<?= base_url('visa_summary_list'); ?>" class="dropdown-item notify-item" style="color:black;">Visa Info</a>
+                </li>   
+                        
+        
+            <?php }else if(isset($_SESSION['is_client_logged_in']) && $_SESSION['is_client_logged_in']){ ?>
+
+                <!-- <li class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light">
+                    <a href="<?= base_url().'client_home'; ?>"  style="color:white;"> <span class="mdi mdi-format-align-justify" style="font-size: 17px;"></span>  My Visa Request </a>
+                <li> -->
+
+            <?php } ?>
+
+
+                <?php  if(isset($_SESSION['is_staff_logged_in']) && $_SESSION['is_staff_logged_in']) { ?>
+                    <li >
+                        <a href="<?= base_url('staff_profile'); ?>" class="dropdown-item notify-item">
+                        <i class="ri-account-circle-line"></i>
+                        <span>My Profile</span>
+                        </a>
+                    </li>
+                    
+                <?php }else if(isset($_SESSION['is_client_logged_in']) && $_SESSION['is_client_logged_in']){ ?>
+                    <!-- <a href="<?= base_url('client_profile'); ?>" class="dropdown-item notify-item">
+                    <i class="ri-account-circle-line"></i>
+                    <span>My Profile</span>
+                    </a> -->
+                <?php } ?>
+                                           
+                <?php  if(isset($_SESSION['is_staff_logged_in']) && $_SESSION['is_staff_logged_in']) { ?>
+                    <li >
+                    <a href="<?= base_url()."staff_logout"; ?>" class="dropdown-item notify-item">
+                        <i class="ri-logout-box-line"></i>
+                        <span>Logout</span>
+                    </a>
+                    </li>
+                <?php }else if(isset($_SESSION['is_client_logged_in']) && $_SESSION['is_client_logged_in']){ ?>
+                    <li >
+                    <a href="<?= base_url()."client_logout"; ?>" class="dropdown-item notify-item">
+                        <i class="ri-logout-box-line"></i>
+                        <span>Logout</span>
+                    </a>
+                    </li>
+                <?php } ?>
+
+            </ul>
+        </div>
             <!-- Topbar Start -->
             <div class="navbar-custom">
+
                 <div class="container-fluid">
-    
-                    <ul class="list-unstyled topnav-menu float-right mb-0">
+                    <div id="show_nav_pane" style="float: right !important;">
+                    
+                        <button class="button-menu-mobiles" id="right_slide_nav" onclick="right_slide_nav(this )"><i class="fe-menu"></i></button>
+                    </div>
+                    <ul class="list-unstyled topnav-menu float-right mb-0" id="hide_nav_pane">
 
                         <?php  if(isset($_SESSION['is_staff_logged_in']) && $_SESSION['is_staff_logged_in'] && $_SESSION['logged_in_staff_role'] == 'Staff') { ?>
 
@@ -226,8 +367,8 @@
     
                     </ul>
 
-
-
+                    
+                               
                     <!-- LOGO -->
                     <div class="logo-box">
                         <a href="index.html" class="logo logo-dark text-center">
@@ -255,27 +396,7 @@
 
                     
 
-                    <!-- <ul class="list-unstyled topnav-menu topnav-menu-left m-0">
-                        <li>
-                            <button class="button-menu-mobile waves-effect waves-light">
-                                <i class="fe-menu"></i>
-                            </button>
-                        </li>
-
-                        <li>
-                           
-                            <a class="navbar-toggle nav-link" data-toggle="collapse" data-target="#topnav-menu-content">
-                                <div class="lines">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                </div>
-                            </a>
-                           
-                        </li>   
-            
-                    </ul> -->
-                    <div class="clearfix"></div>
+                  
                 </div>
             </div>
 
@@ -323,3 +444,5 @@
                 </div> <!-- end container-fluid -->
             </div> <!-- end topnav-->
             <?php } ?>    
+
+
