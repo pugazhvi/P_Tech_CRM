@@ -2,6 +2,7 @@
 <!-- Start Page Content here -->
 <!-- ============================================================== -->
 
+
 <div class="content-page">
     <!-- Start Content-->
     <div class="container-fluid">
@@ -20,8 +21,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-6" style="margin-top: 19px;margin-left: -21px;">
-            <button style="float: right;" class="btn btn-primary waves-effect waves-light mr-1" href="#" onclick="window.history.back()">Back to List</button>
+            <div class="col-6">
+            <button style="float: right;color:#fff !important;background-color:#6c757d !important;border-color:#6c757d !important;" class="btn waves-effect waves-light mr-1" href="#" onclick="window.history.back()">Back to List</button>
 
             </div>
         </div>     
