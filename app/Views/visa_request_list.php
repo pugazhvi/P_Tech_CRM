@@ -2,6 +2,11 @@
 <!-- Start Page Content here -->
 <!-- ============================================================== -->
 <style>
+    #client_table tbody tr:hover {
+        background-color: #cce5ff !important; /* Light blue color */
+        cursor: pointer;
+    }
+
 
     @media screen and (max-width: 767px) {
                 .visa_status_count_view {

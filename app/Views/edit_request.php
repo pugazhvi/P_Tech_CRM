@@ -334,9 +334,12 @@
                             <?php } ?>
                             <small class="text-muted float-right"></small>
                             </h5>
-                            <?php echo $notes['notes']; ?>
+                            <?php 
+                                if (!empty($notes['notes'])) { 
+                                    echo $notes['notes'] . "<br/>"; 
+                                } 
+                            ?>
 
-                            <br/>
 
                             <a href="javascript: void(0);" class="text-muted font-13 d-inline-block mt-2">
                             <i class="mdi mdi-account-circle"></i> <?php echo $notes['created_by']; ?> 

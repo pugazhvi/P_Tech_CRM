@@ -65,6 +65,7 @@ class VisaRequestController extends BaseController
 
 		if($this->request->getmethod() == 'POST')
 		{
+                $cleint_id = $this->request->getPost('client_id');
 				$visaData = $this->request->getVar();
 
                 $file = $this->request->getFile('file');
@@ -91,6 +92,8 @@ class VisaRequestController extends BaseController
                     $this->NotesModel->save(['visa_request_id'=>$id,'status'=>$visaData['status'],'notes'=>$visaData['notes'], 'created_by'=>$this->session->get('is_staff_logged_in'), 'file'=> isset( $file_name) ?  $file_name : null]);
                     $MailHelper = new MailHelper();
                     $MailHelper->send_email($id);
+                    session()->setFlashdata('client_id', $cleint_id);
+
 					return redirect()->to(base_url()."visa_request_list"); 
 				}
 		

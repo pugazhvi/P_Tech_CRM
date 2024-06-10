@@ -104,14 +104,14 @@
                 <div class="card-body">
                     
 
-                    <form method="post" action="<?= base_url()."create_visa_request"; ?>" enctype="multipart/form-data" class="parsley-examples">
+                    <form id="request_create_form" method="post" action="<?= base_url()."create_visa_request"; ?>" enctype="multipart/form-data" class="parsley-examples">
 
                         <div class="row">
                             
 
                                 <div class="form-group col-md-3">
                                     <label for="client">Client<span class="text-danger">*</span></label>
-                                    <select class="select2-dropdown form-control"  name="client_id" required>
+                                    <select class="select2-dropdown form-control"  name="client_id" id="client_id" required>
                                         <option value="">Select client</option>
                                         <?php foreach ($clientData as $key => $clientValue) { ?>
                                             <option value="<?php echo $clientValue['client_id'];  ?>"><?php echo $clientValue['org_name'];  ?>-<?php echo $clientValue['branch'];  ?>-<?php echo $clientValue['agency'];  ?></option>
@@ -250,7 +250,10 @@
             }
         }
 
-
+        // $('#submitBtn').click(function (e) {
+        //     e.preventDefault();
+        //     $('#request_create_form').submit();
+        // })
   
    
 </script>  
@@ -295,7 +298,14 @@
                     }
                 });
         });
+
+
     });
+
+
+
+
+
     </script>
 <!-- ============================================================== -->
 <!-- End Page content -->
