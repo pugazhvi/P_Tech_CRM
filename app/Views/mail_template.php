@@ -13,8 +13,8 @@
 <table class="body-wrap" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; width: 100%; background-color: #f6f6f6; margin: 0;" bgcolor="#f6f6f6">
 <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
 <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;" valign="top"></td>
-<td class="container" width="900" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; display: block !important; max-width: 900px !important; clear: both !important; margin: 0 auto;" valign="top">
-    <div class="content" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; max-width: 900x; display: block; margin: 0 auto; padding: 20px;">
+<td class="container" width="600" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px;  display: block !important; max-width: 600px !important; clear: both !important; margin: 0 auto;" valign="top">
+    <div class="content" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; max-width: 600px; display: block; margin: 0 auto; padding: 20px;">
         <table class="main" width="100%" cellpadding="0" cellspacing="0" itemprop="action" itemscope itemtype="http://schema.org/ConfirmAction"  style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; border-radius: 3px; margin: 0; border: none;" >
             <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                 <td class="content-wrap" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;padding: 30px;border: 3px solid #3bafda;border-radius: 7px; background-color: #fff;" valign="top">
@@ -35,32 +35,36 @@
                             <td >
                                 <table  width="100%" cellpadding="0" cellspacing="0"  style=" margin-bottom: 17px; border-bottom: 2px solid #3bafda; padding : 0 0 10px;" >
                                     
-                                    <tr style=" margin-bottom: 17px;">
+                                    <tr  style="margin-bottom: 17px;">
 
-                                        <td style="text-align: center; width:25%;">
+                                        <td style="text-align: center; width:50%;">
                                         <span style="font-size: 14px; color:#1aa79c;" >Traveller</span> 
                                         <br>
                                         <span style="font-size: 16px; font-weight: 600;"><?= $visaData->traveller_name; ?></span> 
                                         </td>
 
-                                        <td style="text-align: center; width:25%;">
+                                        <td style="text-align: center; width:50%;">
                                         <span style="font-size: 14px; color:#1aa79c;">Passport</span> 
                                         <br>
                                         <span style="font-size: 16px;font-weight: 600;"><?= $visaData->passport_no; ?></span>
                                         </td>
+                                        
+                                    </tr>
+                                    <tr  style="height: 25px;"></tr>
+                                    <tr style=" margin-bottom: 17px;">
 
-                                        <td style="text-align: center; width:25%;">
+                                        <td style="text-align: center; width:50%;">
                                         <span style="font-size: 14px; color:#1aa79c;" >Country</span>  
                                         <br>
                                         <span style="font-size: 16px;font-weight: 600;"><?= $visaData->country_name; ?></span>
                                         </td>
 
-                                        <td style="text-align: center; width:25%;">
+                                        <td style="text-align: center; width:50%;">
                                         <span style="font-size: 14px; color:#1aa79c;" >Visa Type</span> 
                                         <br>
                                         <span style="font-size: 16px;font-weight: 600;"><?= $visaData->visa_type_name; ?></span>
                                         </td>
-                                        
+
                                     </tr>
                                     <tr></tr>
                                
@@ -82,10 +86,10 @@
                         <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;   ">
                             <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; vertical-align: top; margin: 0; background-color: #1aa79c;color: white;border-radius: 4px;     padding: 5px 5px 5px 15px;     " valign="top">
                               <span style="font-size: 14px;"> <?= $visaNotesData[0]['status_value']; ?> </span>
-                              </br>
+                              <div style="height: 4px;"></div>
                               <?php if($visaNotesData[0]['notes'] != '') { ?> 
                               <span style="font-size: 12px;"> <?= $visaNotesData[0]['notes']; ?> </span>  
-                              </br>
+                              <div style="height: 4px;"></div>
                               <?php } ?> 
                               <span style="font-size: 11px;"> <?php echo date('d-M-Y h:i A', strtotime( $visaNotesData[0]['created_at'] ));  ?> </span>  
                             </td>
@@ -109,10 +113,10 @@
                             <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0; background-color: #F0FBFF;">
                             <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; color: black;   padding: 5px 5px 5px 25px; border-left: 2px solid #3BAFDA;" valign="top">
                               <span style="font-size: 14px;"> <?= $value['status_value']; ?> </span>
-                              </br>
+                              <div style="height: 4px;"></div>
                               <?php if($value['notes'] != '') { ?> 
                               <span style="font-size: 12px;"> <?= $value['notes']; ?> </span>  
-                              </br>
+                              <div style="height: 4px;"></div>
                               <?php } ?> 
                               <span style="font-size: 11px; color:#1aa79c;"> <?php echo date('d-M-Y h:i A', strtotime(  $value['created_at'] )); ?> </span>  
                             </td>
