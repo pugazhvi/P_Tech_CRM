@@ -13,8 +13,8 @@
 <table class="body-wrap" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; width: 100%; background-color: #f6f6f6; margin: 0;" bgcolor="#f6f6f6">
 <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
 <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;" valign="top"></td>
-<td class="container" width="600" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; display: block !important; max-width: 600px !important; clear: both !important; margin: 0 auto;" valign="top">
-    <div class="content" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; max-width: 600px; display: block; margin: 0 auto; padding: 20px;">
+<td class="container" width="900" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; display: block !important; max-width: 900px !important; clear: both !important; margin: 0 auto;" valign="top">
+    <div class="content" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; max-width: 900x; display: block; margin: 0 auto; padding: 20px;">
         <table class="main" width="100%" cellpadding="0" cellspacing="0" itemprop="action" itemscope itemtype="http://schema.org/ConfirmAction"  style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; border-radius: 3px; margin: 0; border: none;" >
             <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                 <td class="content-wrap" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;padding: 30px;border: 3px solid #3bafda;border-radius: 7px; background-color: #fff;" valign="top">
@@ -26,99 +26,112 @@
                         
                         <tr>
                             <td style="text-align: center">
-                                <a href="#" style="display: block; margin-bottom: 5px; "> <img src="<?= base_url()."public"; ?>/assets/images/login-logo.png" height="24" alt="logo" style="width: 120px; height: 50px;"/></a> <br/>
+                                <a href="#" style="display: block; margin-bottom: 5px; "> <img src="<?= base_url()."public"; ?>/assets/images/login-logo.png" height="24" alt="logo" style="width: 145px; height: 65px;"/></a> <br/>
                             </td>
                         </tr>
 
 
                         <tr>
                             <td >
-                                <table  width="100%" cellpadding="0" cellspacing="0"  style=" margin-bottom: 12px; border-bottom: 1px solid black;" >
-                                    <tr style=" border-bottom: 2px solid black;">
-                                        <td style="text-align: left; width:50%; padding-left: 15px; font-weight: 600;">
-                                        Traveller Name
+                                <table  width="100%" cellpadding="0" cellspacing="0"  style=" margin-bottom: 17px; border-bottom: 2px solid #3bafda; padding : 0 0 10px;" >
+                                    
+                                    <tr style=" margin-bottom: 17px;">
+
+                                        <td style="text-align: center; width:25%;">
+                                        <span style="font-size: 14px; color:#1aa79c;" >Traveller</span> 
+                                        <br>
+                                        <span style="font-size: 16px; font-weight: 600;"><?= $visaData->traveller_name; ?></span> 
                                         </td>
-                                        <td style="text-align: left; width:50%">
-                                        <?= $visaData->traveller_name; ?>
+
+                                        <td style="text-align: center; width:25%;">
+                                        <span style="font-size: 14px; color:#1aa79c;">Passport</span> 
+                                        <br>
+                                        <span style="font-size: 16px;font-weight: 600;"><?= $visaData->passport_no; ?></span>
                                         </td>
+
+                                        <td style="text-align: center; width:25%;">
+                                        <span style="font-size: 14px; color:#1aa79c;" >Country</span>  
+                                        <br>
+                                        <span style="font-size: 16px;font-weight: 600;"><?= $visaData->country_name; ?></span>
+                                        </td>
+
+                                        <td style="text-align: center; width:25%;">
+                                        <span style="font-size: 14px; color:#1aa79c;" >Visa Type</span> 
+                                        <br>
+                                        <span style="font-size: 16px;font-weight: 600;"><?= $visaData->visa_type_name; ?></span>
+                                        </td>
+                                        
                                     </tr>
-                                    <tr>
-                                        <td style="text-align: left; width:50%; padding-left: 15px; font-weight: 600;">
-                                        Passport No
-                                        </td>
-                                        <td style="text-align: left; width:50%">
-                                        <?= $visaData->passport_no; ?>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align: left; width:50%; padding-left: 15px; font-weight: 600;">
-                                        Travel To 
-                                        </td>
-                                        <td style="text-align: left; width:50%">
-                                        <?= $visaData->country_name; ?>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                       <td style="text-align: left; width:50%; padding-left: 15px; font-weight: 600;">
-                                       Visa Type
-                                        </td>
-                                        <td style="text-align: left; width:50%">
-                                        <?= $visaData->visa_type_name; ?>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align: left; width:50%; padding-left: 15px; font-weight: 600;">
-                                        Req Created
-                                        </td>
-                                        <td style="text-align: left; width:50%">
-                                        <?php echo date('d-M-Y h:i A', strtotime( $visaData->created_at )); ?>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align: left; width:50%; padding-left: 15px; font-weight: 600;">
-                                        Req Updated 
-                                        </td>
-                                        <td style="text-align: left; width:50%">
-                                        <?php echo date('d-M-Y h:i A', strtotime( $visaNotesData[0]['updated_at'] )); ?>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align: left; width:50%; padding-left: 15px; font-weight: 600;">
-                                        Current Status
-                                        </td>
-                                        <td style="text-align: left; width:50%">
-                                        <?= $visaNotesData[0]['status_value']; ?>
-                                        </td>
-                                    </tr>
+                                    <tr></tr>
+                               
                                 </table>   
                             </td>
+
                         </tr>
 
 
-                        <!-- <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
-                            <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
-                                Please confirm your email address by clicking the link below.
-                            </td>
-                        </tr>
-
-
-                        <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
-                            <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
-                                We may need to send you critical information about our service and it is
-                                important that we have an accurate email address.
-                            </td>
-                        </tr> -->
+                       
 
                      
 
-                        <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                        <tr style=" font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                             <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
-                              <b>Note : </b>   <?= $visaNotesData[0]['notes']; ?>
+                              <b style=" text-decoration: underline; text-decoration-color: #3bafda;  text-underline-offset: 2px;">Current Status </b>  
                             </td>
                         </tr>
+                        <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;   ">
+                            <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; vertical-align: top; margin: 0; background-color: #1aa79c;color: white;border-radius: 4px;     padding: 5px 5px 5px 15px;     " valign="top">
+                              <span style="font-size: 14px;"> <?= $visaNotesData[0]['status_value']; ?> </span>
+                              </br>
+                              <?php if($visaNotesData[0]['notes'] != '') { ?> 
+                              <span style="font-size: 12px;"> <?= $visaNotesData[0]['notes']; ?> </span>  
+                              </br>
+                              <?php } ?> 
+                              <span style="font-size: 11px;"> <?php echo date('d-M-Y h:i A', strtotime( $visaNotesData[0]['created_at'] ));  ?> </span>  
+                            </td>
+                        </tr>
+
+                        <tr style=" font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                            <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
+                             
+                            </td>
+                        </tr>
+
+                        <?php if(count($visaNotesData)  > 1) { ?>
+                        <tr style=" font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                            <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
+                              <b style=" text-decoration: underline; text-decoration-color: #3bafda;  text-underline-offset: 2px;">Status History</b>  
+                            </td>
+                        </tr>
+                        
+                           
+                        <?php foreach ($visaNotesData as $key => $value) { if($key != 0) { ?>
+                            <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0; background-color: #F0FBFF;">
+                            <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; color: black;   padding: 5px 5px 5px 25px; border-left: 2px solid #3BAFDA;" valign="top">
+                              <span style="font-size: 14px;"> <?= $value['status_value']; ?> </span>
+                              </br>
+                              <?php if($value['notes'] != '') { ?> 
+                              <span style="font-size: 12px;"> <?= $value['notes']; ?> </span>  
+                              </br>
+                              <?php } ?> 
+                              <span style="font-size: 11px; color:#1aa79c;"> <?php echo date('d-M-Y h:i A', strtotime(  $value['created_at'] )); ?> </span>  
+                            </td>
+                            </tr>
+                        <?php } } ?>
+
+                        <?php } ?>
+                           
+                        <tr style=" font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                            <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
+                             
+                            </td>
+                        </tr>
+
+
+
                         <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                             <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
-                               <?php if($attach){ echo "<b>**</b> Please Find Below Attachment File"; } ?>
+                               <?php  if($attach){ echo "<b>**</b> Please Find Below Attachment File"; }  ?>
                             </td>
                         </tr>
                     </table>
