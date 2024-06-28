@@ -30,11 +30,56 @@
                             </td>
                         </tr>
 
-
-                        <tr>
+                     
+                        
+                        <!-- <tr>
                             <td >
                                 <table  width="100%" cellpadding="0" cellspacing="0"  style=" margin-bottom: 17px; border-bottom: 2px solid #3bafda; padding : 0 0 10px;" >
                                     
+                                    <tr  style="margin-bottom: 17px;">
+
+                                        <td style="text-align: center; width:50%;">
+                                        <span style="font-size: 14px; color:#1aa79c;" >Client & Branch</span> 
+                                        <br>
+                                        <span style="font-size: 16px; font-weight: 600;"><?= $visaData->client_name; ?> - <?= $visaData->branch; ?></span> 
+                                        </td>
+
+                                        
+
+                                        <td style="text-align: center; width:50%;">
+                                        <span style="font-size: 14px; color:#1aa79c;">Agency</span> 
+                                        <br>
+                                        <span style="font-size: 16px;font-weight: 600;"><?= $visaData->agency; ?></span>
+                                        </td>
+                                        
+                                    </tr>
+                                   
+                               
+                                </table>   
+                            </td>
+
+                        </tr> -->
+                        <tr>
+                            <td >
+                                <table  width="100%" cellpadding="0" cellspacing="0"  style=" margin-bottom: 17px; border-bottom: 2px solid #3bafda; padding : 0 0 10px;" >
+                                   <tr  style="margin-bottom: 17px;">
+
+                                    <td style="text-align: center; width:50%;">
+                                    <span style="font-size: 14px; color:#1aa79c;" >Client</span> 
+                                    <br>
+                                    <span style="font-size: 16px; font-weight: 600;"><?= $visaData->client_name; ?> - <?= $visaData->branch; ?></span> 
+                                    </td>
+
+
+
+                                    <td style="text-align: center; width:50%;">
+                                    <span style="font-size: 14px; color:#1aa79c;">Agency</span> 
+                                    <br>
+                                    <span style="font-size: 16px;font-weight: 600;"><?= $visaData->agency; ?></span>
+                                    </td>
+
+                                    </tr>
+                                    <tr  style="height: 25px;"></tr>
                                     <tr  style="margin-bottom: 17px;">
 
                                         <td style="text-align: center; width:50%;">
