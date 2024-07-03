@@ -34,7 +34,7 @@ class StaffController extends BaseController
     public function login()
     {
 
-        if($this->session->has('is_staff_logged_in')){ return redirect()->to(base_url().'staff_home'); }
+        if($this->session->has('is_staff_logged_in')){ return redirect()->to(base_url().'visa_request_list'); }
 		if($this->request->getmethod() == 'POST')
 		{
 			$user_name = $this->request->getVar('user_name');
