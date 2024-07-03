@@ -41,7 +41,7 @@
                                         <td style="text-align: center; width:50%;">
                                         <span style="font-size: 14px; color:#1aa79c;" >Client & Branch</span> 
                                         <br>
-                                        <span style="font-size: 16px; font-weight: 600;"><?= $visaData->client_name; ?> - <?= $visaData->branch; ?></span> 
+                                        <span style="font-size: 16px; font-weight: 600;"> <?= $visaData->branch; ?></span> 
                                         </td>
 
                                         
@@ -67,7 +67,7 @@
                                     <td style="text-align: center; width:50%;">
                                     <span style="font-size: 14px; color:#1aa79c;" >Client</span> 
                                     <br>
-                                    <span style="font-size: 16px; font-weight: 600;"><?= $visaData->client_name; ?> - <?= $visaData->branch; ?></span> 
+                                    <span style="font-size: 16px; font-weight: 600;"><?= $visaData->agency; ?> - <?= $visaData->branch; ?></span> 
                                     </td>
 
 
