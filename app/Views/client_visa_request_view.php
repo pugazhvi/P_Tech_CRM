@@ -67,7 +67,7 @@
                     </div>
 
                     <p class="text-primary"><?= $visaData->request_id; ?></p>
-                    <h4 class="mb-1"><?= $visaData->client_name; ?>-<?= $visaData->branch; ?>-<?= $visaData->agency; ?> 
+                    <h4 class="mb-1"><?= $visaData->agency; ?>-<?= $visaData->branch; ?> 
                     <span class="mdi mdi-information-outline" style="color: green;font-size: 15px;" data-toggle="modal" data-target="#centermodal"></span>
                     </h4>  
                  
