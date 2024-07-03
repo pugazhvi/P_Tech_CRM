@@ -70,9 +70,9 @@
 
         <div id="categoryFilter" style="display: flex;width: 250px;">
             <select class="select2-dropdown" id="client_list" style="width:auto;">
-                <option value="">Select Client</option>
+                <option value="">Select Agent</option>
                 <?php foreach ($client_list as $key => $value) { ?>
-                    <option class="dropdown-item " href="#" value="<?= $value['client_id'] ?>"><?= $value['branch'] ?>-<?= $value['agency'] ?></option>
+                    <option class="dropdown-item " href="#" value="<?= $value['client_id'] ?>"><?= $value['agency'] ?>-<?= $value['branch'] ?></option>
                 <?php } ?>
             </select>
             
@@ -89,6 +89,7 @@
                     <table id="client_table" class="table display table-hover m-0 table-centered dt-responsive nowrap w-100" cellspacing="0" >
                         <thead class="bg-light">
                         <tr>
+                            <th class="font-weight-medium">Agent</th>
                             <th class="font-weight-medium">Client</th>
                             <th class="font-weight-medium">Created Date</th>
                             <th class="font-weight-medium">Traveller</th>
@@ -275,7 +276,8 @@
                             var priorityIcon = visa.priority !== null ? '<span class="mdi mdi-star" style="color: gold; font-size: 14px;"></span> ' : '';
                             var formattedDate = moment(visa.created_at).format('DD-MMM-YYYY');
                             var row = [
-                                visa.branch + '-' + visa.agency,
+                                visa.agency + '-' + visa.branch ,
+                                visa.company_name,
                                 formattedDate,
                                 priorityIcon + visa.traveller_name,
                                 visa.passport_no,

@@ -251,7 +251,7 @@
                 <form >
                     <div class="form-row">
                         <div class="form-group col-md-6">
-
+                            <input type="hidden" id="company_client_id" name="company_client_id">
                             <label for="company_name" class="col-form-label">Company Name</label>
                             <input class="form-control" name="company_name" id="company_name" type="text">
                         </div>
@@ -269,6 +269,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     function submitCompny(event) {
+        console.log($('#client_id').val());
         event.preventDefault(); // Prevent the default form submission behavior
 
         if($('#client_id').val() == ''){
@@ -295,7 +296,7 @@
             data: formData,
             dataType: 'json',
             success: function(response) {
-                // console.log(response);
+                console.log(response);
                 if (response == "failed") {
                     toastr.warning(response, 'Warning');
                 }else{
@@ -325,6 +326,7 @@
     $(document).ready(function() {
         $('#client_id').change(function () {
             console.log($(this).val());
+            $('#company_client_id').val($(this).val());
             $.ajax({
                 url: '<?= base_url("get_company_list/") ?>'+$(this).val(),
                     type: 'GET',

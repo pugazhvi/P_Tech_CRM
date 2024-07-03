@@ -258,9 +258,9 @@ class VisaRequestController extends BaseController
     
     public function create_company(){
 
-
        $insert =  $this->CompanyModel->insert($this->request->getPost());
-       $companyData = $this->CompanyModel->findAll();
+       $client_id = $this->request->getPost('client_id');
+       $companyData = $this->CompanyModel->where('client_id', $client_id)->findAll();
        if($insert){
         return json_encode(['companyData'=>$companyData, 'dataSelect'=> $insert]);
        }else{

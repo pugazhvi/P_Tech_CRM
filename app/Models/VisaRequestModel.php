@@ -120,8 +120,9 @@ class VisaRequestModel extends Model
     public function getVisaRequestListClient($branch_id = null,$client_id = null)
     {
          $result =  $this->db->table('visa_request')
-                         ->select('visa_request.* , client.branch as branch, client.agency as agency ,client.email as client_email , country.country as country_name , category.category as visa_type_name , status.status_value ')
-                         ->join('client', 'visa_request.client_id = client.client_id') 
+                         ->select('visa_request.* ,company.company_name, client.branch as branch, client.agency as agency ,client.email as client_email , country.country as country_name , category.category as visa_type_name , status.status_value ')
+                         ->join('client', 'visa_request.client_id = client.client_id')
+                         ->join('company', 'visa_request.company_id = company.company_id')  
                          ->join('country', 'visa_request.country_of_visit = country.id') 
                          ->join('category', 'visa_request.visa_type = category.id') 
                          ->join('status', 'visa_request.status = status.status_id') 
