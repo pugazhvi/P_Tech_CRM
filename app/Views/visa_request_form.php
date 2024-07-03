@@ -207,7 +207,7 @@
                                     <textarea id="textarea" name="notes" class="form-control" maxlength="225" rows="3" placeholder="This textarea has a limit of 225 chars."></textarea>
                                 </div>
                                 
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-2">
                                     <label for="notes">File Upload</label>
                                     <input type="file" name="file" class="form-control" id="file"/>
                                 </div>
@@ -250,7 +250,7 @@
             <div class="modal-body">
                 <form >
                     <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-12">
                             <input type="hidden" id="company_client_id" name="company_client_id">
                             <label for="company_name" class="col-form-label">Company Name</label>
                             <input class="form-control" name="company_name" id="company_name" type="text">
