@@ -72,7 +72,7 @@
             <select class="select2-dropdown" id="client_list" style="width:auto;">
                 <option value="">Select Client</option>
                 <?php foreach ($client_list as $key => $value) { ?>
-                    <option class="dropdown-item " href="#" value="<?= $value['client_id'] ?>"><?= $value['org_name'] ?>-<?= $value['branch'] ?>-<?= $value['agency'] ?></option>
+                    <option class="dropdown-item " href="#" value="<?= $value['client_id'] ?>"><?= $value['branch'] ?>-<?= $value['agency'] ?></option>
                 <?php } ?>
             </select>
             
@@ -186,12 +186,15 @@
                 var client_id = $(this).val();
                 table.clear().draw();
 
+                console.log("client_id");
+                console.log(client_id);
                 if(client_id){
                     $.ajax({
                         url: '<?php echo base_url() ?>getClientList/'+client_id, 
                         type: 'GET', // HTTP method
+                        dataType: 'json',
                         success: function(response) {
-                            console.log(response);
+                            // console.log(response);
                             client_list_ajax= response;
                             if($('#add_30days_old_dispatched_data').prop('checked')){
                                 append_visa_request_list(client_id, table,1);
@@ -236,7 +239,6 @@
             function append_visa_request_list(client_id,table, dispatched=0) {
                     var visaList = client_list_ajax; 
 
-
                     var filteredVisaList = visaList.filter(function (visa) {
                             var currentDate = new Date();
                             var createdAt = new Date(visa.created_at);
@@ -273,7 +275,7 @@
                             var priorityIcon = visa.priority !== null ? '<span class="mdi mdi-star" style="color: gold; font-size: 14px;"></span> ' : '';
                             var formattedDate = moment(visa.created_at).format('DD-MMM-YYYY');
                             var row = [
-                                visa.client_name + '-' + visa.branch + '-' + visa.agency,
+                                visa.branch + '-' + visa.agency,
                                 formattedDate,
                                 priorityIcon + visa.traveller_name,
                                 visa.passport_no,

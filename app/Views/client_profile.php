@@ -14,10 +14,7 @@
                     <div class="table-responsive">
                         <table class="table table-borderless table-sm">
                             <tbody>
-                                <tr>
-                                    <th scope="row">Org Name :</th>
-                                    <td class="text-muted"><?php echo $client->org_name; ?></td>
-                                </tr>
+
                                 <tr>
                                     <th scope="row">Branch :</th>
                                     <td class="text-muted"><?php echo $client->branch; ?></td>
@@ -25,10 +22,6 @@
                                 <tr>
                                     <th scope="row">Agency :</th>
                                     <td class="text-muted"><?php echo $client->agency; ?></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Mobile :</th>
-                                    <td class="text-muted"><?php echo $client->mobile_no; ?></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Email :</th>
@@ -57,12 +50,6 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="org_name">Org Name</label>
-                                        <input type="text" class="form-control" id="org_name" name="org_name" value="<?php echo $client->org_name; ?>">
-                                    </div>
-                                </div>  
-                                <div class="col-md-4">
-                                    <div class="form-group">
                                         <label for="branch">Branch</label>
                                         <input type="text" class="form-control" id="branch" name="branch" value="<?php echo $client->branch; ?>">
                                     </div>
@@ -80,13 +67,7 @@
                                         <label for="useremail">Email <span style="font-size:12px;">&nbsp;&nbsp;&nbsp;(You can add multiple email IDs separated by commas)</span></label>
                                         <input type="email" class="form-control" id="email"  name="email"  value="<?php echo $client->email; ?>">
                                     </div>
-                                </div>  
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="mobile_no">Mobile Number</label>
-                                        <input type="text" class="form-control" id="mobile_no" name="mobile_no" value="<?php echo $client->mobile_no; ?>">
-                                    </div>
-                                </div>   
+                                </div>    
 
                                 <div class="col-md-12">
                                     <div class="form-group" style="margin-top: 28px;">

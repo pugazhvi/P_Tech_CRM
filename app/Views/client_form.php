@@ -47,29 +47,15 @@
                         <h5 class="mb-3 text-uppercase bg-light p-2"><i class="mdi mdi-account-circle mr-1"></i> Client Info</h5>
 
                         <div class="form-row">
-
-                        
-                            
-                            <div class="form-group col-md-3">
-                                <label for="staffName">Organization Name<span class="text-danger">*</span></label>
-                                <input type="text" name="org_name" value="<?php if(isset($clientData)){ echo $clientData->org_name; } ?>" parsley-trigger="change" required  class="form-control" id="orgName">
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="branch">Location<span class="text-danger">*</span></label>
-                                <input type="text" name="branch" value="<?php if(isset($clientData)){ echo $clientData->branch; } ?>" parsley-trigger="change" required  class="form-control" id="branch">
-                            </div>
                             <div class="form-group col-md-3">
                                 <label for="agency">Agency<span class="text-danger">*</span></label>
                                 <input type="text" name="agency" value="<?php if(isset($clientData)){ echo $clientData->agency; } ?>" parsley-trigger="change" required  class="form-control" id="agency">
                             </div>
                             <div class="form-group col-md-3">
-                                <label for="mobile">Mobile<span class="text-danger">*</span></label>
-                                <input type="text" name="mobile_no" value="<?php if(isset($clientData)){ echo $clientData->mobile_no; } ?>" parsley-trigger="change" required placeholder="Enter Mobile" class="form-control" id="mobile">
+                                <label for="branch">Location<span class="text-danger">*</span></label>
+                                <input type="text" name="branch" value="<?php if(isset($clientData)){ echo $clientData->branch; } ?>" parsley-trigger="change" required  class="form-control" id="branch">
                             </div>
-                        
-                    
-
-                            <div class="form-group col-md-12">
+                            <div class="form-group col-md-6">
                                 <label for="email">Email<span class="text-danger">*</span><span style="font-size:12px;">&nbsp;&nbsp;&nbsp;(You can add multiple email IDs separated by commas)</span></label>
                                 <input type="text" name="email" value="<?php if(isset($clientData)){ echo $clientData->email; } ?>" parsley-trigger="change" required placeholder="Enter Email" class="form-control" id="email">
                             </div>

@@ -49,7 +49,8 @@
                     <table id="datatable-buttons" class="table table-hover m-0 table-centered dt-responsive nowrap w-100" cellspacing="0" >
                         <thead class="bg-light">
                         <tr>
-                            <th class="font-weight-medium">Branch</th>
+                            <th class="font-weight-medium">Agent</th>
+                            <th class="font-weight-medium">Client</th>
                             <th class="font-weight-medium">Created Date</th>
                             <th class="font-weight-medium">Traveller</th>
                             <th class="font-weight-medium">Passport No</th>
@@ -65,7 +66,8 @@
                        
                         <?php foreach ($visaList as $key => $value) { ?>
                             <tr  onclick="window.location.href='<?= base_url()."view_visa_request?visa_request_id=".md5($value['visa_request_id']); ?>'" >
-                            <td><b>UVS-<?php echo $value['branch_name'];  ?></b></td>
+                            <td><b><?php echo $value['agency'];  ?>-<?php echo $value['branch_name'];  ?></b></td>
+                            <td><b><?php echo $value['company_name'];  ?></b></td>
                             <td><?php echo date('d-M-Y', strtotime($value['created_at']));  ?></td>
                             <td><?php echo $value['traveller_name'];  ?></td>
                             <td><?php echo $value['passport_no'];  ?></td>

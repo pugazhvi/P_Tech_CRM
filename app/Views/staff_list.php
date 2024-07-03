@@ -33,8 +33,6 @@
                                 <tr>
                                     <th>Branch</th>
                                     <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Mobile</th>
                                     <th>Role</th>
                                     <th>Status</th>
                                     <th>Action</th>
@@ -49,8 +47,6 @@
                                 <tr>
                                     <td> <?php echo $value['branch_name'];  ?></td>
                                     <td> <?php echo $value['name'];  ?></td>
-                                    <td><?php echo $value['email'];  ?></td>
-                                    <td><?php echo $value['mobile_no'];  ?></td>
                                     <td><?php echo $value['role'];  ?></td>
                                     <td><?php if($value['is_active'] == 1): ?>
                                                 <span style="color:green">Active</span>

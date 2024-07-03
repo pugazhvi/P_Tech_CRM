@@ -7,6 +7,7 @@ use App\Models\ClientModel;
 use App\Models\BranchModel;
 
 use CodeIgniter\API\ResponseTrait;
+use CodeIgniter\Database\Exceptions\DatabaseException;
 
 
 class StaffController extends BaseController
@@ -36,9 +37,9 @@ class StaffController extends BaseController
         if($this->session->has('is_staff_logged_in')){ return redirect()->to(base_url().'staff_home'); }
 		if($this->request->getmethod() == 'POST')
 		{
-			$email = $this->request->getVar('email');
+			$user_name = $this->request->getVar('user_name');
 			$password = $this->request->getVar('password');
-			$staffdata = $this->StaffModel->verifyEmail($email);
+			$staffdata = $this->StaffModel->verifyUserName($user_name);
      
 			if($staffdata)
 			{
@@ -58,12 +59,12 @@ class StaffController extends BaseController
                     return redirect()->to(base_url().'visa_request_list');
 				}
 				else{
-					$this->session->setTempdata('error','Email or Password is invalid',3);
+					$this->session->setTempdata('error','User Name or Password is invalid',3);
                     return redirect()->to(base_url()."staff");
 				}
 
 			}else{
-			  $this->session->setTempdata('error','Email or Password is invalid',3);
+			  $this->session->setTempdata('error','User Name or Password is invalid',3);
 			  return redirect()->to(base_url()."staff");				  
 			}
 
@@ -134,14 +135,30 @@ class StaffController extends BaseController
 
 		if($this->request->getmethod() == 'POST')
 		{
+			try {
 				$staffData = $this->request->getVar();
-                $staffData['created_by'] = $this->session->get('is_staff_logged_in');
+				$staffData['created_by'] = $this->session->get('is_staff_logged_in');
+			
+				// Attempt to insert the data
 				$insert = $this->StaffModel->save($staffData);
-				if($insert) 
-				{
-					return redirect()->to(base_url()."staff_list"); 
+			
+				if ($insert) {
+					return redirect()->to(base_url("staff_list"));
+				} else {
+					// If insert fails without throwing an exception, set a general error message
+					$this->session->setFlashdata('error', 'Failed to insert staff data.');
+					return redirect()->back()->withInput();
 				}
-		
+			} catch (DatabaseException $e) {
+				// Catch database-specific exceptions and set the error message
+				$this->session->setFlashdata('error', $e->getMessage());
+				return redirect()->back()->withInput();
+			} catch (\Exception $e) {
+				// Catch any other exceptions and set the error message
+				$this->session->setFlashdata('error', 'An unexpected error occurred: ' . $e->getMessage());
+				return redirect()->back()->withInput();
+			}
+			
 		}else{
 
 			$data['branchData'] = $this->BranchModel->findAll();

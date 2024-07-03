@@ -110,12 +110,24 @@
                             
 
                                 <div class="form-group col-md-3">
-                                    <label for="client">Client<span class="text-danger">*</span></label>
+                                    <label for="agent">Agent<span class="text-danger">*</span></label>
                                     <select class="select2-dropdown form-control"  name="client_id" id="client_id" required>
-                                        <option value="">Select client</option>
+                                        <option value="">Select Agent</option>
                                         <?php foreach ($clientData as $key => $clientValue) { ?>
-                                            <option value="<?php echo $clientValue['client_id'];  ?>"><?php echo $clientValue['org_name'];  ?>-<?php echo $clientValue['branch'];  ?>-<?php echo $clientValue['agency'];  ?></option>
+                                            <option value="<?php echo $clientValue['client_id'];  ?>"><?php echo $clientValue['agency'];  ?>-<?php echo $clientValue['branch'];  ?></option>
                                         <?php } ?>
+                                            
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="company">Company<span class="text-danger">*</span></label>
+                                    <i type="button" class="fe-plus-circle" id="addCompanyeModalButton" style="font-size: 18px;" data-toggle="modal" data-target="#addCompanyModal" title="Add Company"></i>
+
+                                    <select class="select2-dropdown form-control"  name="company_id" id="company_id" required>
+                                        <option value="">Select Company</option>
+                                        <?php if(isset($companyData)){ foreach ($companyData as $key => $companyValue) { ?>
+                                            <option value="<?php echo $companyValue['company_id'];  ?>"><?php echo $companyValue['company_name']; ?></option>
+                                        <?php } }?>
                                             
                                     </select>
                                 </div>
@@ -225,7 +237,122 @@
 
 </div> <!-- content -->
 
+<div class="modal fade" id="addCompanyModal" tabindex="-1" role="dialog" aria-labelledby="addCompanyModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addCompanyModalLabel">Add New Company</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form >
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+
+                            <label for="company_name" class="col-form-label">Company Name</label>
+                            <input class="form-control" name="company_name" id="company_name" type="text">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                        <button style="float: right;" class="btn btn-rounded btn-primary" onclick="submitCompny(event)">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+    function submitCompny(event) {
+        event.preventDefault(); // Prevent the default form submission behavior
+
+        if($('#client_id').val() == ''){
+            toastr.warning('Select First Agent');
+            return ;
+        }
+        // Get the value of the Make Name input field
+        var companyName = $('#company_name').val();
+
+        // Check if Make Name is empty
+        if (companyName === '') {
+            // Display error message
+            toastr.error('Please enter a Company Name.', 'Error');
+            return; // Stop further execution of the function
+        }
+        var formData = {
+            company_name: $('#company_name').val(),
+            client_id: $('#client_id').val()
+        };
+    
+        $.ajax({
+            type: 'POST',
+            url: '<?php echo base_url()."create_company"?>', 
+            data: formData,
+            dataType: 'json',
+            success: function(response) {
+                // console.log(response);
+                if (response == "failed") {
+                    toastr.warning(response, 'Warning');
+                }else{
+                    $('#addCompanyModal').modal('hide');
+                    $('#company_name').val('');
+                    toastr.success(response.data, 'Success');
+
+                    $('#company_id').empty();
+
+                    $('#company_id').append('<option value="0">Select Company</option>');
+
+                    response.companyData.forEach(function(company) {
+                        $('#company_id').append('<option value="' + company.company_id + '">' + company.company_name + '</option>');
+                    });
+
+                    $('#company_id').val(response.dataSelect).trigger('change');
+                }
+            },
+            error: function(xhr, status, error) {
+                // Handle error response here
+                console.error(xhr.responseText);
+            }
+        });
+    }
+
+
+    $(document).ready(function() {
+        $('#client_id').change(function () {
+            console.log($(this).val());
+            $.ajax({
+                url: '<?= base_url("get_company_list/") ?>'+$(this).val(),
+                    type: 'GET',
+                    dataType: 'json', // Expect JSON response
+                    success: function(response) {
+                        if (response.status == false) {
+                            toastr.warning('Visa type data found.', 'Warning');
+                        } else {
+                            $('#company_id').empty();
+                            $('#company_id').append('<option value="">Select Company</option')
+                            $.each(response.data, function(index, item) {
+                                $('#company_id').append($('<option>', {
+                                    value: item.company_id,
+                                    text: item.company_name
+                                }));
+                            });
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle error
+                        console.error(xhr.responseText);
+                        toastr.error('Failed to fetch data.', 'Error');
+                    }
+                });
+        });
+    });
+
+
     function convertToUpperCase() {
         var inputField = document.getElementById("passport_no");
         inputField.value = inputField.value.toUpperCase();
@@ -259,7 +386,6 @@
 </script>  
 
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/js/select2.min.js"></script>
     <script>
     $(document).ready(function() {

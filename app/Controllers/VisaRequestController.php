@@ -10,6 +10,7 @@ use App\Models\StatusModel;
 use App\Models\CountryModel;
 use App\Models\VisaTypeModel;
 use App\Models\NotesModel;
+use App\Models\CompanyModel;
 
 class VisaRequestController extends BaseController
 {
@@ -21,6 +22,8 @@ class VisaRequestController extends BaseController
     protected $CountryModel;
     protected $VisaTypeModel;
     protected $NotesModel;
+    protected $CompanyModel;
+    
     public function __construct()
     {
         $this->session = session();
@@ -31,6 +34,7 @@ class VisaRequestController extends BaseController
         $this->CountryModel = new CountryModel();
         $this->VisaTypeModel = new VisaTypeModel();
         $this->NotesModel = new NotesModel();
+        $this->CompanyModel = new CompanyModel();
        
     }
 
@@ -56,7 +60,7 @@ class VisaRequestController extends BaseController
         echo view('layout/footer');
     }
 
-	
+
 
 
 	public function create_visa_request()
@@ -103,7 +107,6 @@ class VisaRequestController extends BaseController
             $data['statusData'] = $this->StatusModel->findall();
             $data['countryData'] = $this->CountryModel->findall();
             $data['visaTypeData'] = $this->VisaTypeModel->findall();
-
 		    $staffdata = $this->StaffModel->where('staff_id',$this->session->get('is_staff_logged_in'))->get()->getRow();
             echo view('layout/header', ['Data'=>$staffdata]);
             echo view('visa_request_form',$data);
@@ -141,6 +144,7 @@ class VisaRequestController extends BaseController
             $data['statusData'] = $this->StatusModel->findall();
             $data['countryData'] = $this->CountryModel->findall();
             $data['visaTypeData'] = $this->VisaRequestModel->getVisaType($data['visaData']->country_of_visit);
+            $data['companyData'] = $this->CompanyModel->where('client_id', $data['visaData']->client_id)->findAll();
 
 		    $staffdata = $this->StaffModel->where('staff_id',$this->session->get('is_staff_logged_in'))->get()->getRow();
             echo view('layout/header', ['Data'=>$staffdata]);
@@ -252,9 +256,27 @@ class VisaRequestController extends BaseController
         }
     }
     
+    public function create_company(){
 
 
+       $insert =  $this->CompanyModel->insert($this->request->getPost());
+       $companyData = $this->CompanyModel->findAll();
+       if($insert){
+        return json_encode(['companyData'=>$companyData, 'dataSelect'=> $insert]);
+       }else{
+        return json_encode('failed');
+       }
+    }
 
+    public function get_company_list($cleint_id){
+        $companyData = $this->CompanyModel->where('client_id', $cleint_id)->findAll();
 
+        if(isset($companyData)){
+            return json_encode(['status'=>true , 'data'=>$companyData]);
+        }else{
+            return json_encode(['status'=>false , 'data'=>'No Company Found']);
+        }
+
+    }
 
 }

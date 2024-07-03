@@ -46,87 +46,69 @@
                 <div class="card-body">
                     
 
-                    <form method="post" 
-                        <?php if(isset($staffData)){ ?>  action="<?= base_url()."staff_edit"; ?>"
-                        <?php } else {  ?>   action="<?= base_url()."staff_create"; ?>" <?php } ?>
+                    <form method="post"
+                        <?php if(isset($staffData)){ ?>  action="<?= base_url("staff_edit"); ?>"
+                        <?php } else {  ?>   action="<?= base_url("staff_create"); ?>" <?php } ?>
                         class="parsley-examples">
 
-
                         <?php if(isset($staffData)){ ?>
-                                <input type="hidden" required   name="id" value="<?= $staffData->staff_id; ?>" id='id' >
+                            <input type="hidden" required name="id" value="<?= $staffData->staff_id; ?>" id='id'>
                         <?php } ?>
 
                         <div class="form-row">
 
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-4">
                                 <label for="branch_id">Branch<span class="text-danger">*</span></label>
-                                <select class="select2-dropdown form-control" name="branch_id" id="branch_id"  required>
+                                <select class="select2-dropdown form-control" name="branch_id" id="branch_id" required>
                                     <option value="">Select branch</option>
                                     <?php foreach ($branchData as $key => $branchValue) { ?>
-                                        <option value="<?php echo $branchValue['id'];  ?>"  <?php if(isset($staffData)){ echo ($branchValue['id'] ==  $staffData->branch_id) ? 'selected' : ''; } ?> ><?php echo $branchValue['branch'];  ?></option>
+                                        <option value="<?= $branchValue['id']; ?>" 
+                                            <?= old('branch_id', isset($staffData) ? $staffData->branch_id : '') == $branchValue['id'] ? 'selected' : ''; ?>>
+                                            <?= $branchValue['branch']; ?>
+                                        </option>
                                     <?php } ?>
-                                        
                                 </select>   
                             </div>
 
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-4">
                                 <label for="role">Role<span class="text-danger">*</span></label>
-                                <select  class="select2-dropdown form-control" name="role" id="role" parsley-trigger="change" required >
-                                <?php if(isset($staffData)){ ?> <option value="<?= $staffData->role; ?>"> <?= $staffData->role; ?> </option>   <?php } ?>
-                                    <option >Select Role</option>
-                                    <option value="Admin">Admin</option>
-                                    <option value="Staff">Staff</option>
+                                <select class="select2-dropdown form-control" name="role" id="role" parsley-trigger="change" required>
+                                    <option value="">Select Role</option>
+                                    <option value="Admin" <?= old('role', isset($staffData) ? $staffData->role : '') == 'Admin' ? 'selected' : ''; ?>>Admin</option>
+                                    <option value="Staff" <?= old('role', isset($staffData) ? $staffData->role : '') == 'Staff' ? 'selected' : ''; ?>>Staff</option>
                                 </select>
                             </div>
 
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-4">
                                 <label for="staffName">Staff Name<span class="text-danger">*</span></label>
-                                <input type="text" name="name" value="<?php if(isset($staffData)){ echo $staffData->name; } ?>" parsley-trigger="change" required placeholder="Enter staff name" class="form-control" id="staffName">
+                                <input type="text" name="name" value="<?= old('name', isset($staffData) ? $staffData->name : '') ?>" parsley-trigger="change" required placeholder="Enter staff name" class="form-control" id="staffName">
                             </div>
-
-                            <div class="form-group col-md-3">
-                                <label for="mobile">Mobile<span class="text-danger">*</span></label>
-                                <input type="text" name="mobile_no" value="<?php if(isset($staffData)){ echo $staffData->mobile_no; } ?>" parsley-trigger="change" required placeholder="Enter Mobile" class="form-control" id="mobile">
-                            </div>
-                        
                         </div>
 
                         <div class="form-row">
-
+                            <div class="form-group col-md-4">
+                                <label for="user_name">User Name<span class="text-danger">*</span></label>
+                                <input type="text" name="user_name" value="<?= old('user_name', isset($staffData) ? $staffData->user_name : '') ?>" parsley-trigger="change" required placeholder="Enter User Name" class="form-control" id="user_name">
+                            </div>
+                            
+                            <?php if(!isset($staffData)){  ?>
                                 <div class="form-group col-md-4">
-                                    <label for="email">Email<span class="text-danger">*</span></label>
-                                    <input type="email" name="email" value="<?php if(isset($staffData)){ echo $staffData->email; } ?>" parsley-trigger="change" required placeholder="Enter Email" class="form-control" id="email">
-                                </div>
-                                <?php if(!isset($staffData)){  ?>
-                                    <div class="form-group col-md-4">
                                     <label for="pass1">Password<span class="text-danger">*</span></label>
-                                    <input id="pass1" type="password"  placeholder="Password" required class="form-control">
+                                    <input id="pass1" type="password" name="password" placeholder="Password" required class="form-control">
                                 </div>
 
                                 <div class="form-group col-md-4">
                                     <label for="passWord2">Confirm Password <span class="text-danger">*</span></label>
-                                    <input data-parsley-equalto="#pass1" type="password" name="password" required placeholder="Password" class="form-control" id="passWord2">
+                                    <input data-parsley-equalto="#pass1" type="password" name="password_confirm" required placeholder="Password" class="form-control" id="passWord2">
                                 </div>
-                                <?php } ?>
-                            
-
+                            <?php } ?>
                         </div>
-
-
-    
-                   
-                    
-                        
 
                         <div class="form-group text-right m-b-0">
-                            <button class="btn btn-primary waves-effect waves-light mr-1" type="submit">
+                            <button id="staff_form_submit" class="btn btn-primary waves-effect waves-light mr-1" type="submit">
                                 Submit
                             </button>
-                            <!-- <button type="reset" onclick="window.history.back()" class="btn btn-secondary waves-effect">
-                                Cancel
-                            </button> -->
                         </div>
-
                     </form>
 
                     <?php if (isset($staffData)) { ?>
@@ -184,13 +166,17 @@
 
 </div> <!-- content -->
 
-    
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/js/select2.min.js"></script>
     <script>
     $(document).ready(function() {
+        console.log("hello");
+        <?php if (session()->getFlashdata('error')): ?>
+            console.log("1111111111111111111");
 
+            toastr.warning("<?= session()->getFlashdata('error') ?>");
+        <?php endif; ?>
         $('.select2-dropdown').select2();
     });
     </script>
@@ -280,4 +266,25 @@
             }
         });
     });
+
+    // $('#staff_form_submit').click(function (event) {
+    //     event.preventDefault();
+    //     var user_name = $('#user_name').val();
+    //     $.ajax({
+    //         type: 'GET',
+    //         url: '<?php echo base_url()."user_name_check/"?>'. user_name, 
+    //         dataType: 'json',
+    //         success: function(response) {
+    //             console.log(response);
+
+    //             if (response) {
+    //                 window.location.reload();
+    //             }
+    //         },
+    //         error: function(xhr, status, error) {
+    //             // Handle error response here
+    //             console.error(xhr.responseText);
+    //         }
+    //     })
+    // })
 </script>

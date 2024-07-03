@@ -23,8 +23,9 @@ use CodeIgniter\Router\RouteCollection;
  $routes->match(['get','post'],'/verify_otp','StaffController::verify_otp');
  $routes->match(['get','post'],'/change_password','StaffController::change_password');
  $routes->post('status_staff', 'StaffController::status_staff');
+//  $routes->get('user_name_check/(:any)', 'StaffController::user_name_check/$1');
  
-
+ 
 
  $routes->match(['get','post'],'/','ClientController::login');
  $routes->get('/client_logout','ClientController::client_logout');
@@ -44,6 +45,8 @@ use CodeIgniter\Router\RouteCollection;
  $routes->match(['get','post'],'/edit_visa_request','VisaRequestController::edit_visa_request');
  $routes->get('download/(:any)', 'VisaRequestController::download/$1');
  $routes->match(['get','post'],'/update_notes','VisaRequestController::update_notes');
+ $routes->match(['get','post'],'/create_company','VisaRequestController::create_company');
+ $routes->get('get_company_list/(:any)','VisaRequestController::get_company_list/$1');
 
 
  $routes->match(['get','post'],'/visa_summary_list','MasterController::visa_summary_list');

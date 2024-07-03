@@ -31,19 +31,13 @@
                                         <input type="text" class="form-control" id="name" name="name" value="<?php echo $staff->name; ?>">
                                     </div>
                                 </div>      
+                                            
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="mobile_no">Mobile Number</label>
-                                        <input type="text" class="form-control" id="mobile_no" name="mobile_no" value="<?php echo $staff->mobile_no; ?>">
+                                        <label for="User Name">User Name</label>
+                                        <input type="text" class="form-control" id="user_name" name="user_name" value="<?php echo $staff->user_name; ?>">
                                     </div>
-                                </div>                 
-                            
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="useremail">Email Address</label>
-                                        <input type="email" class="form-control" id="email"  name="email"  value="<?php echo $staff->email; ?>">
-                                    </div>
-                                </div>  
+                                </div>
                                 <div class="col-md-12">
                                     <div class="form-group" style="margin-top: 28px;">
                                         <button type="submit" class="btn btn-primary" style="float: inline-end;" >Update</button>

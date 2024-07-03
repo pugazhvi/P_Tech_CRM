@@ -56,7 +56,7 @@ class ClientController extends BaseController
 				if (password_verify($password, $clientdata['password'])) 
 				{
 					$this->session->set('is_client_logged_in',$clientdata['client_id']);
-                    $this->session->set('logged_in_client_name',$clientdata['org_name']);
+                    $this->session->set('logged_in_client_name',$clientdata['agency']);
 
                     return redirect()->to(base_url().'client_home');
 				}
@@ -96,7 +96,6 @@ class ClientController extends BaseController
 		}
         $data['visaList']  = $this->VisaRequestModel->getVisaRequestListByClientId(session()->get('is_client_logged_in'));
         $data['statusCount']  = $this->VisaRequestModel->getVisaRequestBasedOnStatusByClientId(session()->get('is_client_logged_in'));
-
         $clientdata = $this->ClientModel->where('client_id',$this->session->get('is_client_logged_in'))->get()->getRow();
         echo view('layout/header', ['Data'=>$clientdata]);
         echo view('client_visa_request_list',$data);
@@ -200,7 +199,7 @@ class ClientController extends BaseController
                 'is_active' => $is_active
             ];
             $updated = $this->ClientModel->update($client_id, $data);
-            $client_list = $this->ClientModel->orderBy('org_name','asc')->findAll();
+            $client_list = $this->ClientModel->findAll();
 
             if ($updated) {
                 $result = $data;

@@ -286,12 +286,9 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body">
-                    <h5>Organization-Location-Agency</h5>
-                    <p ><?= $reqClientData->org_name; ?>-<?= $reqClientData->branch; ?>-<?= $reqClientData->agency; ?></p>
-                   
-                    <h5>Mobile</h5>
-                    <p ><?= $reqClientData->mobile_no; ?></p>
-                   
+                    <h5>Agency-Location</h5>
+                    <p ><?= $reqClientData->agency; ?>-<?= $reqClientData->branch; ?>-</p>
+                                      
                     <h5>Email</h5>
                     <p ><?= $reqClientData->email; ?></p>
                 </div>

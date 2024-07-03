@@ -33,7 +33,6 @@
                                 <tr>
                                     <th>Name</th>
                                     <th>Email</th>
-                                    <th>Mobile</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
@@ -45,9 +44,8 @@
                             <?php foreach ($clientList as $key => $value) { ?>
 
                                 <tr>
-                                    <td> <?php echo $value['org_name'];  ?>-<?php echo $value['branch'];  ?>-<?php echo $value['agency'];  ?></td>
+                                    <td><?php echo $value['agency'];  ?>-<?php echo $value['branch'];  ?></td>
                                     <td><?php echo $value['email'];  ?></td>
-                                    <td><?php echo $value['mobile_no'];  ?></td>
                                     <td><?php if($value['is_active'] == 1): ?>
                                                 <span style="color:green">Active</span>
                                             <?php else: ?>

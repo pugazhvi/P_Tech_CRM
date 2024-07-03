@@ -258,6 +258,9 @@
                             <li class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light">
                                 <a href="<?= base_url().'visa_request_list'; ?>"  style="color:white;">  Visa Request List</a>
                             <li>
+                            <li class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light">
+                                <a href="<?= base_url().'client_list'; ?>"  style="color:white;"> Client</a>
+                            <li>
                         
                         <?php }else if(isset($_SESSION['is_staff_logged_in']) && $_SESSION['is_staff_logged_in'] && $_SESSION['logged_in_staff_role'] == 'Admin'){ ?>
 
@@ -319,7 +322,7 @@
                                 <?php  if(isset($_SESSION['is_staff_logged_in']) && $_SESSION['is_staff_logged_in']) { ?>
                                     <?=   $Data->name; ?>
                                 <?php }else if(isset($_SESSION['is_client_logged_in']) && $_SESSION['is_client_logged_in']){ ?>
-                                    <?=   $Data->org_name; ?>
+                                    <?=   $Data->agency; ?>
                                 <?php } ?>
                                 <i class="mdi mdi-chevron-down"></i> 
                                 </span>

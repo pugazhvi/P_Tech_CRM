@@ -63,8 +63,8 @@
                                 <?php endif;?>
 
                                     <div class="form-group mb-3">
-                                        <label for="emailaddress">Email</label>
-                                        <input class="form-control" type="email" id="emailaddress" name="email" required="" placeholder="Enter your email">
+                                        <label for="user_name">User Name</label>
+                                        <input class="form-control" type="text" id="user_name" name="user_name" required="" placeholder="Enter your User Name">
                                     </div>
 
                                     <div class="form-group mb-3">

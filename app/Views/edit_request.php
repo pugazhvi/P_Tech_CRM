@@ -174,7 +174,7 @@
                     </div>
 
                     <p class="text-primary"><?= $visaData->request_id; ?></p>
-                    <h4 class="mb-1"><?= $visaData->client_name; ?>-<?= $visaData->branch; ?>-<?= $visaData->agency; ?> 
+                    <h4 class="mb-1"><?= $visaData->agency; ?>-<?= $visaData->branch; ?> 
                     <span class="mdi mdi-information-outline" style="color: green;font-size: 15px;" data-toggle="modal" data-target="#centermodal"></span> 
                     </h4>  
                  
@@ -386,19 +386,32 @@
 
                         <div class="row">
 
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="client">Client<span class="text-danger">*</span></label>
+                                    <label for="client">Agent<span class="text-danger">*</span></label>
                                     <select class="select2-dropdown form-control"  name="client_id" required>
-                                        <option value="">Select client</option>
+                                        <option value="">Select Agent</option>
                                         <?php foreach ($clientData as $key => $clientValue) { ?>
-                                            <option value="<?php echo $clientValue['client_id'];  ?>" <?php echo ($clientValue['client_id'] ==  $visaData->client_id) ? 'selected' : ''; ?> ><?php echo $clientValue['org_name'];  ?>-<?php echo $clientValue['branch'];  ?>-<?php echo $clientValue['agency'];  ?></option>
+                                            <option value="<?php echo $clientValue['client_id'];  ?>" <?php echo ($clientValue['client_id'] ==  $visaData->client_id) ? 'selected' : ''; ?> ><?php echo $clientValue['agency'];  ?>-<?php echo $clientValue['branch'];  ?></option>
                                         <?php } ?>
                                             
                                     </select>
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="company">Company<span class="text-danger">*</span></label>
+                                    <!-- <i type="button" class="fe-plus-circle" id="addCompanyeModalButton" style="font-size: 18px;" data-toggle="modal" data-target="#addCompanyModal" title="Add Company"></i> -->
 
+                                    <select class="select2-dropdown form-control"  name="company_id" id="company_id" required>
+                                        <option value="">Select Company</option>
+                                        <?php if(isset($companyData)){ foreach ($companyData as $key => $companyValue) { ?>
+                                            <option value="<?php echo $companyValue['company_id'];  ?>" <?php echo ($companyValue['company_id'] ==  $visaData->company_id) ? 'selected' : ''; ?>><?php echo $companyValue['company_name']; ?></option>
+                                        <?php } }?>
+                                            
+                                    </select>
+                                </div>
+                            </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="field-1" class="control-label">Traveller Name</label>
@@ -464,18 +477,93 @@
                 </div>
                 <div class="modal-body">
                     <h5>Organization-Location-Agency</h5>
-                    <p ><?= $reqClientData->org_name; ?>-<?= $reqClientData->branch; ?>-<?= $reqClientData->agency; ?></p>
+                    <p ><?= $reqClientData->branch; ?>-<?= $reqClientData->agency; ?></p>
                    
-                    <h5>Mobile</h5>
-                    <p ><?= $reqClientData->mobile_no; ?></p>
                    
-                    <h5>Email</h5>
-                    <p ><?= $reqClientData->email; ?></p>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
+    
+<div class="modal fade" id="addCompanyModal" tabindex="-1" role="dialog" aria-labelledby="addCompanyModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addCompanyModalLabel">Add New Company</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form >
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+
+                            <label for="company_name" class="col-form-label">Company Name</label>
+                            <input class="form-control" name="company_name" id="company_name" type="text">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                        <button style="float: right;" class="btn btn-rounded btn-primary" onclick="submitCompny(event)">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+        function submitCompny(event) {
+            event.preventDefault(); // Prevent the default form submission behavior
+            // Get the value of the Make Name input field
+        var companyName = $('#company_name').val();
+
+        // Check if Make Name is empty
+        if (companyName === '') {
+            // Display error message
+            toastr.error('Please enter a Company Name.', 'Error');
+            return; // Stop further execution of the function
+        }
+        var formData = {
+            company_name: $('#company_name').val()
+        };
+       
+        $.ajax({
+            type: 'POST',
+            url: '<?php echo base_url()."create_company"?>', 
+            data: formData,
+            dataType: 'json',
+            success: function(response) {
+                // console.log(response);
+                if (response == "failed") {
+                    toastr.warning(response, 'Warning');
+                }else{
+                    $('#addCompanyModal').modal('hide');
+                    $('#company_name').val('');
+                    toastr.success(response.data, 'Success');
+
+                    $('#company_id').empty();
+
+                    $('#company_id').append('<option value="0">Select Company</option>');
+
+                    response.companyData.forEach(function(company) {
+                        $('#company_id').append('<option value="' + company.company_id + '">' + company.company_name + '</option>');
+                    });
+
+                    $('#company_id').val(response.dataSelect).trigger('change');
+                }
+            },
+            error: function(xhr, status, error) {
+                // Handle error response here
+                console.error(xhr.responseText);
+            }
+        });
+    }
+    </script>
     <!-- ============================================================== -->
     <!-- End Page content -->
     <!-- ============================================================== -->
