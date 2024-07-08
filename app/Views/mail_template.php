@@ -67,19 +67,19 @@
                                     <td style="text-align: center; width:50%;">
                                     <span style="font-size: 14px; color:#1aa79c;" >Client</span> 
                                     <br>
-                                    <span style="font-size: 16px; font-weight: 600;"><?= $visaData->agency; ?> - <?= $visaData->branch; ?></span> 
+                                    <span style="font-size: 16px; font-weight: 600;"><?= $visaData->company_name; ?></span> 
                                     </td>
 
 
 
                                     <td style="text-align: center; width:50%;">
-                                    <span style="font-size: 14px; color:#1aa79c;">Agency</span> 
+                                    <span style="font-size: 14px; color:#1aa79c;">Organization</span> 
                                     <br>
-                                    <span style="font-size: 16px;font-weight: 600;"><?= $visaData->agency; ?></span>
+                                    <span style="font-size: 16px;font-weight: 600;"><?= $visaData->agency .' - ' . $visaData->branch ?></span>
                                     </td>
 
                                     </tr>
-                                    <tr  style="height: 25px;"></tr>
+                                    <tr  style="height: 10px;"></tr>
                                     <tr  style="margin-bottom: 17px;">
 
                                         <td style="text-align: center; width:50%;">
@@ -95,7 +95,7 @@
                                         </td>
                                         
                                     </tr>
-                                    <tr  style="height: 25px;"></tr>
+                                    <tr  style="height: 10px;"></tr>
                                     <tr style=" margin-bottom: 17px;">
 
                                         <td style="text-align: center; width:50%;">
