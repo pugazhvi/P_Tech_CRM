@@ -64,19 +64,21 @@
                                 <table  width="100%" cellpadding="0" cellspacing="0"  style=" margin-bottom: 17px; border-bottom: 2px solid #3bafda; padding : 0 0 10px;" >
                                    <tr  style="margin-bottom: 17px;">
 
+                                   <td style="text-align: center; width:50%;">
+                                    <span style="font-size: 14px; color:#1aa79c;">Client</span> 
+                                    <br>
+                                    <span style="font-size: 16px;font-weight: 600;"><?= $visaData->agency .' - ' . $visaData->branch ?></span>
+                                    </td>
+
                                     <td style="text-align: center; width:50%;">
-                                    <span style="font-size: 14px; color:#1aa79c;" >Client</span> 
+                                    <span style="font-size: 14px; color:#1aa79c;" >Company</span> 
                                     <br>
                                     <span style="font-size: 16px; font-weight: 600;"><?= $visaData->company_name; ?></span> 
                                     </td>
 
 
 
-                                    <td style="text-align: center; width:50%;">
-                                    <span style="font-size: 14px; color:#1aa79c;">Organization</span> 
-                                    <br>
-                                    <span style="font-size: 16px;font-weight: 600;"><?= $visaData->agency .' - ' . $visaData->branch ?></span>
-                                    </td>
+                                   
 
                                     </tr>
                                     <tr  style="height: 10px;"></tr>

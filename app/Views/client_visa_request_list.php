@@ -49,8 +49,8 @@
                     <table id="datatable-buttons" class="table table-hover m-0 table-centered dt-responsive nowrap w-100" cellspacing="0" >
                         <thead class="bg-light">
                         <tr>
-                            <th class="font-weight-medium">Agent</th>
                             <th class="font-weight-medium">Client</th>
+                            <th class="font-weight-medium">Company</th>
                             <th class="font-weight-medium">Created Date</th>
                             <th class="font-weight-medium">Traveller</th>
                             <th class="font-weight-medium">Passport No</th>

@@ -388,9 +388,9 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="client">Agent<span class="text-danger">*</span></label>
+                                    <label for="client">Client<span class="text-danger">*</span></label>
                                     <select class="select2-dropdown form-control"  name="client_id" required>
-                                        <option value="">Select Agent</option>
+                                        <option value="">Select Client</option>
                                         <?php foreach ($clientData as $key => $clientValue) { ?>
                                             <option value="<?php echo $clientValue['client_id'];  ?>" <?php echo ($clientValue['client_id'] ==  $visaData->client_id) ? 'selected' : ''; ?> ><?php echo $clientValue['agency'];  ?>-<?php echo $clientValue['branch'];  ?></option>
                                         <?php } ?>
