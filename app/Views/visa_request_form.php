@@ -181,6 +181,20 @@
                                     </select>   
                                 </div>
 
+                               
+
+                            
+
+                                <div class="form-group col-md-6">
+                                    <label for="notes">Notes</label>
+                                    <textarea id="textarea" name="notes" class="form-control" maxlength="225" rows="3" placeholder="This textarea has a limit of 225 chars."></textarea>
+                                </div>
+                                
+                                <div class="form-group col-md-3">
+                                    <label for="notes">File Upload</label>
+                                    <input type="file" name="file" class="form-control" id="file"/>
+                                </div>
+
                                 <div class="form-group col-md-3">
                                     <!-- <label for="priority">Priority</label>
                                     <select class="select2-dropdown form-control" id="priority" name="priority" parsley-trigger="change" >
@@ -198,18 +212,6 @@
                                         <span class="slider round"></span>
                                     </label> 
                                     </div>
-                                </div>
-
-                            
-
-                                <div class="form-group col-md-6">
-                                    <label for="notes">Notes</label>
-                                    <textarea id="textarea" name="notes" class="form-control" maxlength="225" rows="3" placeholder="This textarea has a limit of 225 chars."></textarea>
-                                </div>
-                                
-                                <div class="form-group col-md-2">
-                                    <label for="notes">File Upload</label>
-                                    <input type="file" name="file" class="form-control" id="file"/>
                                 </div>
                             
                     
