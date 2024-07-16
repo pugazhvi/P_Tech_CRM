@@ -284,7 +284,7 @@
                                             </div>
 
                                             <div class="form-group col-md-2 d-flex justify-content-start align-items-center m-0">
-                                                <button type="submit" class="btn btn-sm btn-success "><i class='uil uil-message mr-1'></i>Submit</button>
+                                                <button type="submit" class="btn btn-sm btn-success " id="submit-btn"><i class='uil uil-message mr-1'></i>Submit</button>
                                                 <img src="<?= base_url()."public"; ?>/assets/images/submit-spin.svg" width="19px" height="19px" class="ml-2" id="submit-spin" style="display:none;"></img>
                                             </div>
                                            
@@ -476,8 +476,10 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body">
-                    <h5>Organization-Location-Agency</h5>
-                    <p ><?= $reqClientData->branch; ?>-<?= $reqClientData->agency; ?></p>
+                    <h5>Client-Location</h5>
+                    <p ><?= $reqClientData->agency; ?>-<?= $reqClientData->branch; ?></p>
+                    <h5>Email ID</h5>
+                    <p ><?= $reqClientData->email; ?></p>
                    
                    
                 </div>
@@ -616,6 +618,7 @@
                return;
             }
             $('#submit-spin').show();
+            $('#submit-btn').hide();
             // Serialize the form data
             var checkbox = document.getElementById("is_visa_approved");
             checkbox.value = checkbox.checked ? "1" : "0";
@@ -647,6 +650,7 @@
                         $('#notes').empty(); 
                         $('#notes').append(response.notes); 
                         $('#submit-spin').hide();
+                        $('#submit-btn').show();
                     
                         $('.notes-field').val('');
                         $('#file').val(''); 

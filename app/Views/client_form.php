@@ -48,7 +48,7 @@
 
                         <div class="form-row">
                             <div class="form-group col-md-3">
-                                <label for="agency">Agency<span class="text-danger">*</span></label>
+                                <label for="agency">Client Name<span class="text-danger">*</span></label>
                                 <input type="text" name="agency" value="<?php if(isset($clientData)){ echo $clientData->agency; } ?>" parsley-trigger="change" required  class="form-control" id="agency">
                             </div>
                             <div class="form-group col-md-3">

@@ -110,9 +110,9 @@
                             
 
                                 <div class="form-group col-md-3">
-                                    <label for="agent">Agent<span class="text-danger">*</span></label>
+                                    <label for="agent">Client<span class="text-danger">*</span></label>
                                     <select class="select2-dropdown form-control"  name="client_id" id="client_id" required>
-                                        <option value="">Select Agent</option>
+                                        <option value="">Select Client</option>
                                         <?php foreach ($clientData as $key => $clientValue) { ?>
                                             <option value="<?php echo $clientValue['client_id'];  ?>"><?php echo $clientValue['agency'];  ?>-<?php echo $clientValue['branch'];  ?></option>
                                         <?php } ?>
@@ -275,7 +275,7 @@
         event.preventDefault(); // Prevent the default form submission behavior
 
         if($('#client_id').val() == ''){
-            toastr.warning('Select First Agent');
+            toastr.warning('Please Select Client');
             return ;
         }
         // Get the value of the Make Name input field

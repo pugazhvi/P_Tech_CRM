@@ -36,6 +36,39 @@
     .status-option .status-box:hover h3, .status-option .status-box.active h3{
         color: #fff;
     }
+    #client_list_old_data{
+        width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: -50px;
+    margin-left: 7px;
+    }
+    #client_list_old_data #categoryFilter_11{
+        width: 100%;
+    }
+    #client_table_wrapper .row{
+        float: right;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: -37px;
+    flex-direction: column-reverse;
+    }
+    #client_table_wrapper .dt-buttons{
+        flex-basis: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+    }
+    #client_table_filter{
+        flex-basis: 100%;
+        max-width: 100%;
+    }
+    #categoryFilter_11 label{
+       
+    margin-left: 0!important;
+    display: flex;
+    padding: 0;
+    margin-top: 10px;
+    }
 
 </style>    
 <div class="content-page">
@@ -70,7 +103,7 @@
 
         <div id="categoryFilter" style="display: flex;width: 250px;">
             <select class="select2-dropdown" id="client_list" style="width:auto;">
-                <option value="">Select Agent</option>
+                <option value="">Select Client</option>
                 <?php foreach ($client_list as $key => $value) { ?>
                     <option class="dropdown-item " href="#" value="<?= $value['client_id'] ?>"><?= $value['agency'] ?>-<?= $value['branch'] ?></option>
                 <?php } ?>
@@ -166,7 +199,21 @@
             var table = $('#client_table').DataTable({
                 dom: 'fBrtip',
                 buttons: [
-                    'copy', 'print', 'pdf',
+                    {
+                        extend: 'copy',
+                        text: '<i class="fa fa-copy"></i>',
+                        titleAttr: 'Copy'
+                    },
+                    {
+                        extend: 'print',
+                        text: '<i class="fa fa-print"></i>',
+                        titleAttr: 'Print'
+                    },
+                    {
+                        extend: 'pdf',
+                        text: '<i class="fa fa-file-pdf"></i>',
+                        titleAttr: 'PDF'
+                    }
                 ]
             });
 
@@ -177,7 +224,7 @@
             $('#client_table_wrapper').find('.row').append($('.dt-buttons.btn-group.flex-wrap')[0]);
             $('#client_table_wrapper').find('.row').append($('#client_table_filter')[0]);
             $('.dt-buttons.btn-group.flex-wrap').addClass('col-3');
-            $('.dt-buttons.btn-group.flex-wrap').css('display','contents');
+            // $('.dt-buttons.btn-group.flex-wrap').css('display','contents');
             $('#client_table_filter').addClass('col-9');
 
             var client_list_ajax = '';
