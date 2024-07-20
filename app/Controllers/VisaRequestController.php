@@ -50,6 +50,9 @@ class VisaRequestController extends BaseController
 
     public function visa_request_list()
     {
+
+
+
         if(!$this->session->has('is_staff_logged_in')){ return redirect()->to(base_url().'staff'); }
 
         $data['client_list'] =  $this->ClientModel->where('is_active',1)->findAll();       

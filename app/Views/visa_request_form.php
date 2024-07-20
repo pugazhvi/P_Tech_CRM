@@ -81,7 +81,8 @@
             
         <!-- start page title -->
         <div class="row">
-            <div class="col-12">
+        <div class="col-2"></div>
+            <div class="col-8">
                 <div class="page-title-box page-title-box-alt">
                     <h4 class="page-title">Create Visa Request</h4>
                     <div class="page-title-right">
@@ -93,12 +94,14 @@
                     </div>
                 </div>
             </div>
+        <div class="col-2"></div>    
         </div>     
         <!-- end page title -->  
  
  
         <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
 
             <div class="card">
                 <div class="card-body">
@@ -109,7 +112,7 @@
                         <div class="row">
                             
 
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-6">
                                     <label for="agent">Client<span class="text-danger">*</span></label>
                                     <select class="select2-dropdown form-control"  name="client_id" id="client_id" required>
                                         <option value="">Select Client</option>
@@ -119,7 +122,7 @@
                                             
                                     </select>
                                 </div>
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-6">
                                     <label for="company">Company<span class="text-danger">*</span></label>
                                     <i type="button" class="fe-plus-circle" id="addCompanyeModalButton" style="font-size: 18px;" data-toggle="modal" data-target="#addCompanyModal" title="Add Company"></i>
 
@@ -132,18 +135,18 @@
                                     </select>
                                 </div>
 
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-6">
                                     <label for="passport_no">Passport No<span class="text-danger">*</span></label>
                                     <input type="text" name="passport_no"  parsley-trigger="change" required  class="form-control" id="passport_no" onchange="validatePassportNumber()">
                                     <span id="error-message" style="color:red;display:none;">Invalid passport number.</span>
                                 </div>
 
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-6">
                                     <label for="traveller_name">Traveller Name<span class="text-danger">*</span></label>
                                     <input type="text" name="traveller_name"  parsley-trigger="change" required  class="form-control" id="traveller_name">
                                 </div>
 
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-6">
                                     <label for="country_of_visit">Country Of Visit<span class="text-danger">*</span></label>
                                     <select class="select2-dropdown form-control" name="country_of_visit" id="country_of_visit"  required>
                                         <option value="">Select country</option>
@@ -154,7 +157,7 @@
                                     </select>   
                                 </div>
 
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-6">
                                     <label for="visa_type">Visa Type<span class="text-danger">*</span></label>
                                     <select class="select2-dropdown form-control"  name="visa_type" id="visa_type" required>
                                         <option value="">Select visa type</option>
@@ -163,17 +166,9 @@
                                     </select>
                                 </div>
 
-                                <div class="form-group col-md-3">
-                                    <label for="trip_approval_no">Trip Approval No</label>
-                                    <input type="text" name="trip_approval_no"  parsley-trigger="change"   class="form-control" id="trip_approval_no">
-                                </div>
-
-                            
-                            
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-6">
                                     <label for="status">Status<span class="text-danger">*</span></label>
                                     <select class="select2-dropdown form-control"  name="status" required>
-                                        
                                         <?php foreach ($statusData as $key => $statusValue) { ?>
                                             <option value="<?php echo $statusValue['status_id'];  ?>"><?php echo $statusValue['status_value'];  ?></option>
                                         <?php } ?>
@@ -181,29 +176,31 @@
                                     </select>   
                                 </div>
 
+
+                                <div class="form-group col-md-6">
+                                    <label for="trip_approval_no">Trip Approval No</label>
+                                    <input type="text" name="trip_approval_no"  parsley-trigger="change"   class="form-control" id="trip_approval_no">
+                                </div>
+
+                            
+                            
+                                
+
                                
 
                             
 
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-12">
                                     <label for="notes">Notes</label>
                                     <textarea id="textarea" name="notes" class="form-control" maxlength="225" rows="3" placeholder="This textarea has a limit of 225 chars."></textarea>
                                 </div>
                                 
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-6">
                                     <label for="notes">File Upload</label>
                                     <input type="file" name="file" class="form-control" id="file"/>
                                 </div>
 
-                                <div class="form-group col-md-3">
-                                    <!-- <label for="priority">Priority</label>
-                                    <select class="select2-dropdown form-control" id="priority" name="priority" parsley-trigger="change" >
-                                        <option value="medium">Medium</option>
-                                        <option value="low">Low</option>
-                                        <option value="high">High</option>
-                                        <option value="urgent">Urgent</option>
-                                        <option value="critical">Critical</option>
-                                    </select> -->
+                                <div class="form-group col-md-6">
                                     <label></label><br>
                                     <div id="is-visa-approve-display">
                                     Priority
@@ -230,6 +227,7 @@
                 </div>
             </div> <!-- end card -->
         </div>
+        <div class="col-lg-2"></div>
         <!-- end col -->
 
     </div>

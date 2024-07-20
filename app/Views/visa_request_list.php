@@ -3,21 +3,24 @@
 <!-- ============================================================== -->
 <style>
     #client_table tbody tr:hover {
-        background-color: #cce5ff !important; /* Light blue color */
+        background-color: #cce5ff !important; 
         cursor: pointer;
     }
 
 
     @media screen and (max-width: 767px) {
-                .visa_status_count_view {
-                    display: none; /* Hide the div on smaller screens */
+                .visa_status_button {
+                    display: none;
+                }
+                .status-option{
+                    display: none; 
                 }
             }
     @media screen and (max-width: 767px) {
         
     }
     .select2-container .select2-selection--single{
-        height: 36px;
+        height: 37px;
         border:1px solid #ced4da;
     }
     .select2-container--default .select2-selection--single .select2-selection__rendered{
@@ -26,9 +29,13 @@
     .select2-container--default .select2-selection--single .select2-selection__arrow{
         top:4px;
     }
+    #statusContent .status-box{
+        border-radius: 5px;
+        background: #d0fff2;
+    }
     .status-option .status-box:hover, .status-option .status-box.active {
-        background: #02a8b5;
-        color: #fff;
+        background: #1aa79c!important;
+        color: #fff!important;
         border-radius: 5px;
         box-shadow: 6px 5px 8px 0 #00000036;
         cursor: pointer;
@@ -36,7 +43,8 @@
     .status-option .status-box:hover h3, .status-option .status-box.active h3{
         color: #fff;
     }
-    #client_list_old_data{
+    
+    /* #client_list_old_data{
         width: 50%;
     display: flex;
     flex-wrap: wrap;
@@ -68,7 +76,29 @@
     display: flex;
     padding: 0;
     margin-top: 10px;
+    } */
+
+    #client_table_filter{
+        float: right;
     }
+    #client_table_wrapper .dt-buttons{
+        margin-bottom: 5px;
+    }
+    #client_table_filter{
+        margin-bottom: 0;
+        margin-top: 5px;
+    }
+
+   
+    .view-status-btn button, .view-status-btn button:hover{
+        color: #ffffff;
+    }
+    .visa_status_count_view  .card-header{
+        background-color: #eb7a76;
+        padding-bottom: 1px;
+        padding-top: 10px;
+    }
+    
 
 </style>    
 <div class="content-page">
@@ -77,8 +107,51 @@
     
 
           
-    
-    <div class="row visa_status_count_view">
+<div class="row visa_status_count_view">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header" >
+        <div class="row">
+            <div class="col-6 row">
+            <div id="categoryFilter" style="display: flex;width: 250px;">
+                <select class="select2-dropdown" id="client_list" style="width:auto;">
+                    <option value="">Select Client</option>
+                    <?php foreach ($client_list as $key => $value) { ?>
+                        <option class="dropdown-item " href="#" value="<?= $value['client_id'] ?>"><?= $value['agency'] ?>-<?= $value['branch'] ?></option>
+                    <?php } ?>
+                </select>  
+            </div>
+
+            <div id="categoryFilter_11">
+                <label class="form-control" style="border:1px solid white;margin-left: 5px;display:flex;" for=""><input style="height: 19px;width: 28px;" id="add_30days_old_dispatched_data" type="checkbox"><span> Include Archived Data</span></label>
+            </div>
+            </div>            
+            <div class="col-6 text-right view-status-btn">
+            <button type="button" class="btn btn-link visa_status_button" onclick="toggleContent()">
+             Visa Status <i id="toggleIcon" class="fas fa-minus"></i>
+            </button>
+                    </div>
+
+        </div>
+      </div>
+      <div class="card-body status-option" id="statusContent" style="padding: 0.5rem !important;">
+        <div class="text-center">
+          <div class="row">
+            <?php foreach ($status_master as $key => $value) { ?>
+            <div class="col-md-2 col-xl-2 status">
+              <div class="py-1 status-box">
+                <h3 class="<?= strtolower(str_replace(' ', '_', $value['status_value'])); ?>">0</h3>
+                <p class="text-uppercase mb-1 font-13 font-weight-medium"><?= $value['status_value']; ?></p>
+              </div>
+            </div>
+            <?php } ?>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <!-- <div class="row visa_status_count_view">
         <div class="col-12">
             <div class="card" >
                 <div class="card-body status-option" style="padding: 0.5rem !important;">
@@ -98,22 +171,12 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row" id="client_list_old_data">
+    </div> -->
+   
 
-        <div id="categoryFilter" style="display: flex;width: 250px;">
-            <select class="select2-dropdown" id="client_list" style="width:auto;">
-                <option value="">Select Client</option>
-                <?php foreach ($client_list as $key => $value) { ?>
-                    <option class="dropdown-item " href="#" value="<?= $value['client_id'] ?>"><?= $value['agency'] ?>-<?= $value['branch'] ?></option>
-                <?php } ?>
-            </select>
-            
-        </div>
-        <div id="categoryFilter_11">
-            <label class="form-control" style="border:1px solid white;margin-left: 5px;display:flex;" for=""><input style="height: 19px;width: 28px;" id="add_30days_old_dispatched_data" type="checkbox"><span> Include Archived Data</span></label>
-        </div>
-    </div>
+        
+
+   
     <div class="row">
 
         <div class="col-12">
@@ -165,15 +228,15 @@
 <script>
 
     $(document).ready(function() {
+        toggleContent();
         $('.select2-dropdown').select2();
 
         $('.status').on('click', function() {
-            console.log("1111111111111111111111");
+
             var statusValue = $(this).find('.font-weight-medium').text().trim();
             var table = $('#client_table').DataTable();
             
-            
-
+    
             // Remove active class from all other .status-box elements
             $('.status .status-box').removeClass('active');
            
@@ -188,7 +251,7 @@
             }
         });
         
-        // console.log($('#datatable-buttons_wrapper'));
+       
 
     });
 
@@ -213,20 +276,16 @@
                         extend: 'pdf',
                         text: '<i class="fa fa-file-pdf"></i>',
                         titleAttr: 'PDF'
+                    },
+                    {
+                        extend: 'csv',
+                        text: '<i class="fa fa-file-csv"></i>',
+                        titleAttr: 'CSV'
                     }
                 ]
             });
 
-            $('.dt-buttons.btn-group.flex-wrap').after('<div class="row"></div>')
-
-            $('.card-body-test').prepend($('#client_list_old_data'))
-
-            $('#client_table_wrapper').find('.row').append($('.dt-buttons.btn-group.flex-wrap')[0]);
-            $('#client_table_wrapper').find('.row').append($('#client_table_filter')[0]);
-            $('.dt-buttons.btn-group.flex-wrap').addClass('col-3');
-            // $('.dt-buttons.btn-group.flex-wrap').css('display','contents');
-            $('#client_table_filter').addClass('col-9');
-
+    
             var client_list_ajax = '';
             var status_masters = <?php echo json_encode($status_master); ?>;
 
@@ -372,17 +431,21 @@
 
     })
 
+</script>
 
-
-
-
-
-
-
-
-
-
-
-
+<script>
+  function toggleContent() {
+    var content = document.getElementById("statusContent");
+    var toggleIcon = document.getElementById("toggleIcon");
+    if (content.style.display === "none") {
+      content.style.display = "block";
+      toggleIcon.classList.remove("fa-plus");
+      toggleIcon.classList.add("fa-minus");
+    } else {
+      content.style.display = "none";
+      toggleIcon.classList.remove("fa-minus");
+      toggleIcon.classList.add("fa-plus");
+    }
+  }
 </script>
 

@@ -19,6 +19,18 @@
 
 		<!-- icons -->
 		<link href="<?= base_url()."public"; ?>/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <style>
+        body {
+            background-image: url('<?= base_url() . "public/assets/images/bg-staff-login.jpg"; ?>');
+            background-size: cover; /* Makes sure the image covers the entire background */
+            background-repeat: no-repeat; /* Prevents the image from repeating */
+            background-position: center center; /* Centers the image in the background */
+            background-attachment: fixed; /* Keeps the background image fixed during scrolling */
+        }
+        .text-primary{
+            color: black !important;
+        }
+        </style>
 
     </head>
 
@@ -28,7 +40,7 @@
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-md-8 col-lg-6 col-xl-5">
-                        <div class="card">
+                        <div class="card" style="width:90%;">
 
                             <div class="card-body p-4">
                                 
@@ -98,12 +110,12 @@
                         </div>
                         <!-- end card -->
 
-                        <div class="row mt-3">
+                        <!-- <div class="row mt-3">
                             <div class="col-12 text-center">
                                 <p> <a href="<?= base_url('forgot_password'); ?>" class="text-primary font-weight-medium ml-1">Forgot your password?</a></p>
                                
                             </div> 
-                        </div>
+                        </div> -->
                         <!-- end row -->
 
                     </div> <!-- end col -->
@@ -114,8 +126,8 @@
         </div>
         <!-- end page -->
 
-        <footer class="footer footer-alt">
-            <script>document.write(new Date().getFullYear())</script> &copy;  <a href="" class="text-dark">UVS</a> 
+        <footer class="footer footer-alt" style="color: white;">
+            <script>document.write(new Date().getFullYear())</script> &copy;  <a href=""  style="color: white;">UVS</a> 
         </footer>
 
         <!-- Vendor js -->

@@ -19,7 +19,8 @@
             
         <!-- start page title -->
         <div class="row">
-            <div class="col-12">
+        <div class="col-2"></div>
+            <div class="col-8">
                 <div class="page-title-box page-title-box-alt">
                     <h4 class="page-title">
                         
@@ -35,12 +36,14 @@
                     </div>
                 </div>
             </div>
+        <div class="col-2"></div>
         </div>     
         <!-- end page title -->  
  
  
         <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
 
             <div class="card">
                 <div class="card-body">
@@ -59,7 +62,7 @@
                    
                 <div class="row">
 
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-6">
                             <label for="vs_country">Country<span class="text-danger">*</span></label>
                             <select class="select2-dropdown form-control" name="vs_country" id="country_of_visit"  required>
                                 <option value="">Select country</option>
@@ -70,12 +73,12 @@
                             </select>   
                         </div>
 
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-6">
                             <label for="vs_country_code">Country Code<span class="text-danger">*</span></label>
                             <input type="text" name="vs_country_code"  parsley-trigger="change" required  class="form-control" id="vs_country_code" value="<?php if(isset($visaSummaryData)){ echo $visaSummaryData->vs_country_code; } ?>">
                         </div>
 
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-6">
                             <label for="vs_category">Category<span class="text-danger">*</span></label>
                             <select class="select2-dropdown form-control"  name="vs_category" id="visa_type" required>
                                 <option value="">Select Category</option> 
@@ -86,7 +89,7 @@
                         </div>
 
 
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-6">
                             <label for="vs_type">VS Type<span class="text-danger">*</span></label>
                            
                             <select class="select2-dropdown form-control" id="vs_type" name="vs_type" parsley-trigger="change" >
@@ -97,87 +100,87 @@
                             </select>
                         </div>
 
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-6">
                             <label for="vs_processing">VS Processing<span class="text-danger">*</span></label>
                             <input type="text" name="vs_processing"  parsley-trigger="change" required  class="form-control" id="vs_processing" value="<?php if(isset($visaSummaryData)){ echo $visaSummaryData->vs_processing; } ?>">
                         </div>
 
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-6">
                             <label for="vs_processing_base">VS Processing Base<span class="text-danger">*</span></label>
                             <input type="text" name="vs_processing_base"  parsley-trigger="change" required  class="form-control" id="vs_processing_base" value="<?php if(isset($visaSummaryData)){ echo $visaSummaryData->vs_processing_base; } ?>">
                         </div>
 
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-6">
                             <label for="vs_stay">VS Stay<span class="text-danger">*</span></label>
                             <input type="text" name="vs_stay"  parsley-trigger="change" required  class="form-control" id="vs_stay" value="<?php if(isset($visaSummaryData)){ echo $visaSummaryData->vs_stay; } ?>">
                         </div>
                          
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-6">
                             <label for="vs_stay_base">VS Stay Base<span class="text-danger">*</span></label>
                             <input type="text" name="vs_stay_base"  parsley-trigger="change" required  class="form-control" id="vs_stay_base" value="<?php if(isset($visaSummaryData)){ echo $visaSummaryData->vs_stay_base; } ?>">
                         </div>
 
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-6">
                             <label for="vs_entry">VS Entry<span class="text-danger">*</span></label>
                             <input type="text" name="vs_entry"  parsley-trigger="change" required  class="form-control" id="vs_entry" value="<?php if(isset($visaSummaryData)){ echo $visaSummaryData->vs_entry; } ?>">
                         </div>
                         
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-6">
                             <label for="vs_validity">VS Validity<span class="text-danger">*</span></label>
                             <input type="text" name="vs_validity"  parsley-trigger="change" required  class="form-control" id="vs_validity" value="<?php if(isset($visaSummaryData)){ echo $visaSummaryData->vs_validity; } ?>">
                         </div>
     
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-6">
                             <label for="vs_validity_base">VS Validity Base<span class="text-danger">*</span></label>
                             <input type="text" name="vs_validity_base"  parsley-trigger="change" required  class="form-control" id="vs_validity_base" value="<?php if(isset($visaSummaryData)){ echo $visaSummaryData->vs_validity_base; } ?>">
                         </div>
 
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-6">
                             <label for="vs_fee">VS Fee<span class="text-danger">*</span></label>
                             <input type="text" name="vs_fee"  parsley-trigger="change" required  class="form-control" id="vs_fee" value="<?php if(isset($visaSummaryData)){ echo $visaSummaryData->vs_fee; } ?>">
                         </div>
                         
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-6">
                             <label for="vs_fee_child">VS Fee Child<span class="text-danger">*</span></label>
                             <input type="text" name="vs_fee_child"  parsley-trigger="change" required  class="form-control" id="vs_fee_child" value="<?php if(isset($visaSummaryData)){ echo $visaSummaryData->vs_fee_child; } ?>">
                         </div>
                          
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-6">
                             <label for="vs_fee_currency">VS Fee Currency<span class="text-danger">*</span></label>
                             <input type="text" name="vs_fee_currency"  parsley-trigger="change" required  class="form-control" id="vs_fee_currency" value="<?php if(isset($visaSummaryData)){ echo $visaSummaryData->vs_fee_currency; } ?>">
                         </div>
 
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-6">
                             <label for="vs_vfs_fee">VS VFS Fee<span class="text-danger">*</span></label>
                             <input type="text" name="vs_vfs_fee"  parsley-trigger="change" required  class="form-control" id="vs_vfs_fee" value="<?php if(isset($visaSummaryData)){ echo $visaSummaryData->vs_vfs_fee; } ?>">
                         </div>
                         
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-6">
                             <label for="vs_vsf_fee_currency">VS VFS Fee Currency<span class="text-danger">*</span></label>
                             <input type="text" name="vs_vsf_fee_currency"  parsley-trigger="change" required  class="form-control" id="vs_vsf_fee_currency" value="<?php if(isset($visaSummaryData)){ echo $visaSummaryData->vs_vsf_fee_currency; } ?>">
                         </div>
 
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-6">
                             <label for="vs_uvs_fee">VS UVS Fee<span class="text-danger">*</span></label>
                             <input type="text" name="vs_uvs_fee"  parsley-trigger="change" required  class="form-control" id="vs_uvs_fee" value="<?php if(isset($visaSummaryData)){ echo $visaSummaryData->vs_uvs_fee; } ?>">
                         </div>
 
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-6">
                             <label for="vs_sgst">VS SGST<span class="text-danger">*</span></label>
                             <input type="text" name="vs_sgst"  parsley-trigger="change" required  class="form-control" id="vs_sgst" value="<?php if(isset($visaSummaryData)){ echo $visaSummaryData->vs_sgst; } ?>">
                         </div>
 
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-6">
                             <label for="vs_cgst">VS CGST<span class="text-danger">*</span></label>
                             <input type="text" name="vs_cgst"  parsley-trigger="change" required  class="form-control" id="vs_cgst" value="<?php if(isset($visaSummaryData)){ echo $visaSummaryData->vs_cgst; } ?>">
                         </div>
 
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-6">
                             <label for="vs_igst">VS IGST<span class="text-danger">*</span></label>
                             <input type="text" name="vs_igst"  parsley-trigger="change" required  class="form-control" id="vs_igst" value="<?php if(isset($visaSummaryData)){ echo $visaSummaryData->vs_igst; } ?>">
                         </div>
 
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-6">
                             <label for="vs_total_fee">VS Total Fee<span class="text-danger">*</span></label>
                             <input type="text" name="vs_total_fee"  parsley-trigger="change" required  class="form-control" id="vs_total_fee" value="<?php if(isset($visaSummaryData)){ echo $visaSummaryData->vs_total_fee; } ?>">
                         </div>
@@ -209,6 +212,7 @@
                 </div>
             </div> <!-- end card -->
         </div>
+        <div class="col-lg-2"></div>
         <!-- end col -->
 
     </div>

@@ -145,7 +145,16 @@
                 border-color: #cfe5ed;
             }
         </style>
-
+<!-- <style>
+  body {
+    background-image: url('<?= base_url() . "public/assets/images/uvs (4).jpg"; ?>');
+    background-size: cover;
+    background-repeat: no-repeat; 
+    background-position: center center; 
+    background-attachment: fixed; 
+    background-color: #f0f3f8;
+  }
+</style> -->
 
 
 

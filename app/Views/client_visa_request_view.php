@@ -67,7 +67,7 @@
                     </div>
 
                     <p class="text-primary"><?= $visaData->request_id; ?></p>
-                    <h4 class="mb-1"><?= $visaData->agency; ?>-<?= $visaData->branch; ?> 
+                    <h4 class="mb-1"><?= $visaData->agency; ?>-<?= $visaData->branch; ?>-<?= $visaData->company_name; ?>
                     <span class="mdi mdi-information-outline" style="color: green;font-size: 15px;" data-toggle="modal" data-target="#centermodal"></span>
                     </h4>  
                  
@@ -286,8 +286,8 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body">
-                    <h5>Agency-Location</h5>
-                    <p ><?= $reqClientData->agency; ?>-<?= $reqClientData->branch; ?>-</p>
+                    <h5>Client-Location-Company</h5>
+                    <p ><?= $visaData->agency; ?>-<?= $visaData->branch; ?>-<?= $visaData->company_name; ?></p>
                                       
                     <h5>Email</h5>
                     <p ><?= $reqClientData->email; ?></p>

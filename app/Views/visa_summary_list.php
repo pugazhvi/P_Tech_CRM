@@ -7,7 +7,8 @@
     <div class="container-fluid">
          <!-- start page title -->
          <div class="row">
-                <div class="col-12">
+         <div class="col-1"></div>
+                <div class="col-10">
                     <div class="page-title-box page-title-box-alt">
                         <h4 class="page-title">Visa Info</h4>
                         <div class="page-title-right">
@@ -17,13 +18,15 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-1"></div>
             </div>     
             <!-- end page title -->  
             
                        
     
     <div class="row">
-        <div class="col-12">
+    <div class="col-1"></div>
+        <div class="col-10">
             <div class="card">
                 <div class="card-body">
                     <table id="datatable-buttons" class="table table-hover m-0 table-centered dt-responsive nowrap w-100" cellspacing="0" >
@@ -93,6 +96,7 @@
                 </div>
             </div>
         </div><!-- end col -->
+        <div class="col-1"></div>   
     </div>
  
 
