@@ -5,11 +5,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 
-<body style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; width: 100% !important; height: 100%; line-height: 1.6em; background-color: #f6f6f6; margin: 0;"  bgcolor="#f6f6f6">
+<body style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; max-width: 800px !important; height: 100%; line-height: 1.6em; background-color: #f6f6f6; margin: 0;"  bgcolor="#f6f6f6">
 
-<div class="body-wrap" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; width: 100%; background-color: #f6f6f6; margin: 0;" bgcolor="#f6f6f6">
+<div class="body-wrap" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; max-width: 800px; background-color: #f6f6f6; margin: 0;" bgcolor="#f6f6f6">
     <div style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;" valign="top"></div>
-    <div class="container" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; display: block !important; max-width: 800px !important; clear: both !important; margin: 0 auto;" valign="top">
+    <div class="container" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px;  display: block !important; max-width: 800px !important; clear: both !important; margin: 0 auto;" valign="top">
         <div class="content" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; max-width: 800px; display: block; margin: 0 auto; padding: 20px;">
             <div class="main" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; border-radius: 3px; margin: 0; border: none;">
                 <div class="content-wrap" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;padding: 30px;border: 3px solid #3bafda;border-radius: 7px; background-color: #fff;" valign="top">
@@ -17,7 +17,7 @@
                     
                     <div style="text-align: center; margin-bottom: 5px;">
                         <a href="#">
-                            <img src="<?= base_url()."public"; ?>/assets/images/login-logo.png" height="24" alt="logo" style="width: 145px; height: 65px;"/>
+                            <img src="<?= base_url()."public"; ?>/assets/images/login-logo.png" height="24" alt="logo" style="width: 200px; height: 85px;"/>
                         </a>
                         <br/>
                     </div>
