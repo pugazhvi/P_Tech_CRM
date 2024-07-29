@@ -63,7 +63,7 @@
                      
 
                         <!-- form -->
-                        <form action="<?= base_url(); ?>" method="post">
+                        <form action="<?= base_url().'client'; ?>" method="post">
 
                                 <?php if(session()->getTempdata('error')):?>
                                    <div class="alert alert-danger" >

@@ -27,7 +27,7 @@ use CodeIgniter\Router\RouteCollection;
  
  
 
- $routes->match(['get','post'],'/','ClientController::login');
+ $routes->match(['get','post'],'/client','ClientController::login');
  $routes->get('/client_logout','ClientController::client_logout');
  $routes->match(['get','post'],'/client_home','ClientController::client_home');
  $routes->match(['get','post'],'/view_visa_request','ClientController::view_visa_request');
@@ -59,4 +59,23 @@ use CodeIgniter\Router\RouteCollection;
  $routes->match(['get','post'],'/category_list','MasterController::category_list');
  $routes->match(['get','post'],'/category_create','MasterController::category_create');
  $routes->match(['get','post'],'/category_edit','MasterController::category_edit');
+
+
+
+
+ //web
+ $routes->match(['get','post'],'/','WebController::home');
+ $routes->match(['get','post'],'/get_cat','WebController::get_cat');
+ $routes->match(['get','post'],'/why_choose_us','WebController::why_choose_us');
+ $routes->match(['get','post'],'/apply_visa','WebController::apply_visa');
+ $routes->match(['get','post'],'/contact','WebController::contact');
+ $routes->match(['get','post'],'/terms','WebController::terms');
+ $routes->match(['get','post'],'/privacy','WebController::privacy');
+ $routes->match(['get','post'],'/track_visa','WebController::track_visa');
+ $routes->match(['get','post'],'/visa_info','WebController::visa_info');
+ $routes->match(['get','post'],'/contact_request','WebController::contact_request');
+
+//  $routes->match(['get','post'],'/test','WebController::test');
+
+ 
  

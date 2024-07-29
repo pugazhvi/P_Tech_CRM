@@ -146,6 +146,34 @@ class MailHelper
     }
 
 
+    public static function send_contact_mail($tomail,$subject,$html)
+    {    
+        self::initLogger();
+
+       
+        try {
+            $email = \Config\Services::email();
+            $email->setMailType('html');
+            $email->setFrom('bbone@venbait.in', 'UVS');
+            $email->setTo($tomail);
+            $email->setSubject($subject);
+            $email->setMessage($html);
+
+            if ($email->send()) {
+                self::$logger->info('OTP email sent successfully to: ' . $tomail);
+                return json_encode(['status' => 'success','code' => 200, 'message'=>'Email Sent Successfully...','data' => $tomail,],200);
+            } else {
+                self::$logger->error('OTP email sending failed to: ' . $tomail);
+                return json_encode(['status' => 'failed','code' => 404,'message'=>'Email Sent Failed...','data' => $tomail  ],404);
+            }
+            
+        } catch (\Exception $e) {
+            self::$logger->error('Exception caught: ' . $e->getMessage());
+            return json_encode(['status' => 'failed','code' => 500,'data' => $tomail],500);
+        }  
+    }
+
+
    
 
 

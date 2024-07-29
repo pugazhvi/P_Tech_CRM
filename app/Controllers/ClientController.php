@@ -50,7 +50,7 @@ class ClientController extends BaseController
 				if($clientdata['is_active'] == 0)
 				{
 					$this->session->setTempdata('error','Client Deactivated',3);
-					return redirect()->to(base_url());	
+					return redirect()->to(base_url().'client');	
 				}
 
 				if (password_verify($password, $clientdata['password'])) 
@@ -62,12 +62,12 @@ class ClientController extends BaseController
 				}
 				else{
 					$this->session->setTempdata('error','Email or Password is invalid',3);
-                    return redirect()->to(base_url());
+                    return redirect()->to(base_url().'client');
 				}
 
 			}else{
 			  $this->session->setTempdata('error','Email or Password is invalid',3);
-			  return redirect()->to(base_url());				  
+			  return redirect()->to(base_url().'client');				  
 			}
 
 		}
@@ -81,14 +81,14 @@ class ClientController extends BaseController
 	{
 		session()->remove('is_client_logged_in');
 		session()->destroy();
-		return redirect()->to(base_url());
+		return redirect()->to(base_url().'client');
 	}
 
 
     public function client_home()
     {
 
-        if(!$this->session->has('is_client_logged_in')){ return redirect()->to(base_url()); }
+        if(!$this->session->has('is_client_logged_in')){ return redirect()->to(base_url().'client'); }
 
 		if($this->request->getmethod() == 'POST')
 		{
@@ -105,7 +105,7 @@ class ClientController extends BaseController
     public function view_visa_request($visa_request_id = null)
 	{
 		
-            if(!$this->session->has('is_client_logged_in')){ return redirect()->to(base_url()); }
+            if(!$this->session->has('is_client_logged_in')){ return redirect()->to(base_url().'client'); }
 
             $visa_request_id = $this->request->getVar('visa_request_id');
 
@@ -129,7 +129,7 @@ class ClientController extends BaseController
 
     public function client_profile()
 	{
-		if(!$this->session->has('is_client_logged_in')){ return redirect()->to(base_url()); }
+		if(!$this->session->has('is_client_logged_in')){ return redirect()->to(base_url().'client'); }
 		if($this->request->getmethod() == 'POST')
 		{
 				//update client profile
